@@ -11,11 +11,13 @@ public class DestroyonInvisible : MonoBehaviour
     {
         if (destroyTarget == null)
         {
+            Debug.Log("im dead");
             Destroy(gameObject);
         }
 
         else
         {
+            Debug.Log("i SHOULD BE DEAD");
             Destroy(destroyTarget);
         }
     }
