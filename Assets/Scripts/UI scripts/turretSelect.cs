@@ -11,7 +11,7 @@ public class turretSelect : MonoBehaviour
     // Start is called before the first frame update
       void Start()
       {
-        optionPanel.GetComponentsInChildren<Text>()[1].text = "1";
+        optionPanel.GetComponentsInChildren<Text>()[1].text = GetComponent<Turret>().firerate.ToString();
       }
     //
     //  // Update is called once per frame
@@ -21,15 +21,14 @@ public class turretSelect : MonoBehaviour
     //  }
     private void OnMouseDown()
     {
-        GetComponent<bul_shoot_down>().enabled = true;
-        GetComponent<point_at_player>().enabled = true;
+        GetComponent<Turret_Fire>().enabled = true;
+        GetComponent<Turret_Targeting>().enabled = true;
 
         optionPanel.gameObject.SetActive(true);
-        //optionPanel.transform.Find("firerate_val").GetComponent<Text>().text = GetComponent<bul_shoot_down>().fireRate.ToString();
        
-        if (optionPanel.GetComponentInChildren<Text>().text != null)
+        if (optionPanel.GetComponentsInChildren<Text>()[1].text != null)
         {
-            GetComponent<bul_shoot_down>().fireRate = float.Parse( optionPanel.GetComponentInChildren<Text>().text );
+            GetComponent<Turret>().firerate = float.Parse( optionPanel.GetComponentInChildren<Text>().text );
         }
     }
 }
