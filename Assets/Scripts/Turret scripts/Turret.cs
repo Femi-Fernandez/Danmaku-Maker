@@ -11,6 +11,10 @@ public class Turret : MonoBehaviour
     public float firerate;
     [SerializeField]
     public int targetingType;
+    [SerializeField]
+    public int rotateAngleDirection;
+    [SerializeField]
+    public int rotateAngleWidth;
 
     /// <summary>
     /// Bullet fire variables 

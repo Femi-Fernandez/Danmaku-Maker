@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+//using System.Numerics;
 using UnityEngine;
 
 public class Turret_Targeting : MonoBehaviour
@@ -26,6 +27,11 @@ public class Turret_Targeting : MonoBehaviour
                 }
                 break;
 
+            case 2:
+                // float angle = Mathf.Sin(Time.time) * 70;
+                float angle = Mathf.PingPong(Time.time * 50, targetType.rotateAngleWidth) - (targetType.rotateAngleDirection + targetType.rotateAngleWidth/2);
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                break;
             default:
 
                 break;

@@ -20,15 +20,12 @@ public class Turret_BulletSetup : MonoBehaviour
     {
         if (_player != null)
         {
-            GameObject bullet = transform.GetComponentInParent<bullet_pool>().GetBullet();
+            //GameObject bullet = transform.GetComponentInParent<bullet_pool>().GetBullet();
             switch (bulletConfig.bulletFormation)
             {
                 //single shot downwards
                 case 1:
-                    bullet.transform.position = transform.position;
-                    bullet.transform.rotation = transform.rotation;
-                    bullet.SetActive(true);
-                    bullet.GetComponent<bullet_move_down>().setDirection();
+                    StartCoroutine(Bul_Shot());
                     break;
 
                 //string of shots, then wait to fire again.
@@ -44,13 +41,25 @@ public class Turret_BulletSetup : MonoBehaviour
 
     }
 
+    IEnumerator Bul_Shot()
+    {
+        GameObject bullet = transform.GetComponentInParent<bullet_pool>().GetBullet();
+        bullet.transform.position = transform.position;
+        bullet.transform.rotation = transform.rotation;
+        bullet.SetActive(true);
+        bullet.GetComponent<bullet_move_down>().setDirection();
+        yield return new WaitForSeconds(bulletConfig.firerate);
+        GetComponent<Turret_Fire>().readyToFire = true;
+
+    }
+
     IEnumerator Bul_LineShot()
     {
         
         for (int i = 0; i < bulletConfig.numOfBullets; i++)
         {
             GameObject bullet = transform.GetComponentInParent<bullet_pool>().GetBullet();
-            //Debug.Log("i = " + i);
+
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation;
             bullet.SetActive(true);
@@ -58,7 +67,7 @@ public class Turret_BulletSetup : MonoBehaviour
             yield return new WaitForSeconds(bulletConfig.bulletDelay);
         }
         GetComponent<Turret_Fire>().readyToFire = true;
-       // Debug.Log("here once plss");
+
     }
 
 }

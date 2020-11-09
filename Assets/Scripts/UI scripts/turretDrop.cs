@@ -7,7 +7,7 @@ public class turretDrop : MonoBehaviour, IDropHandler
 {
     public GameObject turret;
     public GameObject boss;
-
+    int numOfTurrets;
     public void OnDrop(PointerEventData eventData)
     {
         RectTransform turretPanel = transform as RectTransform;
@@ -18,6 +18,8 @@ public class turretDrop : MonoBehaviour, IDropHandler
 
             Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             GameObject spawnedTurret = Instantiate(turret, worldPosition, transform.rotation) as GameObject;
+            spawnedTurret.name = "turret " + numOfTurrets;
+            numOfTurrets++;
 
             spawnedTurret.transform.parent = boss.transform;
         }
