@@ -9,13 +9,14 @@ public class Deselect : MonoBehaviour
 
     private void OnMouseDown()
     {
-        //optionPanel.gameObject.SetActive(false);
+        optionPanel.gameObject.SetActive(false);
         GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
         for (int i = 0; i < turrets.Length; i++)
         {
             turrets[i].GetComponent<Turret_Fire>().enabled = false;
             turrets[i].GetComponent<Turret_Targeting>().enabled = false;
-            turrets[i].transform.rotation = Quaternion.Euler(0,0,0);
+            turrets[i].GetComponent<Turret_BulletSetup>().enabled = false;
+            turrets[i].transform.rotation = Quaternion.Euler(0,0,-90);
         }
     }
 }

@@ -5,12 +5,29 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
+    /// <summary>
+    /// generic turret settings (applies to all)
+    /// </summary>
     [SerializeField]
     public int fireType;
     [SerializeField]
     public float firerate;
     [SerializeField]
     public int targetingType;
+
+    /// <summary>
+    /// Target player settings
+    /// </summary>
+    [SerializeField]
+    public bool smoothTarget;
+    [SerializeField]
+    public float smoothTargetSpeed;
+    [SerializeField]
+    public float targetPlayerOffsetAmmount;
+
+    /// <summary>
+    /// arc targetting settings
+    /// </summary>
     [SerializeField]
     public int rotateAngleDirection;
     [SerializeField]

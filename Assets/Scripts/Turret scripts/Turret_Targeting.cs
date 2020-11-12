@@ -7,34 +7,52 @@ using UnityEngine;
 public class Turret_Targeting : MonoBehaviour
 {
 
-    Turret targetType;
+    Turret turret;
     GameObject _player;
     private void Start()
     {
-        targetType = GetComponent<Turret>();
+        turret = GetComponent<Turret>();
         _player = GameObject.FindWithTag("Player");
     }
     void Update()
     {
-        switch (targetType.targetingType)
+        if (_player != null)
         {
-            case 1:
-                if (_player != null)
-                {
-                    Vector2 direction = _player.transform.position - transform.position;
-                    Quaternion rotation = Quaternion.AngleAxis(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg, Vector3.forward);
-                    transform.rotation = rotation;
-                }
-                break;
+            switch (turret.targetingType)
+            {
+                case 1:
+                    targetPlayer();
+                    break;
 
-            case 2:
-                // float angle = Mathf.Sin(Time.time) * 70;
-                float angle = Mathf.PingPong(Time.time * 50, targetType.rotateAngleWidth) - (targetType.rotateAngleDirection + targetType.rotateAngleWidth/2);
-                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                break;
-            default:
+                case 2:
+                    // float angle = Mathf.Sin(Time.time) * 70;
+                    float angle = Mathf.PingPong(Time.time * 50, turret.rotateAngleWidth) - (turret.rotateAngleDirection + turret.rotateAngleWidth / 2);
+                    transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                    break;
+                default:
 
-                break;
+                    break;
+            }
         }
+    }
+    public Quaternion rotation;
+    void targetPlayer()
+    {
+        if (turret.smoothTarget == true)
+        {
+            Vector2 direction = _player.transform.position - transform.position;
+            Quaternion rotation = Quaternion.AngleAxis(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg, Vector3.forward) * Quaternion.AngleAxis(turret.targetPlayerOffsetAmmount, Vector3.forward);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, turret.smoothTargetSpeed/1000);
+        }
+        else
+        {
+            Vector2 direction = _player.transform.position - transform.position;
+             rotation = Quaternion.AngleAxis(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg, Vector3.forward) * Quaternion.AngleAxis(turret.targetPlayerOffsetAmmount, Vector3.forward);
+            transform.rotation = rotation;
+
+        }
+
+        
+        
     }
 }
