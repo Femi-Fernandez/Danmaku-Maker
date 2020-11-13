@@ -9,6 +9,7 @@ public class Turret_Targeting : MonoBehaviour
 
     Turret turret;
     GameObject _player;
+
     private void Start()
     {
         turret = GetComponent<Turret>();
@@ -25,9 +26,7 @@ public class Turret_Targeting : MonoBehaviour
                     break;
 
                 case 2:
-                    // float angle = Mathf.Sin(Time.time) * 70;
-                    float angle = Mathf.PingPong(Time.time * 50, turret.rotateAngleWidth) - (turret.rotateAngleDirection + turret.rotateAngleWidth / 2);
-                    transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                    arcShot();
                     break;
                 default:
 
@@ -35,7 +34,14 @@ public class Turret_Targeting : MonoBehaviour
             }
         }
     }
-    public Quaternion rotation;
+    
+    void arcShot()
+    {
+        // float angle = Mathf.Sin(Time.time) * 70;
+        float angle = Mathf.PingPong(Time.time * turret.rotateSpeed * 5, turret.rotateAngleWidth) - (turret.rotateAngleDirection + turret.rotateAngleWidth / 2);
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
     void targetPlayer()
     {
         if (turret.smoothTarget == true)
@@ -47,7 +53,7 @@ public class Turret_Targeting : MonoBehaviour
         else
         {
             Vector2 direction = _player.transform.position - transform.position;
-             rotation = Quaternion.AngleAxis(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg, Vector3.forward) * Quaternion.AngleAxis(turret.targetPlayerOffsetAmmount, Vector3.forward);
+            Quaternion rotation = Quaternion.AngleAxis(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg, Vector3.forward) * Quaternion.AngleAxis(turret.targetPlayerOffsetAmmount, Vector3.forward);
             transform.rotation = rotation;
 
         }

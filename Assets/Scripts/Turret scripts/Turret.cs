@@ -29,9 +29,11 @@ public class Turret : MonoBehaviour
     /// arc targetting settings
     /// </summary>
     [SerializeField]
-    public int rotateAngleDirection;
+    public float rotateAngleDirection;
     [SerializeField]
-    public int rotateAngleWidth;
+    public float rotateAngleWidth;
+    [SerializeField]
+    public float rotateSpeed;
 
     /// <summary>
     /// Bullet fire variables 
