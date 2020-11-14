@@ -6,6 +6,14 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
     /// <summary>
+    ///check if turret is active
+    /// </summary>
+    [SerializeField]
+    public int streamNumber;
+    [SerializeField]
+    public bool streamEnabled;
+
+    /// <summary>
     /// generic turret settings (applies to all)
     /// </summary>
     [SerializeField]

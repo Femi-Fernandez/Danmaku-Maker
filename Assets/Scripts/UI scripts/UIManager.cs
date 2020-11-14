@@ -8,11 +8,12 @@ public class UIManager : MonoBehaviour
     GameObject optionPanel;
     GameObject targetPlayerUI;
     GameObject arcShotUI;
-    GameObject[] UIPanels = new GameObject[3];
+   // GameObject[] UIPanels = new GameObject[3];
 
     Text[] fireRateInput;
     Text turretName;
     Dropdown aimType;
+    Dropdown numOfStreams;
     Button saveTurretSettings;
 
     // target player variables
@@ -26,6 +27,8 @@ public class UIManager : MonoBehaviour
     Text[] rotationSpeed;
 
     Turret turret;
+    GameObject mainTurret;
+    public GameObject[] turretChildren = new GameObject[4];
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +41,8 @@ public class UIManager : MonoBehaviour
         fireRateInput = GameObject.Find("turret firerate input").GetComponentsInChildren<Text>();
         turretName = GameObject.Find("SelectedTurret").GetComponent<Text>();
         aimType = GameObject.Find("Turret aim types").GetComponent<Dropdown>();
-        saveTurretSettings = GameObject.Find("Save settings").GetComponent<Button>();
+        numOfStreams = GameObject.Find("number of streams input").GetComponent<Dropdown>();
+        saveTurretSettings = GameObject.Find("Save turret settings").GetComponent<Button>();
 
         //get targeted turret options
         smoothTargetToggle = GameObject.Find("Smooth targeting Toggle").GetComponent<Toggle>();
@@ -59,6 +63,12 @@ public class UIManager : MonoBehaviour
         }
         );
 
+        numOfStreams.onValueChanged.AddListener(delegate
+        {
+            numOfStreamsChanged(numOfStreams);
+        }
+        );
+
         saveTurretSettings.onClick.AddListener(delegate
         {
             saveTurretPressed();
@@ -72,6 +82,13 @@ public class UIManager : MonoBehaviour
     public void turretSelected(GameObject currentTurret) 
     {
         turret = currentTurret.GetComponent<Turret>();
+        mainTurret = currentTurret.transform.parent.gameObject;
+
+        turretChildren[0] = mainTurret.transform.GetChild(0).gameObject;
+        turretChildren[1] = mainTurret.transform.GetChild(1).gameObject;
+        turretChildren[2] = mainTurret.transform.GetChild(2).gameObject;
+        turretChildren[3] = mainTurret.transform.GetChild(3).gameObject;
+
         turretName.text = "Selected turret " + currentTurret.name;
 
         currentTurret.GetComponent<Turret_Fire>().enabled = true;
@@ -81,13 +98,47 @@ public class UIManager : MonoBehaviour
         aimType.value = turret.targetingType - 1;
         SetActiveUI();
     }
-
-
-
+    void numOfStreamsChanged(Dropdown change)
+    {
+        //turret.targetingType = change.value + 1;
+        Debug.Log(mainTurret.transform.childCount);
+        for (int i = 1; i < change.value +1; i++)
+        {
+            Debug.Log("activate turret: " + i);
+            turretChildren[i].SetActive(true);
+            turretChildren[i].GetComponent<Turret>().streamEnabled = true;
+        }
+        for (int i = change.value+1; i < 4; i++)
+        {
+            turretChildren[i].SetActive(false);
+            turretChildren[i].GetComponent<Turret>().streamEnabled = false;
+        }
+    }
 
     void SetActiveUI()
     {
         switch(turret.targetingType)
+        {
+            case 1:
+                arcShotUI.SetActive(false);
+                targetPlayerUI.SetActive(true);
+                break;
+            case 2:
+                targetPlayerUI.SetActive(false);
+                arcShotUI.SetActive(true);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+
+    void DropdownValueChanged(Dropdown change)
+    {
+        turret.targetingType = change.value + 1;
+
+        switch (turret.targetingType)
         {
             case 1:
                 arcShotUI.SetActive(false);
@@ -119,25 +170,6 @@ public class UIManager : MonoBehaviour
                 break;
             case 2:
                 saveArcShotSettings();
-                break;
-
-            default:
-                break;
-        }
-    }
-    void DropdownValueChanged(Dropdown change)
-    {
-        turret.targetingType = change.value + 1;
-
-        switch (turret.targetingType)
-        {
-            case 1:
-                arcShotUI.SetActive(false);
-                targetPlayerUI.SetActive(true);
-                break;
-            case 2:
-                targetPlayerUI.SetActive(false);
-                arcShotUI.SetActive(true);
                 break;
 
             default:

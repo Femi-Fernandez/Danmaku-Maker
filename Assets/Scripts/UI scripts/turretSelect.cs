@@ -17,6 +17,6 @@ public class turretSelect : MonoBehaviour
 
     private void OnMouseDown()
     {
-        uiManager.GetComponent<UIManager>().turretSelected(transform.gameObject);
+        uiManager.GetComponent<UIManager>().turretSelected(transform.GetChild(0).gameObject);
     }   
 }

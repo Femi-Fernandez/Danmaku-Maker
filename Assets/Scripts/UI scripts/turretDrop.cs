@@ -22,8 +22,8 @@ public class turretDrop : MonoBehaviour, IDropHandler
             numOfTurrets++;
 
             spawnedTurret.transform.parent = boss.transform;
-            spawnedTurret.GetComponent<Turret_Targeting>().enabled = false;
-            spawnedTurret.GetComponent<Turret_Fire>().enabled = false;
+           // spawnedTurret.GetComponent<Turret_Targeting>().enabled = false;
+           // spawnedTurret.GetComponent<Turret_Fire>().enabled = false;
             SetDefaultValues(spawnedTurret);
            // spawnedTurret.GetComponent<Turret>().rotateAngleDirection = 90;
         }
@@ -31,8 +31,12 @@ public class turretDrop : MonoBehaviour, IDropHandler
 
     void SetDefaultValues(GameObject turret)
     {
-        turret.GetComponent<Turret>().rotateAngleDirection = 90;
-        turret.GetComponent<Turret>().rotateAngleWidth = 10;
-        turret.GetComponent<Turret>().rotateSpeed = 5;
+        for (int i = 0; i < 4; i++)
+        {
+            Turret childToSet = turret.transform.GetChild(i).gameObject.GetComponent<Turret>();
+            childToSet.rotateAngleDirection = 90;
+            childToSet.rotateAngleWidth = 10;
+            childToSet.rotateSpeed = 5;
+        }
     }
 }
