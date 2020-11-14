@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,7 @@ public class UIManager : MonoBehaviour
     Text turretName;
     Dropdown aimType;
     Dropdown numOfStreams;
+    Dropdown streamToEdit;
     Button saveTurretSettings;
 
     // target player variables
@@ -28,7 +30,8 @@ public class UIManager : MonoBehaviour
 
     Turret turret;
     GameObject mainTurret;
-    public GameObject[] turretChildren = new GameObject[4];
+    GameObject currentSelectedTurret;
+    GameObject[] turretChildren = new GameObject[4];
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +45,7 @@ public class UIManager : MonoBehaviour
         turretName = GameObject.Find("SelectedTurret").GetComponent<Text>();
         aimType = GameObject.Find("Turret aim types").GetComponent<Dropdown>();
         numOfStreams = GameObject.Find("number of streams input").GetComponent<Dropdown>();
+        streamToEdit = GameObject.Find("stream to edit input").GetComponent<Dropdown>();
         saveTurretSettings = GameObject.Find("Save turret settings").GetComponent<Button>();
 
         //get targeted turret options
@@ -57,6 +61,7 @@ public class UIManager : MonoBehaviour
         
         //aimType.value = GetComponent<Turret>().targetingType - 1;
 
+        //set listeners for the dropdown boxes
         aimType.onValueChanged.AddListener(delegate
         {
             DropdownValueChanged(aimType);
@@ -67,6 +72,12 @@ public class UIManager : MonoBehaviour
         {
             numOfStreamsChanged(numOfStreams);
         }
+        );
+
+        streamToEdit.onValueChanged.AddListener(delegate
+            {
+                streamToEditChanged(streamToEdit);
+            }
         );
 
         saveTurretSettings.onClick.AddListener(delegate
@@ -81,6 +92,7 @@ public class UIManager : MonoBehaviour
 
     public void turretSelected(GameObject currentTurret) 
     {
+        currentSelectedTurret = currentTurret;
         turret = currentTurret.GetComponent<Turret>();
         mainTurret = currentTurret.transform.parent.gameObject;
 
@@ -89,30 +101,56 @@ public class UIManager : MonoBehaviour
         turretChildren[2] = mainTurret.transform.GetChild(2).gameObject;
         turretChildren[3] = mainTurret.transform.GetChild(3).gameObject;
 
-        turretName.text = "Selected turret " + currentTurret.name;
+        turretName.text = "Selected turret \n" + currentSelectedTurret.name;
 
-        currentTurret.GetComponent<Turret_Fire>().enabled = true;
-        currentTurret.GetComponent<Turret_Targeting>().enabled = true;
-        currentTurret. GetComponent<Turret_BulletSetup>().enabled = true;
+       // currentTurret.GetComponent<Turret_Fire>().enabled = true;
+       // currentTurret.GetComponent<Turret_Targeting>().enabled = true;
+       // currentTurret.GetComponent<Turret_BulletSetup>().enabled = true;
+        fireOnOrOffOnTurret(currentTurret, true);
         optionPanel.SetActive(true);
         aimType.value = turret.targetingType - 1;
         SetActiveUI();
     }
+    void fireOnOrOffOnTurret(GameObject turr, bool b)
+    {
+        turr.GetComponent<Turret_Fire>().enabled = b;
+        turr.GetComponent<Turret_Targeting>().enabled = b;
+        turr.GetComponent<Turret_BulletSetup>().enabled = b;
+    }
     void numOfStreamsChanged(Dropdown change)
     {
-        //turret.targetingType = change.value + 1;
-        Debug.Log(mainTurret.transform.childCount);
+        List<string> streamToEditOptions = new List<string> { };
+        //loops through children activating them up to the number selected
         for (int i = 1; i < change.value +1; i++)
         {
-            Debug.Log("activate turret: " + i);
             turretChildren[i].SetActive(true);
             turretChildren[i].GetComponent<Turret>().streamEnabled = true;
         }
+
         for (int i = change.value+1; i < 4; i++)
         {
             turretChildren[i].SetActive(false);
             turretChildren[i].GetComponent<Turret>().streamEnabled = false;
         }
+
+
+        //creates a list of strings and adds them to the stream to edit dropdown
+        streamToEdit.ClearOptions();
+        for (int i = 1; i < change.value+2; i++)
+        {
+            streamToEditOptions.Add(i.ToString());
+        }
+        streamToEdit.AddOptions(streamToEditOptions);
+    }
+
+    void streamToEditChanged(Dropdown change) 
+    {
+        fireOnOrOffOnTurret(currentSelectedTurret, false);
+        Debug.Log(change.value);
+        turret = turretChildren[change.value].GetComponent<Turret>();
+        currentSelectedTurret = turretChildren[change.value];
+        turretName.text = "Selected turret \n" + currentSelectedTurret.name;
+        fireOnOrOffOnTurret(currentSelectedTurret, true);
     }
 
     void SetActiveUI()
