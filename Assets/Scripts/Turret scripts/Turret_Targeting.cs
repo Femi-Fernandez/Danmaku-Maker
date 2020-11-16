@@ -28,6 +28,13 @@ public class Turret_Targeting : MonoBehaviour
                 case 2:
                     arcShot();
                     break;
+
+                case 3:
+                    spiralShot();
+                    break;
+                case 4:
+                    singleDir();
+                    break;
                 default:
 
                     break;
@@ -35,12 +42,7 @@ public class Turret_Targeting : MonoBehaviour
         }
     }
     
-    void arcShot()
-    {
-        // float angle = Mathf.Sin(Time.time) * 70;
-        float angle = Mathf.PingPong(Time.time * turret.rotateSpeed * 5, turret.rotateAngleWidth) - (turret.rotateAngleDirection + turret.rotateAngleWidth / 2);
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-    }
+
 
     void targetPlayer()
     {
@@ -57,8 +59,30 @@ public class Turret_Targeting : MonoBehaviour
             transform.rotation = rotation;
 
         }
+    }
 
+
+    void arcShot()
+    {
+        // float angle = Mathf.Sin(Time.time) * 70;
+        float angle = Mathf.PingPong(Time.time * turret.rotateSpeed * 5, turret.rotateAngleWidth) - (turret.rotateAngleDirection + turret.rotateAngleWidth / 2);
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    void spiralShot()
+    {
+        if (turret.spiralDirection)
+        {
+            transform.Rotate(0, 0, turret.rotateSpeed / 15);
+        }
+        else
+        {
+            transform.Rotate(0, 0, -turret.rotateSpeed / 15);
+        }
         
-        
+    }
+    void singleDir()
+    {
+        transform.rotation = Quaternion.AngleAxis(-turret.singleDirDirection -90, Vector3.forward);
     }
 }

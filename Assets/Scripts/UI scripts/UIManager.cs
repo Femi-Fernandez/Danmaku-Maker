@@ -9,7 +9,8 @@ public class UIManager : MonoBehaviour
     GameObject optionPanel;
     GameObject targetPlayerUI;
     GameObject arcShotUI;
-   // GameObject[] UIPanels = new GameObject[3];
+    GameObject spiralShotUI;
+    GameObject singleDirectionUI;
 
     Text[] fireRateInput;
     Text turretName;
@@ -28,6 +29,14 @@ public class UIManager : MonoBehaviour
     Text[] arcDirection;
     Text[] rotationSpeed;
 
+    //spiral shot variables
+    Text[] spiralRotationSpeed;
+    Toggle spiralDirection;
+
+    //single direction variables
+    Text[] singleDirectionAim;
+
+    //turret info
     Turret turret;
     GameObject mainTurret;
     GameObject currentSelectedTurret;
@@ -39,6 +48,8 @@ public class UIManager : MonoBehaviour
         optionPanel = GameObject.Find("turret options");
         targetPlayerUI = GameObject.Find("Target player UI");
         arcShotUI = GameObject.Find("Arc shot UI");
+        spiralShotUI = GameObject.Find("Spiral shot UI");
+        singleDirectionUI = GameObject.Find("Single direction UI");
 
         //get generic turret options
         fireRateInput = GameObject.Find("turret firerate input").GetComponentsInChildren<Text>();
@@ -58,8 +69,13 @@ public class UIManager : MonoBehaviour
         arcDirection = GameObject.Find("Arc Direction input").GetComponentsInChildren<Text>();
         rotationSpeed = GameObject.Find("Rotation Speed input").GetComponentsInChildren<Text>();
 
-        
-        //aimType.value = GetComponent<Turret>().targetingType - 1;
+        //get spiral shot options
+        spiralRotationSpeed = GameObject.Find("Spiral Rotation Speed input").GetComponentsInChildren<Text>();
+        spiralDirection = GameObject.Find("Spiral spin direction toggle").GetComponent<Toggle>();
+
+        //get single direction options
+        singleDirectionAim = GameObject.Find("Single direciton input").GetComponentsInChildren<Text>();
+
 
         //set listeners for the dropdown boxes
         aimType.onValueChanged.AddListener(delegate
@@ -87,7 +103,10 @@ public class UIManager : MonoBehaviour
 
         targetPlayerUI.SetActive(false);
         arcShotUI.SetActive(false);
+        spiralShotUI.SetActive(false);
+        singleDirectionUI.SetActive(false);
         optionPanel.SetActive(false);
+        
     }
 
     public void turretSelected(GameObject currentTurret) 
@@ -103,9 +122,6 @@ public class UIManager : MonoBehaviour
 
         turretName.text = "Selected turret \n" + currentSelectedTurret.name;
 
-       // currentTurret.GetComponent<Turret_Fire>().enabled = true;
-       // currentTurret.GetComponent<Turret_Targeting>().enabled = true;
-       // currentTurret.GetComponent<Turret_BulletSetup>().enabled = true;
         fireOnOrOffOnTurret(currentTurret, true);
         optionPanel.SetActive(true);
         aimType.value = turret.targetingType - 1;
@@ -158,14 +174,31 @@ public class UIManager : MonoBehaviour
         switch(turret.targetingType)
         {
             case 1:
-                arcShotUI.SetActive(false);
+
                 targetPlayerUI.SetActive(true);
+                arcShotUI.SetActive(false);
+                spiralShotUI.SetActive(false);
+                singleDirectionUI.SetActive(false);
                 break;
             case 2:
+
                 targetPlayerUI.SetActive(false);
                 arcShotUI.SetActive(true);
+                spiralShotUI.SetActive(false);
+                singleDirectionUI.SetActive(false);
                 break;
-
+            case 3:
+                targetPlayerUI.SetActive(false);
+                arcShotUI.SetActive(false);
+                spiralShotUI.SetActive(true);
+                singleDirectionUI.SetActive(false);
+                break;
+            case 4:
+                targetPlayerUI.SetActive(false);
+                arcShotUI.SetActive(false);
+                spiralShotUI.SetActive(false);
+                singleDirectionUI.SetActive(true);
+                break;
             default:
                 break;
         }
@@ -179,14 +212,29 @@ public class UIManager : MonoBehaviour
         switch (turret.targetingType)
         {
             case 1:
-                arcShotUI.SetActive(false);
-                targetPlayerUI.SetActive(true);
+                targetPlayerUI.SetActive(false);
+                arcShotUI.SetActive(true);
+                spiralShotUI.SetActive(false);
+                singleDirectionUI.SetActive(false);
                 break;
             case 2:
                 targetPlayerUI.SetActive(false);
                 arcShotUI.SetActive(true);
+                spiralShotUI.SetActive(true);
+                singleDirectionUI.SetActive(false);
                 break;
-
+            case 3:
+                targetPlayerUI.SetActive(false);
+                arcShotUI.SetActive(false);
+                spiralShotUI.SetActive(true);
+                singleDirectionUI.SetActive(false);
+                break;
+            case 4:
+                targetPlayerUI.SetActive(false);
+                arcShotUI.SetActive(false);
+                spiralShotUI.SetActive(false);
+                singleDirectionUI.SetActive(true);
+                break;
             default:
                 break;
         }
@@ -210,6 +258,12 @@ public class UIManager : MonoBehaviour
                 saveArcShotSettings();
                 break;
 
+            case 3:
+                saveSpiralShotSettings();
+                break;
+            case 4:
+                saveSingleDirSettings();
+                break;
             default:
                 break;
         }
@@ -253,5 +307,30 @@ public class UIManager : MonoBehaviour
             turret.rotateSpeed = float.Parse(rotationSpeed[1].text);
         }
 
+    }
+
+    void saveSpiralShotSettings()
+    {
+        if (spiralRotationSpeed[1].text != null)
+        {
+            turret.rotateSpeed = float.Parse(spiralRotationSpeed[1].text);
+        }
+
+        if (spiralDirection.isOn)
+        {
+            turret.spiralDirection = true;
+        }
+        else
+        {
+            turret.spiralDirection = false;
+        }   
+    }
+
+    void saveSingleDirSettings()
+    {
+        if (singleDirectionAim[1].text != null)
+        {
+            turret.singleDirDirection = float.Parse(singleDirectionAim[1].text);
+        }
     }
 }

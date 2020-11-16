@@ -5,52 +5,40 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    /// <summary>
-    ///check if turret is active
-    /// </summary>
-    [SerializeField]
+
+    //check if turret is active
     public int streamNumber;
-    [SerializeField]
     public bool streamEnabled;
 
-    /// <summary>
-    /// generic turret settings (applies to all)
-    /// </summary>
-    [SerializeField]
+
+    // generic turret settings (applies to all)
     public int fireType;
-    [SerializeField]
     public float firerate;
-    [SerializeField]
     public int targetingType;
-
-    /// <summary>
-    /// Target player settings
-    /// </summary>
-    [SerializeField]
-    public bool smoothTarget;
-    [SerializeField]
-    public float smoothTargetSpeed;
-    [SerializeField]
-    public float targetPlayerOffsetAmmount;
-
-    /// <summary>
-    /// arc targetting settings
-    /// </summary>
-    [SerializeField]
-    public float rotateAngleDirection;
-    [SerializeField]
-    public float rotateAngleWidth;
-    [SerializeField]
     public float rotateSpeed;
 
-    /// <summary>
-    /// Bullet fire variables 
-    /// </summary>
-    [SerializeField]
-    public int bulletFormation;
-    [SerializeField]
+
+    // Target player settings
+    public bool smoothTarget;
+    public float smoothTargetSpeed;
+    public float targetPlayerOffsetAmmount;
+
+
+    // arc targetting settings
+    public float rotateAngleDirection;
+    public float rotateAngleWidth;
+
+
+    // spiral targetting settings
+    public bool spiralDirection;
+
+    //single direction settings
+    public float singleDirDirection;
+
+
+    //Bullet fire variables  
+    public int bulletFormation; 
     public int numOfBullets;
-    [SerializeField]
     public float bulletDelay;
 
 }
