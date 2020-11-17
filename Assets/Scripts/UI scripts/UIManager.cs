@@ -1,17 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor.Android;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    //UI panels
     GameObject optionPanel;
+    GameObject turretPanel;
+    GameObject bulletPanel;
     GameObject targetPlayerUI;
     GameObject arcShotUI;
     GameObject spiralShotUI;
     GameObject singleDirectionUI;
 
+    //change settings buttons
+    Button toTurretSettings;
+    Button toBulletSettings;
+
+    //general turret settings
     Text[] fireRateInput;
     Text turretName;
     Dropdown aimType;
@@ -44,12 +53,18 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //get main panel and individual shot panels
-        optionPanel = GameObject.Find("turret options");
+        //get main panels and individual sub-panels
+        optionPanel = GameObject.Find("Options panel");
+        turretPanel = GameObject.Find("turret options");
+        bulletPanel = GameObject.Find("bullet options");
         targetPlayerUI = GameObject.Find("Target player UI");
         arcShotUI = GameObject.Find("Arc shot UI");
         spiralShotUI = GameObject.Find("Spiral shot UI");
         singleDirectionUI = GameObject.Find("Single direction UI");
+
+        //get change settings buttons
+        toTurretSettings = GameObject.Find("Turret settings").GetComponent<Button>();
+        toBulletSettings = GameObject.Find("Bullet settings").GetComponent<Button>();
 
         //get generic turret options
         fireRateInput = GameObject.Find("turret firerate input").GetComponentsInChildren<Text>();
@@ -96,6 +111,18 @@ public class UIManager : MonoBehaviour
             }
         );
 
+        //set listeners for the save button and swap settings buttons
+        toTurretSettings.onClick.AddListener(delegate
+        {
+            toTurretSettingsPress();
+        });
+
+        toBulletSettings.onClick.AddListener(delegate
+        {
+            toBulletSettingsPress();
+        });
+
+
         saveTurretSettings.onClick.AddListener(delegate
         {
             saveTurretPressed();
@@ -105,10 +132,11 @@ public class UIManager : MonoBehaviour
         arcShotUI.SetActive(false);
         spiralShotUI.SetActive(false);
         singleDirectionUI.SetActive(false);
+        bulletPanel.SetActive(false);
+        turretPanel.SetActive(false);
         optionPanel.SetActive(false);
         
     }
-
     public void turretSelected(GameObject currentTurret) 
     {
         currentSelectedTurret = currentTurret;
@@ -124,8 +152,9 @@ public class UIManager : MonoBehaviour
 
         fireOnOrOffOnTurret(currentTurret, true);
         optionPanel.SetActive(true);
+        turretPanel.SetActive(true);
         aimType.value = turret.targetingType - 1;
-        SetActiveUI();
+        SetActiveTurretUI();
     }
     void fireOnOrOffOnTurret(GameObject turr, bool b)
     {
@@ -169,12 +198,11 @@ public class UIManager : MonoBehaviour
         fireOnOrOffOnTurret(currentSelectedTurret, true);
     }
 
-    void SetActiveUI()
+    void SetActiveTurretUI()
     {
         switch(turret.targetingType)
         {
             case 1:
-
                 targetPlayerUI.SetActive(true);
                 arcShotUI.SetActive(false);
                 spiralShotUI.SetActive(false);
@@ -239,7 +267,16 @@ public class UIManager : MonoBehaviour
                 break;
         }
     }
-
+    void toTurretSettingsPress()
+    {
+        turretPanel.SetActive(true);
+        bulletPanel.SetActive(false);
+    }
+    void toBulletSettingsPress()
+    {
+        turretPanel.SetActive(false);
+        bulletPanel.SetActive(true);
+    }
     //save button pressed
     void saveTurretPressed()
     {
