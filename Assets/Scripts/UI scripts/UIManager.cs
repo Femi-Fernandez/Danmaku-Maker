@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
     Button toTurretSettings;
     Button toBulletSettings;
 
-    //general turret settings
+    //general turret movement settings
     Text[] fireRateInput;
     Text turretName;
     Dropdown aimType;
@@ -45,6 +45,13 @@ public class UIManager : MonoBehaviour
     //single direction variables
     Text[] singleDirectionAim;
 
+
+    //general bullet settings
+    Dropdown bulletStreamToEdit;
+    Dropdown fireType;
+    Dropdown moveType;
+    Text[] numOfBullets;
+
     //turret info
     Turret turret;
     GameObject mainTurret;
@@ -66,6 +73,23 @@ public class UIManager : MonoBehaviour
         toTurretSettings = GameObject.Find("Turret settings").GetComponent<Button>();
         toBulletSettings = GameObject.Find("Bullet settings").GetComponent<Button>();
 
+        setupTurretPanelsInputs();
+        setupBulletPanelsInputs();
+        setupDropdowns();
+        setupButtons();
+
+        targetPlayerUI.SetActive(false);
+        arcShotUI.SetActive(false);
+        spiralShotUI.SetActive(false);
+        singleDirectionUI.SetActive(false);
+        bulletPanel.SetActive(false);
+        turretPanel.SetActive(false);
+        optionPanel.SetActive(false);
+        
+    }
+
+    void setupTurretPanelsInputs()
+    {
         //get generic turret options
         fireRateInput = GameObject.Find("turret firerate input").GetComponentsInChildren<Text>();
         turretName = GameObject.Find("SelectedTurret").GetComponent<Text>();
@@ -91,7 +115,21 @@ public class UIManager : MonoBehaviour
         //get single direction options
         singleDirectionAim = GameObject.Find("Single direciton input").GetComponentsInChildren<Text>();
 
+    }
 
+    // Dropdown bulletStreamToEdit;
+    // Dropdown fireType;
+    // Dropdown moveType;
+    // Text[] numOfBullets;
+    void setupBulletPanelsInputs()
+    {
+        bulletStreamToEdit = GameObject.Find("bullet stream num input").GetComponent<Dropdown>();
+        fireType = GameObject.Find("fire type input").GetComponent<Dropdown>();
+        moveType = GameObject.Find("movement type input").GetComponent<Dropdown>();
+    }
+
+    void setupDropdowns()
+    {
         //set listeners for the dropdown boxes
         aimType.onValueChanged.AddListener(delegate
         {
@@ -106,11 +144,32 @@ public class UIManager : MonoBehaviour
         );
 
         streamToEdit.onValueChanged.AddListener(delegate
-            {
-                streamToEditChanged(streamToEdit);
-            }
+        {
+            streamToEditChanged(streamToEdit);
+        }
         );
 
+        bulletStreamToEdit.onValueChanged.AddListener(delegate
+        {
+            streamToEditChanged(bulletStreamToEdit);
+        }
+        );
+
+        fireType.onValueChanged.AddListener(delegate
+        {
+            bulletFireType(fireType);
+        }
+        );
+
+        moveType.onValueChanged.AddListener(delegate
+        {
+            bulletMoveType(moveType);
+        }
+        );
+    }
+
+    void setupButtons()
+    {
         //set listeners for the save button and swap settings buttons
         toTurretSettings.onClick.AddListener(delegate
         {
@@ -128,15 +187,8 @@ public class UIManager : MonoBehaviour
             saveTurretPressed();
         });
 
-        targetPlayerUI.SetActive(false);
-        arcShotUI.SetActive(false);
-        spiralShotUI.SetActive(false);
-        singleDirectionUI.SetActive(false);
-        bulletPanel.SetActive(false);
-        turretPanel.SetActive(false);
-        optionPanel.SetActive(false);
-        
     }
+
     public void turretSelected(GameObject currentTurret) 
     {
         currentSelectedTurret = currentTurret;
@@ -154,14 +206,17 @@ public class UIManager : MonoBehaviour
         optionPanel.SetActive(true);
         turretPanel.SetActive(true);
         aimType.value = turret.targetingType - 1;
+        numOfStreamsChanged(numOfStreams);
         SetActiveTurretUI();
     }
+
     void fireOnOrOffOnTurret(GameObject turr, bool b)
     {
         turr.GetComponent<Turret_Fire>().enabled = b;
         turr.GetComponent<Turret_Targeting>().enabled = b;
         turr.GetComponent<Turret_BulletSetup>().enabled = b;
     }
+
     void numOfStreamsChanged(Dropdown change)
     {
         List<string> streamToEditOptions = new List<string> { };
@@ -181,11 +236,13 @@ public class UIManager : MonoBehaviour
 
         //creates a list of strings and adds them to the stream to edit dropdown
         streamToEdit.ClearOptions();
+        bulletStreamToEdit.ClearOptions();
         for (int i = 1; i < change.value+2; i++)
         {
             streamToEditOptions.Add(i.ToString());
         }
         streamToEdit.AddOptions(streamToEditOptions);
+        bulletStreamToEdit.AddOptions(streamToEditOptions);
     }
 
     void streamToEditChanged(Dropdown change) 
@@ -232,6 +289,20 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    void bulletFireType(Dropdown change)
+    {
+        turret.bulletFormation = change.value + 1;
+        switch (turret.bulletFormation)
+        {
+            default:
+                break;
+        }
+    }
+
+    void bulletMoveType(Dropdown change)
+    {
+
+    }
 
     void DropdownValueChanged(Dropdown change)
     {
@@ -248,7 +319,7 @@ public class UIManager : MonoBehaviour
             case 2:
                 targetPlayerUI.SetActive(false);
                 arcShotUI.SetActive(true);
-                spiralShotUI.SetActive(true);
+                spiralShotUI.SetActive(false);
                 singleDirectionUI.SetActive(false);
                 break;
             case 3:
@@ -267,16 +338,19 @@ public class UIManager : MonoBehaviour
                 break;
         }
     }
+
     void toTurretSettingsPress()
     {
         turretPanel.SetActive(true);
         bulletPanel.SetActive(false);
     }
+
     void toBulletSettingsPress()
     {
         turretPanel.SetActive(false);
         bulletPanel.SetActive(true);
     }
+
     //save button pressed
     void saveTurretPressed()
     {
@@ -329,6 +403,7 @@ public class UIManager : MonoBehaviour
             turret.targetPlayerOffsetAmmount = float.Parse(targetingOffset[1].text);
         }
     }
+
     void saveArcShotSettings()
     {
         if (arcSize[1].text != "")

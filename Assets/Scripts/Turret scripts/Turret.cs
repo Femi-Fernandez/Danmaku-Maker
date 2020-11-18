@@ -13,7 +13,6 @@ public class Turret : MonoBehaviour
 
     // generic turret settings (applies to all)
     public int fireType;
-    public float firerate;
     public int targetingType;
     public float rotateSpeed;
 
@@ -39,6 +38,11 @@ public class Turret : MonoBehaviour
     //Bullet fire variables  
     public int bulletFormation; 
     public int numOfBullets;
+    //firerate determines the gap between each burst of shots
+    public float firerate;
+    //bullet delay determins the gap between each individual bullet in a burst (if they are staggered)
     public float bulletDelay;
+    public float angleBetweenBullets;
+    public float bulletRandomRange;
 
 }

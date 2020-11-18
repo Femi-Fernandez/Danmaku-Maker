@@ -5,15 +5,14 @@ using UnityEngine;
 public class Turret_Fire : MonoBehaviour
 {
 
-    Turret fireRate;
+    Turret turret;
     GameObject _player;
 
-    private float fireTimer;
+    public float fireTimer;
     public bool readyToFire;
     private void Start()
     {
-        fireRate = GetComponent<Turret>();
-
+        turret = GetComponent<Turret>();
         fireTimer = 0f;
         readyToFire = true;
     }
@@ -21,10 +20,10 @@ public class Turret_Fire : MonoBehaviour
     
     void Update()
     {
-        if ((fireTimer > fireRate.firerate) && readyToFire)
+        if ((fireTimer > turret.firerate) && readyToFire)
         {
             GetComponent<Turret_BulletSetup>().fireShot();
-            fireTimer = 0f;
+           // fireTimer = 0f;
             readyToFire = false;
         }
         else
