@@ -45,4 +45,8 @@ public class Turret : MonoBehaviour
     public float angleBetweenBullets;
     public float bulletRandomRange;
 
+    //individual bullet settings (what movement type they use, their speed etc)
+    public int bulletMovementType;
+    public float bulletBaseSpeed;
+
 }

@@ -170,3 +170,4 @@ MonoBehaviour:
   movementType: 1
   lifeTime: 3
   speed: 3
+  baseSpeed: 3

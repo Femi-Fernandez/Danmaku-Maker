@@ -7,5 +7,4 @@ public class Bullet : MonoBehaviour
     public float movementType;
     public float lifeTime;
     public float speed;
-    public float baseSpeed;
 }

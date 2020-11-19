@@ -7,14 +7,23 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    //UI panels
+    //main UI panels
     GameObject optionPanel;
     GameObject turretPanel;
     GameObject bulletPanel;
+
+    //turret setting panels
     GameObject targetPlayerUI;
     GameObject arcShotUI;
     GameObject spiralShotUI;
     GameObject singleDirectionUI;
+
+    //bullet setting panels
+    GameObject singleShotUI;
+    GameObject streamShotUI;
+    GameObject shotgunUI;
+    GameObject randomBurstUI;
+    GameObject straightShotgunUI;
 
     //change settings buttons
     Button toTurretSettings;
@@ -60,14 +69,18 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //get main panels and individual sub-panels
+        //get main panels
         optionPanel = GameObject.Find("Options panel");
         turretPanel = GameObject.Find("turret options");
         bulletPanel = GameObject.Find("bullet options");
+
+        //get turret settings panels
         targetPlayerUI = GameObject.Find("Target player UI");
         arcShotUI = GameObject.Find("Arc shot UI");
         spiralShotUI = GameObject.Find("Spiral shot UI");
         singleDirectionUI = GameObject.Find("Single direction UI");
+
+
 
         //get change settings buttons
         toTurretSettings = GameObject.Find("Turret settings").GetComponent<Button>();

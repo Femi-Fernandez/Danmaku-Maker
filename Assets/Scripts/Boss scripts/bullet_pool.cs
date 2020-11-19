@@ -15,6 +15,7 @@ public class bullet_pool : MonoBehaviour
     private void Awake()
     {
         bulletPoolInstanse = this;
+        
     }
     void Initialise()
     {
