@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class turretSelect : MonoBehaviour
 {
     public GameObject uiManager;
-
+    public GameObject[] turrets;
     private void Start()
     {
         uiManager = GameObject.Find("UI Manager");
@@ -17,6 +17,15 @@ public class turretSelect : MonoBehaviour
 
     private void OnMouseDown()
     {
-        uiManager.GetComponent<UIManager>().turretSelected(transform.GetChild(0).gameObject);
+        turrets = GameObject.FindGameObjectsWithTag("Turret");
+        for (int i = 0; i < turrets.Length; i++)
+        {
+            turrets[i].GetComponent<Turret_Fire>().enabled = false;
+            turrets[i].GetComponent<Turret_Targeting>().enabled = false;
+            turrets[i].GetComponent<Turret_BulletSetup>().enabled = false;
+            turrets[i].transform.rotation = Quaternion.Euler(0, 0, -90);
+        }
+
+       uiManager.GetComponent<UIManager>().turretSelected(transform.GetChild(0).gameObject);       
     }   
 }

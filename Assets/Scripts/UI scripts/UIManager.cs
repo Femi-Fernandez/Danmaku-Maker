@@ -18,13 +18,6 @@ public class UIManager : MonoBehaviour
     GameObject spiralShotUI;
     GameObject singleDirectionUI;
 
-    //bullet setting panels
-    GameObject singleShotUI;
-    GameObject streamShotUI;
-    GameObject shotgunUI;
-    GameObject randomBurstUI;
-    GameObject straightShotgunUI;
-
     //change settings buttons
     Button toTurretSettings;
     Button toBulletSettings;
@@ -55,17 +48,39 @@ public class UIManager : MonoBehaviour
     Text[] singleDirectionAim;
 
 
+
+    //bullet setting panels
+    GameObject streamshotUI;
+    GameObject shotgunUI;
+    GameObject randomBurstUI;
+
     //general bullet settings
     Dropdown bulletStreamToEdit;
     Dropdown fireType;
     Dropdown moveType;
-    Text[] numOfBullets;
+    Button saveBulletSettings;
+    //Text[] bulletSpeed;
+
+    //stream bullet settings
+    Text[] streamNumberOfBul;
+    Toggle bulletSpeedIncreaseCheck;
+    Text[] bulletSpeedIncreaseAmmount;
+
+    //shotgun bullet settings
+    Text[] shotgunNumberOfBul;
+    Text[] angleBetweenBul;
+    Toggle straightShotgunShot;
+
+    //random burst bullet settings
+    Text[] randNumberOfBul;
+    Text[] randRange;
 
     //turret info
     Turret turret;
     GameObject mainTurret;
     GameObject currentSelectedTurret;
     GameObject[] turretChildren = new GameObject[4];
+
     // Start is called before the first frame update
     void Start()
     {
@@ -91,14 +106,21 @@ public class UIManager : MonoBehaviour
         setupDropdowns();
         setupButtons();
 
+        //disable all turret setting pannels
         targetPlayerUI.SetActive(false);
         arcShotUI.SetActive(false);
         spiralShotUI.SetActive(false);
         singleDirectionUI.SetActive(false);
+
+        //disable all bullet setting pannels
+        streamshotUI.SetActive(false);
+        shotgunUI.SetActive(false);
+
+        //disable turret, bullet and the main option panel
         bulletPanel.SetActive(false);
         turretPanel.SetActive(false);
         optionPanel.SetActive(false);
-        
+
     }
 
     void setupTurretPanelsInputs()
@@ -130,15 +152,34 @@ public class UIManager : MonoBehaviour
 
     }
 
-    // Dropdown bulletStreamToEdit;
-    // Dropdown fireType;
-    // Dropdown moveType;
-    // Text[] numOfBullets;
+    // Text[] randNumberOfBul;
+    // Text[] randRange;
+
     void setupBulletPanelsInputs()
     {
+        //get generic bullet settings
         bulletStreamToEdit = GameObject.Find("bullet stream num input").GetComponent<Dropdown>();
         fireType = GameObject.Find("fire type input").GetComponent<Dropdown>();
         moveType = GameObject.Find("movement type input").GetComponent<Dropdown>();
+        saveBulletSettings = GameObject.Find("Save bullet settings").GetComponent<Button>();
+
+        //get bullet configuration panels
+        streamshotUI = GameObject.Find("stream shot UI");
+        shotgunUI = GameObject.Find("shotgun UI");
+        randomBurstUI = GameObject.Find("random burst UI");
+
+        //get stream configuration inputs
+        streamNumberOfBul = GameObject.Find("stream num of bullets input").GetComponentsInChildren<Text>();
+        bulletSpeedIncreaseCheck = GameObject.Find("bullet speed increase").GetComponent<Toggle>();
+        bulletSpeedIncreaseAmmount = GameObject.Find("speed increase ammount input").GetComponentsInChildren<Text>();
+
+        //get shotgun configuration inputs
+        shotgunNumberOfBul = GameObject.Find("shotgun num of bullets input").GetComponentsInChildren<Text>();
+        angleBetweenBul = GameObject.Find("arc between bullets input").GetComponentsInChildren<Text>();
+        straightShotgunShot = GameObject.Find("straight shotgun check").GetComponent<Toggle>();
+
+        //get random burst configuration inputs
+
     }
 
     void setupDropdowns()
@@ -200,9 +241,15 @@ public class UIManager : MonoBehaviour
             saveTurretPressed();
         });
 
+
+        saveBulletSettings.onClick.AddListener(delegate
+        {
+            saveBulletPressed();
+        });
+        //saveBulletPressed();
     }
 
-    public void turretSelected(GameObject currentTurret) 
+    public void turretSelected(GameObject currentTurret)
     {
         currentSelectedTurret = currentTurret;
         turret = currentTurret.GetComponent<Turret>();
@@ -220,6 +267,8 @@ public class UIManager : MonoBehaviour
         turretPanel.SetActive(true);
         aimType.value = turret.targetingType - 1;
         numOfStreamsChanged(numOfStreams);
+        fireType.value = turret.bulletFormation -1;
+        bulletFireType(fireType);
         SetActiveTurretUI();
     }
 
@@ -234,13 +283,13 @@ public class UIManager : MonoBehaviour
     {
         List<string> streamToEditOptions = new List<string> { };
         //loops through children activating them up to the number selected
-        for (int i = 1; i < change.value +1; i++)
+        for (int i = 1; i < change.value + 1; i++)
         {
             turretChildren[i].SetActive(true);
             turretChildren[i].GetComponent<Turret>().streamEnabled = true;
         }
 
-        for (int i = change.value+1; i < 4; i++)
+        for (int i = change.value + 1; i < 4; i++)
         {
             turretChildren[i].SetActive(false);
             turretChildren[i].GetComponent<Turret>().streamEnabled = false;
@@ -250,7 +299,7 @@ public class UIManager : MonoBehaviour
         //creates a list of strings and adds them to the stream to edit dropdown
         streamToEdit.ClearOptions();
         bulletStreamToEdit.ClearOptions();
-        for (int i = 1; i < change.value+2; i++)
+        for (int i = 1; i < change.value + 2; i++)
         {
             streamToEditOptions.Add(i.ToString());
         }
@@ -258,7 +307,7 @@ public class UIManager : MonoBehaviour
         bulletStreamToEdit.AddOptions(streamToEditOptions);
     }
 
-    void streamToEditChanged(Dropdown change) 
+    void streamToEditChanged(Dropdown change)
     {
         fireOnOrOffOnTurret(currentSelectedTurret, false);
         Debug.Log(change.value);
@@ -270,7 +319,7 @@ public class UIManager : MonoBehaviour
 
     void SetActiveTurretUI()
     {
-        switch(turret.targetingType)
+        switch (turret.targetingType)
         {
             case 1:
                 targetPlayerUI.SetActive(true);
@@ -307,6 +356,21 @@ public class UIManager : MonoBehaviour
         turret.bulletFormation = change.value + 1;
         switch (turret.bulletFormation)
         {
+            case 1:
+                streamshotUI.SetActive(false);
+                shotgunUI.SetActive(false);
+                break;
+
+            case 2:
+                streamshotUI.SetActive(true);
+                shotgunUI.SetActive(false);
+                break;
+
+            case 3:
+                streamshotUI.SetActive(false);
+                shotgunUI.SetActive(true);
+                break;
+
             default:
                 break;
         }
@@ -364,7 +428,7 @@ public class UIManager : MonoBehaviour
         bulletPanel.SetActive(true);
     }
 
-    //save button pressed
+    //save turret button pressed
     void saveTurretPressed()
     {
         if (fireRateInput[1].text != "")
@@ -448,7 +512,7 @@ public class UIManager : MonoBehaviour
         else
         {
             turret.spiralDirection = false;
-        }   
+        }
     }
 
     void saveSingleDirSettings()
@@ -458,4 +522,66 @@ public class UIManager : MonoBehaviour
             turret.singleDirDirection = float.Parse(singleDirectionAim[1].text);
         }
     }
+
+    void saveBulletPressed()
+    {
+        switch (turret.bulletFormation)
+        {
+            case 1:
+                break;
+
+            case 2:
+                saveStreamShotSettings();
+                break;
+
+            case 3:
+                saveShotgunSettings();
+                break;
+            default:
+                break;
+        }
+    }
+
+    void saveStreamShotSettings()
+    {
+        if (bulletSpeedIncreaseCheck.isOn == true)
+        {
+            turret.bulletSpeedIncreaseCheck = true;
+            if (bulletSpeedIncreaseAmmount[1].text != "")
+            {
+                turret.bulletSpeedIncreaseAmmount = float.Parse(bulletSpeedIncreaseAmmount[1].text);
+            }
+        }
+        else
+        {
+            turret.bulletSpeedIncreaseCheck = false;
+        }
+
+        if (streamNumberOfBul[1].text != "")
+        {
+            turret.numOfBullets = int.Parse(streamNumberOfBul[1].text);
+        }
+    }
+    void saveShotgunSettings()
+    {
+        if (straightShotgunShot.isOn == true)
+        {
+            turret.shotgunStraight = true;
+        }
+        else
+        {
+            turret.shotgunStraight = false;
+        }
+
+        if (shotgunNumberOfBul[1].text != "")
+        {
+            turret.numOfBullets = int.Parse(shotgunNumberOfBul[1].text);
+        }
+
+        if (angleBetweenBul[1].text != "")
+        {
+            turret.angleBetweenBullets = float.Parse(angleBetweenBul[1].text);
+        }
+    }
+
 }

@@ -42,8 +42,12 @@ public class Turret : MonoBehaviour
     public float firerate;
     //bullet delay determins the gap between each individual bullet in a burst (if they are staggered)
     public float bulletDelay;
+    public float bulletSpeedIncreaseAmmount;
     public float angleBetweenBullets;
     public float bulletRandomRange;
+
+    public bool shotgunStraight;
+    public bool bulletSpeedIncreaseCheck;
 
     //individual bullet settings (what movement type they use, their speed etc)
     public int bulletMovementType;

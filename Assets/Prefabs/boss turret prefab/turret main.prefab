@@ -187,8 +187,11 @@ MonoBehaviour:
   numOfBullets: 5
   firerate: 1
   bulletDelay: 0.1
+  bulletSpeedIncreaseAmmount: 0
   angleBetweenBullets: 0
   bulletRandomRange: 0
+  shotgunStraight: 0
+  bulletSpeedIncreaseCheck: 0
   bulletMovementType: 0
   bulletBaseSpeed: 0
 --- !u!114 &6694410549020178388
@@ -241,6 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43f50e67275f1d418c33bac7136b77a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turrets: []
 --- !u!1 &6694410549475043805
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,12 +346,15 @@ MonoBehaviour:
   rotateAngleWidth: 20
   spiralDirection: 0
   singleDirDirection: 0
-  bulletFormation: 5
+  bulletFormation: 3
   numOfBullets: 5
   firerate: 1
   bulletDelay: 0.1
+  bulletSpeedIncreaseAmmount: 0
   angleBetweenBullets: 10
   bulletRandomRange: 0
+  shotgunStraight: 0
+  bulletSpeedIncreaseCheck: 0
   bulletMovementType: 0
   bulletBaseSpeed: 3
 --- !u!114 &6694410549475043806
@@ -400,6 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43f50e67275f1d418c33bac7136b77a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turrets: []
 --- !u!1 &6694410549852429987
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,8 +513,11 @@ MonoBehaviour:
   numOfBullets: 5
   firerate: 1
   bulletDelay: 0.1
+  bulletSpeedIncreaseAmmount: 0
   angleBetweenBullets: 0
   bulletRandomRange: 0
+  shotgunStraight: 0
+  bulletSpeedIncreaseCheck: 0
   bulletMovementType: 0
   bulletBaseSpeed: 0
 --- !u!114 &6694410549852429976
@@ -559,6 +570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43f50e67275f1d418c33bac7136b77a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turrets: []
 --- !u!1 &6694410550044618665
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,8 +840,11 @@ MonoBehaviour:
   numOfBullets: 5
   firerate: 1
   bulletDelay: 0.1
+  bulletSpeedIncreaseAmmount: 0
   angleBetweenBullets: 0
   bulletRandomRange: 0
+  shotgunStraight: 0
+  bulletSpeedIncreaseCheck: 0
   bulletMovementType: 0
   bulletBaseSpeed: 0
 --- !u!114 &6694410550629965110
@@ -882,6 +897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43f50e67275f1d418c33bac7136b77a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turrets: []
 --- !u!1 &6694410550761159649
 GameObject:
   m_ObjectHideFlags: 0

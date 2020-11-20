@@ -6,10 +6,13 @@ public class Deselect : MonoBehaviour
 {
 
     public RectTransform optionPanel;
+    public RectTransform bulletPanel;
 
     private void OnMouseDown()
     {
         optionPanel.gameObject.SetActive(false);
+        bulletPanel.gameObject.SetActive(false);
+
         GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
         for (int i = 0; i < turrets.Length; i++)
         {
