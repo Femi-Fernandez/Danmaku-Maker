@@ -115,6 +115,7 @@ public class UIManager : MonoBehaviour
         //disable all bullet setting pannels
         streamshotUI.SetActive(false);
         shotgunUI.SetActive(false);
+        randomBurstUI.SetActive(false);
 
         //disable turret, bullet and the main option panel
         bulletPanel.SetActive(false);
@@ -179,7 +180,8 @@ public class UIManager : MonoBehaviour
         straightShotgunShot = GameObject.Find("straight shotgun check").GetComponent<Toggle>();
 
         //get random burst configuration inputs
-
+        randNumberOfBul = GameObject.Find("rand burst num of bullets input").GetComponentsInChildren<Text>();
+        randRange = GameObject.Find("rand burst range input").GetComponentsInChildren<Text>();
     }
 
     void setupDropdowns()
@@ -314,6 +316,7 @@ public class UIManager : MonoBehaviour
         turret = turretChildren[change.value].GetComponent<Turret>();
         currentSelectedTurret = turretChildren[change.value];
         turretName.text = "Selected turret \n" + currentSelectedTurret.name;
+        aimType.value = turret.targetingType - 1;
         fireOnOrOffOnTurret(currentSelectedTurret, true);
     }
 
@@ -359,18 +362,26 @@ public class UIManager : MonoBehaviour
             case 1:
                 streamshotUI.SetActive(false);
                 shotgunUI.SetActive(false);
+                randomBurstUI.SetActive(false);
                 break;
 
             case 2:
                 streamshotUI.SetActive(true);
                 shotgunUI.SetActive(false);
+                randomBurstUI.SetActive(false);
                 break;
 
             case 3:
                 streamshotUI.SetActive(false);
                 shotgunUI.SetActive(true);
+                randomBurstUI.SetActive(false);
                 break;
 
+            case 4:
+                streamshotUI.SetActive(false);
+                shotgunUI.SetActive(false);
+                randomBurstUI.SetActive(true);
+                break;
             default:
                 break;
         }
@@ -537,6 +548,9 @@ public class UIManager : MonoBehaviour
             case 3:
                 saveShotgunSettings();
                 break;
+            case 4:
+                saveRandomBurstSettings();
+                break;
             default:
                 break;
         }
@@ -584,4 +598,15 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    void saveRandomBurstSettings()
+    {
+        if (randNumberOfBul[1].text != "")
+        {
+            turret.numOfBullets = int.Parse(randNumberOfBul[1].text);
+        }
+        if (randRange[1].text != "")
+        {
+            turret.bulletRandomRange = float.Parse(randRange[1].text);
+        }
+    }
 }

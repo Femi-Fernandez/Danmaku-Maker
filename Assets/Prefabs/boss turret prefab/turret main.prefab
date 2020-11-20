@@ -97,7 +97,6 @@ GameObject:
   - component: {fileID: 6694410549020178388}
   - component: {fileID: 6694410549020178387}
   - component: {fileID: 6694410549020178386}
-  - component: {fileID: 6694410549020178385}
   m_Layer: 8
   m_Name: turret stream 2
   m_TagString: Turret
@@ -159,6 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiManager: {fileID: 0}
+  turrets: []
 --- !u!114 &6694410549020178389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
   shotgunStraight: 0
   bulletSpeedIncreaseCheck: 0
   bulletMovementType: 0
-  bulletBaseSpeed: 0
+  bulletBaseSpeed: 3
 --- !u!114 &6694410549020178388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,19 +232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9bf5c5d6219044dafc91ef0de3303f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6694410549020178385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6694410549020178399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d43f50e67275f1d418c33bac7136b77a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turrets: []
 --- !u!1 &6694410549475043805
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +247,6 @@ GameObject:
   - component: {fileID: 6694410549475043806}
   - component: {fileID: 6694410549475043793}
   - component: {fileID: 1917547850398467669}
-  - component: {fileID: 6163065589570224772}
   m_Layer: 8
   m_Name: turret stream 1
   m_TagString: Turret
@@ -322,6 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiManager: {fileID: 0}
+  turrets: []
 --- !u!114 &6694410549475043807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,19 +382,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9bf5c5d6219044dafc91ef0de3303f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6163065589570224772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6694410549475043805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d43f50e67275f1d418c33bac7136b77a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turrets: []
 --- !u!1 &6694410549852429987
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,7 +397,6 @@ GameObject:
   - component: {fileID: 6694410549852429976}
   - component: {fileID: 6694410549852429991}
   - component: {fileID: 6694410549852429990}
-  - component: {fileID: 6694410549852429989}
   m_Layer: 8
   m_Name: turret stream 4
   m_TagString: Turret
@@ -485,6 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiManager: {fileID: 0}
+  turrets: []
 --- !u!114 &6694410549852429977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,7 +493,7 @@ MonoBehaviour:
   shotgunStraight: 0
   bulletSpeedIncreaseCheck: 0
   bulletMovementType: 0
-  bulletBaseSpeed: 0
+  bulletBaseSpeed: 3
 --- !u!114 &6694410549852429976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,19 +532,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9bf5c5d6219044dafc91ef0de3303f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6694410549852429989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6694410549852429987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d43f50e67275f1d418c33bac7136b77a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turrets: []
 --- !u!1 &6694410550044618665
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,7 +711,6 @@ GameObject:
   - component: {fileID: 6694410550629965110}
   - component: {fileID: 6694410550629965109}
   - component: {fileID: 6694410550629965108}
-  - component: {fileID: 6694410550629965107}
   m_Layer: 8
   m_Name: turret stream 3
   m_TagString: Turret
@@ -812,6 +772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiManager: {fileID: 0}
+  turrets: []
 --- !u!114 &6694410550629965111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -846,7 +807,7 @@ MonoBehaviour:
   shotgunStraight: 0
   bulletSpeedIncreaseCheck: 0
   bulletMovementType: 0
-  bulletBaseSpeed: 0
+  bulletBaseSpeed: 3
 --- !u!114 &6694410550629965110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -885,19 +846,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9bf5c5d6219044dafc91ef0de3303f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6694410550629965107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6694410550629965105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d43f50e67275f1d418c33bac7136b77a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turrets: []
 --- !u!1 &6694410550761159649
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,6 +896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiManager: {fileID: 0}
+  turrets: []
 --- !u!61 &6694410550761159651
 BoxCollider2D:
   m_ObjectHideFlags: 0

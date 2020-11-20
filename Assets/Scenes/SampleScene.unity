@@ -2616,7 +2616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &308388123
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3125,13 +3125,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 383633568}
   m_TextComponent: {fileID: 19612321}
   m_Placeholder: {fileID: 1804681668}
-  m_ContentType: 3
+  m_ContentType: 2
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 2
+  m_KeyboardType: 4
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 2
+  m_CharacterValidation: 1
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
@@ -6535,7 +6535,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &845979362
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7423,13 +7423,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 936041923}
   m_TextComponent: {fileID: 656090967}
   m_Placeholder: {fileID: 1946613978}
-  m_ContentType: 3
+  m_ContentType: 2
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 2
+  m_KeyboardType: 4
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 2
+  m_CharacterValidation: 1
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
@@ -10118,13 +10118,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1209634424}
   m_TextComponent: {fileID: 490886767}
   m_Placeholder: {fileID: 344288622}
-  m_ContentType: 3
+  m_ContentType: 2
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 2
+  m_KeyboardType: 4
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 2
+  m_CharacterValidation: 1
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
@@ -11206,7 +11206,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1311521801
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14672,7 +14672,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1859792388}
   m_Layer: 5
-  m_Name: Random burst UI
+  m_Name: random burst UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
