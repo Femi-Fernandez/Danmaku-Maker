@@ -16,11 +16,11 @@ public class PlayerMovement : MonoBehaviour
 	{
 		if (Input.GetKey(KeyCode.LeftShift))
 		{
-			speed = 5f;
+			speed = 3f;
 		}
 		else
 		{
-			speed = 10f;
+			speed = 6f;
 		}
 		transform.position += new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0) * speed * Time.deltaTime;
 	}

@@ -18,7 +18,7 @@ public class Turret_Fire : MonoBehaviour
     }
 
     
-    void Update()
+    void FixedUpdate()
     {
         if ((fireTimer > turret.firerate) && readyToFire)
         {

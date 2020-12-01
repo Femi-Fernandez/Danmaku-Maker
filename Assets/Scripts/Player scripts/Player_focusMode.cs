@@ -18,16 +18,16 @@ public class Player_focusMode : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             
-            barrel_left.transform.eulerAngles = new Vector3(-90, 90, 90);
+            barrel_left.transform.eulerAngles = new Vector3(0, 0, 0);
             //barrel_left_boost.transform.eulerAngles = new Vector3(-90, 90, 90);
-            barrel_right.transform.eulerAngles = new Vector3(-90, 90, 90);
+            barrel_right.transform.eulerAngles = new Vector3(0, 0, 0);
             //barrel_right_boost.transform.eulerAngles = new Vector3(-90, 90, 90);
         } 
         else
         {
-            barrel_left.transform.eulerAngles = new Vector3(-95, 90, 90);
+            barrel_left.transform.eulerAngles = new Vector3(0, 0, -5);
             //barrel_left_boost.transform.eulerAngles = new Vector3(-95, 90, 90);
-            barrel_right.transform.eulerAngles = new Vector3(-85, 90, 90);
+            barrel_right.transform.eulerAngles = new Vector3(0, 0, 5);
             //barrel_right_boost.transform.eulerAngles = new Vector3(-85, 90, 90);
         }
     }

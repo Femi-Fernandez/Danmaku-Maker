@@ -3,10 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class Turret : MonoBehaviour
 {
+    public Vector3 turretLocation;
 
-    //check if turret is active
+    //turret settings
+    public int TotalNumberOfTurrets;
+    public string parentTurret;
+    public int numberActiveStreams;
     public int streamNumber;
     public bool streamEnabled;
 

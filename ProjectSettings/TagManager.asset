@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Turret
+  - Player Bullet
+  - Boss Bullet
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - 
   - 
   - Enemy
-  - 
+  - Wall
   - 
   - 
   - 
@@ -56,4 +58,7 @@ TagManager:
     locked: 0
   - name: enemy bullets
     uniqueID: 2512633691
+    locked: 0
+  - name: Borders
+    uniqueID: 1221726845
     locked: 0

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor.Android;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -81,6 +80,24 @@ public class UIManager : MonoBehaviour
     GameObject currentSelectedTurret;
     GameObject[] turretChildren = new GameObject[4];
 
+    //save button
+    Button saveBoss;
+    Button TEMPLOAD;
+    Button TestBoss;
+    Button clearAll;
+
+    [SerializeField]
+    private GameObject player;
+
+    [SerializeField]
+    private GameObject boss;
+
+    [SerializeField]
+    private GameObject gameManager;
+
+
+    GameObject[] turrets;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -101,6 +118,10 @@ public class UIManager : MonoBehaviour
         toTurretSettings = GameObject.Find("Turret settings").GetComponent<Button>();
         toBulletSettings = GameObject.Find("Bullet settings").GetComponent<Button>();
 
+        saveBoss = GameObject.Find("Save Boss").GetComponent<Button>();
+        TEMPLOAD = GameObject.Find("TEMP load").GetComponent<Button>();
+        TestBoss = GameObject.Find("TEST").GetComponent<Button>();
+        clearAll = GameObject.Find("clear boss").GetComponent<Button>();
         setupTurretPanelsInputs();
         setupBulletPanelsInputs();
         setupDropdowns();
@@ -248,9 +269,56 @@ public class UIManager : MonoBehaviour
         {
             saveBulletPressed();
         });
-        //saveBulletPressed();
+
+        saveBoss.onClick.AddListener(delegate
+        {
+            GetComponent<SaveBoss>().saveBoss();
+        });
+
+        TEMPLOAD.onClick.AddListener(delegate
+        {
+            GetComponent<SaveBoss>().LoadBoss();
+        });
+
+        TestBoss.onClick.AddListener(delegate
+        {
+            fightBoss();
+        });
+
+        clearAll.onClick.AddListener(delegate
+        {
+            clearAllTurrets();
+        });
+
     }
 
+    void clearAllTurrets()
+    {
+        for (int i = 1; i < boss.transform.childCount; i++)
+        {
+            Destroy(boss.transform.GetChild(i).gameObject);
+        }
+    }
+
+    void fightBoss()
+    {
+        turrets = GameObject.FindGameObjectsWithTag("Turret");
+        for (int i = 0; i < turrets.Length; i++)
+        {
+            if (turrets[i].GetComponent<Turret>().streamEnabled)
+            {
+                fireOnOrOffOnTurret(turrets[i], true);
+            }
+            else
+            {
+                fireOnOrOffOnTurret(turrets[i], false);
+            }
+        }
+        gameManager.GetComponent<OnGameStart>().PlayMode();
+        optionPanel.SetActive(false);
+        //player.GetComponent<BoxCollider2D>().enabled = true;
+        //boss.transform.GetChild(0).GetComponent<BoxCollider2D>().enabled = true;
+    }
     public void turretSelected(GameObject currentTurret)
     {
         currentSelectedTurret = currentTurret;
@@ -262,11 +330,17 @@ public class UIManager : MonoBehaviour
         turretChildren[2] = mainTurret.transform.GetChild(2).gameObject;
         turretChildren[3] = mainTurret.transform.GetChild(3).gameObject;
 
+        for (int i = 0; i < 4; i++)
+        {
+            turretChildren[i].GetComponent<Turret_Fire>().readyToFire = true;
+        }
+
         turretName.text = "Selected turret \n" + currentSelectedTurret.name;
 
         fireOnOrOffOnTurret(currentTurret, true);
         optionPanel.SetActive(true);
         turretPanel.SetActive(true);
+        bulletPanel.SetActive(false);
         aimType.value = turret.targetingType - 1;
         numOfStreamsChanged(numOfStreams);
         fireType.value = turret.bulletFormation -1;
@@ -285,16 +359,19 @@ public class UIManager : MonoBehaviour
     {
         List<string> streamToEditOptions = new List<string> { };
         //loops through children activating them up to the number selected
+        turretChildren[0].GetComponent<Turret>().numberActiveStreams = change.value + 1;
         for (int i = 1; i < change.value + 1; i++)
         {
             turretChildren[i].SetActive(true);
             turretChildren[i].GetComponent<Turret>().streamEnabled = true;
+            turretChildren[i].GetComponent<Turret>().numberActiveStreams = change.value+1;
         }
 
         for (int i = change.value + 1; i < 4; i++)
         {
             turretChildren[i].SetActive(false);
             turretChildren[i].GetComponent<Turret>().streamEnabled = false;
+            turretChildren[i].GetComponent<Turret>().numberActiveStreams = change.value+1;
         }
 
 
@@ -307,6 +384,9 @@ public class UIManager : MonoBehaviour
         }
         streamToEdit.AddOptions(streamToEditOptions);
         bulletStreamToEdit.AddOptions(streamToEditOptions);
+        bulletFireType(fireType);
+
+        //Debug.Log(turretChildren[0].GetComponent<Turret>().numberActiveStreams);
     }
 
     void streamToEditChanged(Dropdown change)
@@ -318,6 +398,7 @@ public class UIManager : MonoBehaviour
         turretName.text = "Selected turret \n" + currentSelectedTurret.name;
         aimType.value = turret.targetingType - 1;
         fireOnOrOffOnTurret(currentSelectedTurret, true);
+        bulletFireType(fireType);
     }
 
     void SetActiveTurretUI()
@@ -399,8 +480,8 @@ public class UIManager : MonoBehaviour
         switch (turret.targetingType)
         {
             case 1:
-                targetPlayerUI.SetActive(false);
-                arcShotUI.SetActive(true);
+                targetPlayerUI.SetActive(true);
+                arcShotUI.SetActive(false);
                 spiralShotUI.SetActive(false);
                 singleDirectionUI.SetActive(false);
                 break;
@@ -511,18 +592,21 @@ public class UIManager : MonoBehaviour
 
     void saveSpiralShotSettings()
     {
-        if (spiralRotationSpeed[1].text != null)
-        {
-            turret.rotateSpeed = float.Parse(spiralRotationSpeed[1].text);
-        }
 
         if (spiralDirection.isOn)
         {
+            Debug.Log("spin on ");
             turret.spiralDirection = true;
         }
         else
         {
+            Debug.Log("spin off ");
             turret.spiralDirection = false;
+        }
+
+        if (spiralRotationSpeed[1].text != null)
+        {
+            turret.rotateSpeed = float.Parse(spiralRotationSpeed[1].text);
         }
     }
 

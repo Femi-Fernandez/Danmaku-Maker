@@ -15,7 +15,7 @@ public class Turret_Targeting : MonoBehaviour
         turret = GetComponent<Turret>();
         _player = GameObject.FindWithTag("Player");
     }
-    void Update()
+    void FixedUpdate()
     {
         if (_player != null)
         {
@@ -50,7 +50,7 @@ public class Turret_Targeting : MonoBehaviour
         {
             Vector2 direction = _player.transform.position - transform.position;
             Quaternion rotation = Quaternion.AngleAxis(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg, Vector3.forward) * Quaternion.AngleAxis(turret.targetPlayerOffsetAmmount, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, turret.smoothTargetSpeed/1000);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, turret.smoothTargetSpeed/300);
         }
         else
         {
@@ -65,7 +65,7 @@ public class Turret_Targeting : MonoBehaviour
     void arcShot()
     {
         // float angle = Mathf.Sin(Time.time) * 70;
-        float angle = Mathf.PingPong(Time.time * turret.rotateSpeed * 5, turret.rotateAngleWidth) - (turret.rotateAngleDirection + turret.rotateAngleWidth / 2);
+        float angle = Mathf.PingPong(Time.time * turret.rotateSpeed * 10, turret.rotateAngleWidth) - (turret.rotateAngleDirection + turret.rotateAngleWidth / 2);
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
@@ -73,11 +73,11 @@ public class Turret_Targeting : MonoBehaviour
     {
         if (turret.spiralDirection)
         {
-            transform.Rotate(0, 0, turret.rotateSpeed / 15);
+            transform.Rotate(0, 0, turret.rotateSpeed / 3);
         }
         else
         {
-            transform.Rotate(0, 0, -turret.rotateSpeed / 15);
+            transform.Rotate(0, 0, -turret.rotateSpeed / 3);
         }
         
     }

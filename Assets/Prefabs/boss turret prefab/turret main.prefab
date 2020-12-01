@@ -171,7 +171,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f74cc3ca8f2602e4eb58c373a1fe1736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  streamNumber: 0
+  turretLocation: {x: 0, y: 0, z: 0}
+  parentTurret: turret 0
+  streamNumber: 2
   streamEnabled: 0
   fireType: 1
   targetingType: 2
@@ -321,7 +323,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f74cc3ca8f2602e4eb58c373a1fe1736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  streamNumber: 0
+  turretLocation: {x: 0, y: 0, z: 0}
+  parentTurret: turret 0
+  streamNumber: 1
   streamEnabled: 1
   fireType: 1
   targetingType: 1
@@ -471,7 +475,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f74cc3ca8f2602e4eb58c373a1fe1736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  streamNumber: 0
+  turretLocation: {x: 0, y: 0, z: 0}
+  parentTurret: turret 0
+  streamNumber: 4
   streamEnabled: 0
   fireType: 1
   targetingType: 2
@@ -785,7 +791,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f74cc3ca8f2602e4eb58c373a1fe1736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  streamNumber: 0
+  turretLocation: {x: 0, y: 0, z: 0}
+  parentTurret: turret 0
+  streamNumber: 3
   streamEnabled: 0
   fireType: 1
   targetingType: 2
