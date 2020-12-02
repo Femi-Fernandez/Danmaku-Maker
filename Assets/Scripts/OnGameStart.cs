@@ -26,7 +26,7 @@ public class OnGameStart : MonoBehaviour
     void Start()
     {
         StartCoroutine(UIManager.GetComponent<SceneControl>().EnterScene());
-        
+        turretMain = GameObject.FindGameObjectsWithTag("turret Main");
         TestMode();
     }
 
@@ -41,13 +41,13 @@ public class OnGameStart : MonoBehaviour
         player.GetComponent<BoxCollider2D>().enabled = false;
         boss.transform.GetChild(0).GetComponent<BoxCollider2D>().enabled = false;
 
-        GameObject[] turrets = GameObject.FindGameObjectsWithTag("turret Main");
-        for (int i = 0; i < turrets.Length; i++)
+        //GameObject[] turrets = GameObject.FindGameObjectsWithTag("turret Main");
+        for (int i = 0; i < turretMain.Length; i++)
         {
-            turrets[i].SetActive(true);
-            if (turrets[i].GetComponent<BoxCollider2D>())
+            turretMain[i].SetActive(true);
+            if (turretMain[i].GetComponent<BoxCollider2D>())
             {
-                turrets[i].GetComponent<TurretHealth>().health = 100000000000;
+                turretMain[i].GetComponent<TurretHealth>().health = 100000000000;
             }  
         }
     }
@@ -64,7 +64,7 @@ public class OnGameStart : MonoBehaviour
         for (int i = 0; i < turretMain.Length; i++)
         {
             turretMain[i].GetComponent<TurretHealth>().health = turretMain[i].transform.GetChild(0).GetComponent<Turret>().turretHealth;
-           //Debug.Log(turretMain[i].transform.GetChild(1));
+           Debug.Log(turretMain[i].transform.GetChild(0));
             turretMain[i].GetComponent<BoxCollider2D>().enabled = true;
         }
 

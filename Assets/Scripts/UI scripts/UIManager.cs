@@ -236,6 +236,7 @@ public class UIManager : MonoBehaviour
 
         fireType.onValueChanged.AddListener(delegate
         {
+            turret.bulletFormation = fireType.value + 1;
             bulletFireType(fireType);
         }
         );
@@ -350,9 +351,13 @@ public class UIManager : MonoBehaviour
 
     void SetAllValues()
     {
-        aimType.value = turret.targetingType - 1;
         numOfStreams.value = turret.numberActiveStreams - 1;
         numOfStreamsChanged(numOfStreams);
+
+        aimType.value = turret.targetingType - 1;
+
+        spiralDirection.isOn = turret.spiralDirection;
+
         fireType.value = turret.bulletFormation - 1;
         bulletFireType(fireType);
     }
@@ -446,31 +451,35 @@ public class UIManager : MonoBehaviour
 
     void bulletFireType(Dropdown change)
     {
-        turret.bulletFormation = change.value + 1;
+        
         switch (turret.bulletFormation)
         {
             case 1:
                 streamshotUI.SetActive(false);
                 shotgunUI.SetActive(false);
                 randomBurstUI.SetActive(false);
+
                 break;
 
             case 2:
                 streamshotUI.SetActive(true);
                 shotgunUI.SetActive(false);
                 randomBurstUI.SetActive(false);
+
                 break;
 
             case 3:
                 streamshotUI.SetActive(false);
                 shotgunUI.SetActive(true);
                 randomBurstUI.SetActive(false);
+
                 break;
 
             case 4:
                 streamshotUI.SetActive(false);
                 shotgunUI.SetActive(false);
                 randomBurstUI.SetActive(true);
+                
                 break;
             default:
                 break;
