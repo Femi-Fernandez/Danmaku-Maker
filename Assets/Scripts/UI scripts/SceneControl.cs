@@ -53,41 +53,46 @@ public class SceneControl : MonoBehaviour
         }
     }
 
-
     public IEnumerator EnterScene()
     {
-        float timePassed = 0;
-        float t = timePassed / 2f;
-
-        t = t * t * (3f - 2f * t);
-        sceneTransition.fillClockwise = false;
-        while (timePassed < 2f)
-        {
-            t = timePassed / 2f;
-            sceneTransition.fillAmount = Mathf.Lerp(1, 0, t);
-            timePassed += Time.deltaTime;
+     //   float timePassed = 0;
+     //   float t = timePassed / 2f;
+     //
+     //   t = t * t * (3f - 2f * t);
+     //   sceneTransition.fillClockwise = false;
+     //   while (timePassed < 2f)
+     //   {
+     //       t = timePassed / 2f;
+     //       sceneTransition.fillAmount = Mathf.Lerp(1, 0, t);
+     //       timePassed += Time.deltaTime;
             yield return null;
-        }
+     //   }
     }
 
     public IEnumerator ExitScene()
     {
-        float timePassed = 0;
-        float t = timePassed / 2f;
-        t = t * t * (3f - 2f * t);
-        sceneTransition.fillClockwise = true;
-        while (timePassed < 2.01f)
-        {
-            t = timePassed / 2f;
-            sceneTransition.fillAmount = Mathf.SmoothStep(0, 1, t);
-            timePassed += Time.deltaTime;
-
-            if (timePassed >= 2f)
-            {
-                SceneManager.LoadScene("editor");
-                //yield return null;
-            }
+      //  float timePassed = 0;
+      //  float t = timePassed / 2f;
+      //  t = t * t * (3f - 2f * t);
+      //  sceneTransition.fillClockwise = true;
+      //  while (timePassed < 2.01f)
+      //  {
+      //      t = timePassed / 2f;
+      //      sceneTransition.fillAmount = Mathf.SmoothStep(0, 1, t);
+      //      timePassed += Time.deltaTime;
+      //
+      //      if (timePassed >= 2f)
+      //      {
+                loadEditorScene();
+      //      }
             yield return null;
-        }
+      // }
+    }
+    
+    void loadEditorScene()
+    {
+        SceneManager.LoadScene("editor");
     }
 }
+
+

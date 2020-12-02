@@ -14,6 +14,7 @@ public class Turret : MonoBehaviour
     public int numberActiveStreams;
     public int streamNumber;
     public bool streamEnabled;
+    public int turretHealth;
 
 
     // generic turret settings (applies to all)

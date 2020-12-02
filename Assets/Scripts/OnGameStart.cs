@@ -18,6 +18,8 @@ public class OnGameStart : MonoBehaviour
     [SerializeField]
     private GameObject UIManager;
 
+    GameObject[] turretMain;
+
     GameObject[] bullets;
 
     // Start is called before the first frame update
@@ -38,6 +40,16 @@ public class OnGameStart : MonoBehaviour
         player.GetComponent<playerHealth>().health = 5;
         player.GetComponent<BoxCollider2D>().enabled = false;
         boss.transform.GetChild(0).GetComponent<BoxCollider2D>().enabled = false;
+
+        GameObject[] turrets = GameObject.FindGameObjectsWithTag("turret Main");
+        for (int i = 0; i < turrets.Length; i++)
+        {
+            turrets[i].SetActive(true);
+            if (turrets[i].GetComponent<BoxCollider2D>())
+            {
+                turrets[i].GetComponent<TurretHealth>().health = 100000000000;
+            }  
+        }
     }
 
     public void PlayMode()
@@ -46,6 +58,14 @@ public class OnGameStart : MonoBehaviour
         for (int i = 0; i < turrets.Length; i++)
         {
             turrets[i].transform.rotation = Quaternion.Euler(0, 0, -90);
+        }
+
+         turretMain = GameObject.FindGameObjectsWithTag("turret Main");
+        for (int i = 0; i < turretMain.Length; i++)
+        {
+            turretMain[i].GetComponent<TurretHealth>().health = turretMain[i].transform.GetChild(0).GetComponent<Turret>().turretHealth;
+           //Debug.Log(turretMain[i].transform.GetChild(1));
+            turretMain[i].GetComponent<BoxCollider2D>().enabled = true;
         }
 
         optionsPanel.SetActive(false);

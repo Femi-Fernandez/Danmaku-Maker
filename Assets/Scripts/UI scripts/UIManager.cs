@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     Dropdown numOfStreams;
     Dropdown streamToEdit;
     Button saveTurretSettings;
+    Text[] setTurretHealth;
 
     // target player variables
     Toggle smoothTargetToggle;
@@ -154,6 +155,7 @@ public class UIManager : MonoBehaviour
         numOfStreams = GameObject.Find("number of streams input").GetComponent<Dropdown>();
         streamToEdit = GameObject.Find("stream to edit input").GetComponent<Dropdown>();
         saveTurretSettings = GameObject.Find("Save turret settings").GetComponent<Button>();
+        setTurretHealth = GameObject.Find("turret health input").GetComponentsInChildren<Text>();
 
         //get targeted turret options
         smoothTargetToggle = GameObject.Find("Smooth targeting Toggle").GetComponent<Toggle>();
@@ -316,8 +318,6 @@ public class UIManager : MonoBehaviour
         }
         gameManager.GetComponent<OnGameStart>().PlayMode();
         optionPanel.SetActive(false);
-        //player.GetComponent<BoxCollider2D>().enabled = true;
-        //boss.transform.GetChild(0).GetComponent<BoxCollider2D>().enabled = true;
     }
     public void turretSelected(GameObject currentTurret)
     {
@@ -338,14 +338,23 @@ public class UIManager : MonoBehaviour
         turretName.text = "Selected turret \n" + currentSelectedTurret.name;
 
         fireOnOrOffOnTurret(currentTurret, true);
+
+        SetAllValues();
+
         optionPanel.SetActive(true);
         turretPanel.SetActive(true);
         bulletPanel.SetActive(false);
-        aimType.value = turret.targetingType - 1;
-        numOfStreamsChanged(numOfStreams);
-        fireType.value = turret.bulletFormation -1;
-        bulletFireType(fireType);
+
         SetActiveTurretUI();
+    }
+
+    void SetAllValues()
+    {
+        aimType.value = turret.targetingType - 1;
+        numOfStreams.value = turret.numberActiveStreams - 1;
+        numOfStreamsChanged(numOfStreams);
+        fireType.value = turret.bulletFormation - 1;
+        bulletFireType(fireType);
     }
 
     void fireOnOrOffOnTurret(GameObject turr, bool b)
@@ -527,6 +536,11 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log("firerate set");
             turret.firerate = float.Parse(fireRateInput[1].text);
+        }
+
+        if (setTurretHealth[1].text != "")
+        {
+            turret.turretHealth = int.Parse(setTurretHealth[1].text);
         }
 
         switch (turret.targetingType)
