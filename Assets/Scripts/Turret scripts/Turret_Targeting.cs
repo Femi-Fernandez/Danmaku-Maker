@@ -50,7 +50,7 @@ public class Turret_Targeting : MonoBehaviour
         {
             Vector2 direction = _player.transform.position - transform.position;
             Quaternion rotation = Quaternion.AngleAxis(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg, Vector3.forward) * Quaternion.AngleAxis(turret.targetPlayerOffsetAmmount, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, turret.smoothTargetSpeed/300);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, turret.smoothTargetSpeed / 300);
         }
         else
         {
@@ -83,6 +83,6 @@ public class Turret_Targeting : MonoBehaviour
     }
     void singleDir()
     {
-        transform.rotation = Quaternion.AngleAxis(-turret.singleDirDirection -90, Vector3.forward);
+        transform.rotation = Quaternion.AngleAxis(-turret.singleDirDirection - 90, Vector3.forward);
     }
 }

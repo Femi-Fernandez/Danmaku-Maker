@@ -153,7 +153,7 @@ public class Turret_BulletSetup : MonoBehaviour
         {
             GameObject bullet = transform.GetComponentInParent<bullet_pool>().GetBullet();
             bullet.transform.position = transform.position;
-            bullet.transform.rotation = transform.rotation * Quaternion.AngleAxis(UnityEngine.Random.Range(-turret.bulletRandomRange/2, turret.bulletRandomRange / 2), transform.forward);
+            bullet.transform.rotation = transform.rotation * Quaternion.AngleAxis(UnityEngine.Random.Range(-turret.bulletRandomRange / 2, turret.bulletRandomRange / 2), transform.forward);
             bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
             bullet.SetActive(true);
         }
@@ -161,54 +161,4 @@ public class Turret_BulletSetup : MonoBehaviour
         GetComponent<Turret_Fire>().readyToFire = true;
     }
 
-    //IEnumerator bul_straightShotgun()
-    //{
-    //    int anglemanip = 0;
-    //    if (turret.numOfBullets % 2 != 0)
-    //    {
-    //        for (int i = 0; i < turret.numOfBullets; i++)
-    //        {
-    //            GameObject bullet = transform.GetComponentInParent<bullet_pool>().GetBullet();
-    //            bullet.transform.position = transform.position;
-    //            if (i % 2 == 0)
-    //            {
-    //                bullet.transform.rotation = transform.rotation * Quaternion.AngleAxis(-(anglemanip * turret.angleBetweenBullets), transform.forward);
-    //                bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed / Mathf.Cos(((turret.angleBetweenBullets* anglemanip)*Mathf.PI)/180);
-    //                anglemanip++;
-    //            }
-    //            else
-    //            {
-    //                bullet.transform.rotation = transform.rotation * Quaternion.AngleAxis((anglemanip * turret.angleBetweenBullets), transform.forward);
-    //                bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed / Mathf.Cos(((turret.angleBetweenBullets * anglemanip) * Mathf.PI) / 180);
-    //            }
-    //
-    //            bullet.SetActive(true);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        for (int i = 0; i < turret.numOfBullets; i++)
-    //        {
-    //            GameObject bullet = transform.GetComponentInParent<bullet_pool>().GetBullet();
-    //            bullet.transform.position = transform.position;
-    //            if (i % 2 == 0)
-    //            {
-    //                bullet.transform.rotation = transform.rotation * Quaternion.AngleAxis(-((anglemanip * turret.angleBetweenBullets) + (turret.angleBetweenBullets / 2)), transform.forward);
-    //                bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed / Mathf.Cos(((turret.angleBetweenBullets * anglemanip + (turret.angleBetweenBullets / 2)) * Mathf.PI) / 180);
-    //
-    //            }
-    //            else
-    //            {
-    //                bullet.transform.rotation = transform.rotation * Quaternion.AngleAxis((anglemanip * turret.angleBetweenBullets) + (turret.angleBetweenBullets / 2), transform.forward);
-    //                bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed / Mathf.Cos(((turret.angleBetweenBullets * anglemanip + (turret.angleBetweenBullets / 2)) * Mathf.PI) / 180);
-    //                anglemanip++;
-    //            }
-    //       
-    //            bullet.SetActive(true);
-    //        }
-    //
-    //    }
-    //    yield return new WaitForSeconds(turret.firerate);
-    //    GetComponent<Turret_Fire>().readyToFire = true;
-    //}
 }

@@ -29,14 +29,9 @@ public class turretDrop : MonoBehaviour, IDropHandler
             spawnedTurret.transform.position = new Vector3((Mathf.Round(currentPos.x * 10)) / 10,
                                                            (Mathf.Round(currentPos.y * 10)) / 10,
                                                            (Mathf.Round(currentPos.z * 10)) / 10);
-            numOfTurrets++;
+            //numOfTurrets++;
 
             spawnedTurret.transform.parent = boss.transform;
-            for (int i = 1; i < 4; i++)
-            {
-                spawnedTurret.transform.GetChild(i).GetComponent<Turret>().TotalNumberOfTurrets = numOfTurrets;
-                spawnedTurret.transform.GetChild(i).gameObject.SetActive(false);
-            }
 
             SetDefaultValues(spawnedTurret);
 
@@ -44,7 +39,7 @@ public class turretDrop : MonoBehaviour, IDropHandler
 
             for (int i = 0; i < turrets.Length; i++)
             {
-                turrets[i].GetComponent<Turret>().TotalNumberOfTurrets = numOfTurrets;
+                turrets[i].GetComponent<Turret>().TotalNumberOfTurrets++;
             }
         }
 

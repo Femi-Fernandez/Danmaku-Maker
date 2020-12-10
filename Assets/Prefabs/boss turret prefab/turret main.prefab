@@ -150,6 +150,7 @@ MonoBehaviour:
   numberActiveStreams: 0
   streamNumber: 2
   streamEnabled: 0
+  turretHealth: 0
   fireType: 1
   targetingType: 2
   rotateSpeed: 5
@@ -277,22 +278,23 @@ MonoBehaviour:
   numberActiveStreams: 0
   streamNumber: 1
   streamEnabled: 1
-  fireType: 1
-  targetingType: 1
-  rotateSpeed: 5
+  turretHealth: 0
+  fireType: 0
+  targetingType: 0
+  rotateSpeed: 0
   smoothTarget: 0
-  smoothTargetSpeed: 1
+  smoothTargetSpeed: 0
   targetPlayerOffsetAmmount: 0
-  rotateAngleDirection: 90
-  rotateAngleWidth: 20
+  rotateAngleDirection: 0
+  rotateAngleWidth: 0
   spiralDirection: 0
   singleDirDirection: 0
-  bulletFormation: 3
-  numOfBullets: 5
+  bulletFormation: 0
+  numOfBullets: 0
   firerate: 1
   bulletDelay: 0.1
   bulletSpeedIncreaseAmmount: 0
-  angleBetweenBullets: 10
+  angleBetweenBullets: 0
   bulletRandomRange: 0
   shotgunStraight: 0
   bulletSpeedIncreaseCheck: 0
@@ -404,6 +406,7 @@ MonoBehaviour:
   numberActiveStreams: 0
   streamNumber: 4
   streamEnabled: 0
+  turretHealth: 0
   fireType: 1
   targetingType: 2
   rotateSpeed: 5
@@ -695,6 +698,7 @@ MonoBehaviour:
   numberActiveStreams: 0
   streamNumber: 3
   streamEnabled: 0
+  turretHealth: 0
   fireType: 1
   targetingType: 2
   rotateSpeed: 5
@@ -766,6 +770,7 @@ GameObject:
   - component: {fileID: 6694410550761159652}
   - component: {fileID: 6694410550761159651}
   - component: {fileID: 2665990386597577774}
+  - component: {fileID: 1442139660}
   m_Layer: 0
   m_Name: turret main
   m_TagString: turret Main
@@ -845,6 +850,238 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
+--- !u!114 &1442139660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6694410550761159649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d24ecf41ece194db18ad77ab693f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalWaveCount: 1
+  SubwaveCount: 00000000000000000000000000000000
+  TotalNumberOfTurrets: 1
+  activeInWave: 00000000
+  numberActiveStreams: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  streamEnabled: 00000000000000000000000000000000
+  turretHealth: 00000000000000000000000000000000
+  fireType: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  targetingType: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  rotateSpeed:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  smoothTarget: 00000000000000000000000000000000
+  smoothTargetSpeed:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  targetPlayerOffsetAmmount:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  rotateAngleDirection:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  rotateAngleWidth:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  spiralDirection: 00000000000000000000000000000000
+  singleDirDirection:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  bulletFormation: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  numOfBullets: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  firerate:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  bulletDelay:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  bulletSpeedIncreaseAmmount:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  angleBetweenBullets:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  bulletRandomRange:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  shotgunStraight: 00000000000000000000000000000000
+  bulletSpeedIncreaseCheck: 00000000000000000000000000000000
+  bulletMovementType: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  bulletBaseSpeed:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
 --- !u!1 &7811414342321862926
 GameObject:
   m_ObjectHideFlags: 0

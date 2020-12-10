@@ -19,9 +19,12 @@ public class SceneControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         enterEditorWithBoss = GameObject.Find("Load boss button").GetComponent<Button>();
+        
         enterEditor = GameObject.Find("Enter editor button").GetComponent<Button>();
 
+        
         enterEditorWithBoss.onClick.AddListener(delegate
         {
             openEditorSceneWithBoss();

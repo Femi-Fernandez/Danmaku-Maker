@@ -16,7 +16,6 @@ public class Turret : MonoBehaviour
     public bool streamEnabled;
     public int turretHealth;
 
-
     // generic turret settings (applies to all)
     public int fireType;
     public int targetingType;

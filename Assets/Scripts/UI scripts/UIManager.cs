@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+//Control + M + H to create colapse code
+//control + M + U to remove colapsed code
+
+        //Variables
+
     //main UI panels
     GameObject optionPanel;
     GameObject turretPanel;
@@ -48,7 +53,6 @@ public class UIManager : MonoBehaviour
     Text[] singleDirectionAim;
 
 
-
     //bullet setting panels
     GameObject streamshotUI;
     GameObject shotgunUI;
@@ -59,7 +63,6 @@ public class UIManager : MonoBehaviour
     Dropdown fireType;
     Dropdown moveType;
     Button saveBulletSettings;
-    //Text[] bulletSpeed;
 
     //stream bullet settings
     Text[] streamNumberOfBul;
@@ -77,6 +80,7 @@ public class UIManager : MonoBehaviour
 
     //turret info
     Turret turret;
+    turretSubwaveStorage subwaveStorage;
     GameObject mainTurret;
     GameObject currentSelectedTurret;
     GameObject[] turretChildren = new GameObject[4];
@@ -89,15 +93,16 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private GameObject player;
-
     [SerializeField]
     private GameObject boss;
-
     [SerializeField]
     private GameObject gameManager;
 
-
     GameObject[] turrets;
+
+    public int waveNum;
+    public int subwaveNum;
+    public int arraySlot;
 
     // Start is called before the first frame update
     void Start()
@@ -146,6 +151,7 @@ public class UIManager : MonoBehaviour
 
     }
 
+    //finds all the inputs and toggles for the Turret UI panels. 
     void setupTurretPanelsInputs()
     {
         //get generic turret options
@@ -176,9 +182,10 @@ public class UIManager : MonoBehaviour
 
     }
 
-    // Text[] randNumberOfBul;
-    // Text[] randRange;
-
+    int GetArraySlot()
+    {
+        return arraySlot = (waveNum * 4) + subwaveNum;
+    }
     void setupBulletPanelsInputs()
     {
         //get generic bullet settings
@@ -207,6 +214,7 @@ public class UIManager : MonoBehaviour
         randRange = GameObject.Find("rand burst range input").GetComponentsInChildren<Text>();
     }
 
+    //finds all the inputs and toggles for the Bullet UI panels. 
     void setupDropdowns()
     {
         //set listeners for the dropdown boxes
@@ -237,6 +245,7 @@ public class UIManager : MonoBehaviour
         fireType.onValueChanged.AddListener(delegate
         {
             turret.bulletFormation = fireType.value + 1;
+            subwaveStorage.bulletFormation[GetArraySlot()] = turret.bulletFormation;
             bulletFireType(fireType);
         }
         );
@@ -248,6 +257,7 @@ public class UIManager : MonoBehaviour
         );
     }
 
+    //sets listeners for all the buttons on the UI
     void setupButtons()
     {
         //set listeners for the save button and swap settings buttons
@@ -295,6 +305,7 @@ public class UIManager : MonoBehaviour
 
     }
 
+    //deletes all the currently placed turrets. 
     void clearAllTurrets()
     {
         for (int i = 1; i < boss.transform.childCount; i++)
@@ -303,6 +314,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    //checks for what turrets should be enabled, and enables their firing scripts. also deactivates the option panel. 
     void fightBoss()
     {
         turrets = GameObject.FindGameObjectsWithTag("Turret");
@@ -318,13 +330,21 @@ public class UIManager : MonoBehaviour
             }
         }
         gameManager.GetComponent<OnGameStart>().PlayMode();
-        optionPanel.SetActive(false);
+        //optionPanel.SetActive(false);
     }
+
+    /// <summary>
+    /// this is the method that is called when a turret is selected to be edited.
+    /// it sets the current turret variable, the Turret script and the children of the turret to that of the selected turret.
+    /// then it enables the option panel and turret panels and disables the bullet panel and sets the current turret as the current active turret. 
+    /// </summary>
+    /// <param name="currentTurret"></param>
     public void turretSelected(GameObject currentTurret)
     {
         currentSelectedTurret = currentTurret;
         turret = currentTurret.GetComponent<Turret>();
         mainTurret = currentTurret.transform.parent.gameObject;
+        subwaveStorage = mainTurret.GetComponent<turretSubwaveStorage>();
 
         turretChildren[0] = mainTurret.transform.GetChild(0).gameObject;
         turretChildren[1] = mainTurret.transform.GetChild(1).gameObject;
@@ -340,15 +360,16 @@ public class UIManager : MonoBehaviour
 
         fireOnOrOffOnTurret(currentTurret, true);
 
-        SetAllValues();
+        SetAllValues();//NEEDS TESTING
 
         optionPanel.SetActive(true);
         turretPanel.SetActive(true);
         bulletPanel.SetActive(false);
 
-        SetActiveTurretUI();
+        SetActiveTurretUI();          
     }
 
+    //sets the ui options to the currently selected turrets values. 
     void SetAllValues()
     {
         numOfStreams.value = turret.numberActiveStreams - 1;
@@ -360,8 +381,12 @@ public class UIManager : MonoBehaviour
 
         fireType.value = turret.bulletFormation - 1;
         bulletFireType(fireType);
+
+        Debug.Log("array slot: " + GetArraySlot());
+        subwaveStorage.streamEnabled[GetArraySlot()] = turretChildren[0].GetComponent<Turret>().streamEnabled;
     }
 
+    //enables and disables the firing scripts on the inputted turret. 
     void fireOnOrOffOnTurret(GameObject turr, bool b)
     {
         turr.GetComponent<Turret_Fire>().enabled = b;
@@ -369,6 +394,8 @@ public class UIManager : MonoBehaviour
         turr.GetComponent<Turret_BulletSetup>().enabled = b;
     }
 
+    //when the number of streams change, this script enables and disables the inputted number of streams,
+    //and updates the streamToEdit and bulletStreamToEdit dropdowns. 
     void numOfStreamsChanged(Dropdown change)
     {
         List<string> streamToEditOptions = new List<string> { };
@@ -379,6 +406,10 @@ public class UIManager : MonoBehaviour
             turretChildren[i].SetActive(true);
             turretChildren[i].GetComponent<Turret>().streamEnabled = true;
             turretChildren[i].GetComponent<Turret>().numberActiveStreams = change.value+1;
+
+            
+            subwaveStorage.streamEnabled[GetArraySlot()] = turretChildren[i].GetComponent<Turret>().streamEnabled;
+            subwaveStorage.numberActiveStreams[GetArraySlot()] = turretChildren[i].GetComponent<Turret>().numberActiveStreams;
         }
 
         for (int i = change.value + 1; i < 4; i++)
@@ -403,10 +434,11 @@ public class UIManager : MonoBehaviour
         //Debug.Log(turretChildren[0].GetComponent<Turret>().numberActiveStreams);
     }
 
+    //disables the currently firing turret firing scripts, updates the currently selected turret and enables  its firing scripts. 
     void streamToEditChanged(Dropdown change)
     {
         fireOnOrOffOnTurret(currentSelectedTurret, false);
-        Debug.Log(change.value);
+        //Debug.Log(change.value);
         turret = turretChildren[change.value].GetComponent<Turret>();
         currentSelectedTurret = turretChildren[change.value];
         turretName.text = "Selected turret \n" + currentSelectedTurret.name;
@@ -415,6 +447,7 @@ public class UIManager : MonoBehaviour
         bulletFireType(fireType);
     }
 
+    //changes what turret UI is displayed based on the targetingType Dropdown
     void SetActiveTurretUI()
     {
         switch (turret.targetingType)
@@ -449,6 +482,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    //changes what bullet firing UI is displayed based on the bulletFormation dropdown
     void bulletFireType(Dropdown change)
     {
         
@@ -486,15 +520,17 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    //TBI: changes what bullet movement UI is displayed based on the bulletMovement dropdown
     void bulletMoveType(Dropdown change)
     {
 
     }
 
+    //changes what turret UI is displayed based on the targetingType Dropdown
     void DropdownValueChanged(Dropdown change)
     {
         turret.targetingType = change.value + 1;
-
+        subwaveStorage.targetingType[GetArraySlot()] = turret.targetingType;
         switch (turret.targetingType)
         {
             case 1:
@@ -526,32 +562,38 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    //enables the turretPanel and disables the bulletpanel
     void toTurretSettingsPress()
     {
         turretPanel.SetActive(true);
         bulletPanel.SetActive(false);
     }
 
+    //enables the bulletPanel and disables the turretpanel
     void toBulletSettingsPress()
     {
         turretPanel.SetActive(false);
         bulletPanel.SetActive(true);
     }
 
-    //save turret button pressed
+    //saves turret settings based on what targeting type is selected. 
     void saveTurretPressed()
     {
         if (fireRateInput[1].text != "")
         {
             Debug.Log("firerate set");
             turret.firerate = float.Parse(fireRateInput[1].text);
+            subwaveStorage.firerate[GetArraySlot()] = turret.firerate;
         }
 
         if (setTurretHealth[1].text != "")
         {
             turret.turretHealth = int.Parse(setTurretHealth[1].text);
+            subwaveStorage.turretHealth[waveNum] = turret.turretHealth;
         }
 
+        subwaveStorage.activeInWave[waveNum] = true;
+        subwaveStorage.streamEnabled[GetArraySlot()] = turretChildren[0].GetComponent<Turret>().streamEnabled;
         switch (turret.targetingType)
         {
             case 1:
@@ -578,21 +620,25 @@ public class UIManager : MonoBehaviour
         if (smoothTargetToggle.isOn == true)
         {
             turret.smoothTarget = true;
+            subwaveStorage.smoothTarget[GetArraySlot()] = turret.smoothTarget;
             if (smoothTargetSpeed[1].text != "")
             {
                 turret.smoothTargetSpeed = float.Parse(smoothTargetSpeed[1].text);
+                subwaveStorage.smoothTargetSpeed[GetArraySlot()] = turret.smoothTargetSpeed;
                 Debug.Log("slerp set");
             }
         }
         else
         {
             turret.smoothTarget = false;
+            subwaveStorage.smoothTarget[GetArraySlot()] = turret.smoothTarget;
         }
 
         if (targetingOffset[1].text != "")
         {
             Debug.Log("offset set");
             turret.targetPlayerOffsetAmmount = float.Parse(targetingOffset[1].text);
+            subwaveStorage.targetPlayerOffsetAmmount[GetArraySlot()] = turret.targetPlayerOffsetAmmount;
         }
     }
 
@@ -601,14 +647,17 @@ public class UIManager : MonoBehaviour
         if (arcSize[1].text != "")
         {
             turret.rotateAngleWidth = float.Parse(arcSize[1].text);
+            subwaveStorage.rotateAngleWidth[GetArraySlot()] = turret.rotateAngleWidth;
         }
         if (arcDirection[1].text != "")
         {
             turret.rotateAngleDirection = float.Parse(arcDirection[1].text) + 90;
+            subwaveStorage.rotateAngleDirection[GetArraySlot()] = turret.rotateAngleDirection;
         }
         if (rotationSpeed[1].text != "")
         {
             turret.rotateSpeed = float.Parse(rotationSpeed[1].text);
+            subwaveStorage.rotateSpeed[GetArraySlot()] = turret.rotateSpeed;
         }
 
     }
@@ -620,16 +669,19 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log("spin on ");
             turret.spiralDirection = true;
+            subwaveStorage.spiralDirection[GetArraySlot()] = turret.spiralDirection;
         }
         else
         {
             Debug.Log("spin off ");
             turret.spiralDirection = false;
+            subwaveStorage.spiralDirection[GetArraySlot()] = turret.spiralDirection;
         }
 
         if (spiralRotationSpeed[1].text != null)
         {
             turret.rotateSpeed = float.Parse(spiralRotationSpeed[1].text);
+            subwaveStorage.rotateSpeed[GetArraySlot()] = turret.rotateSpeed;
         }
     }
 
@@ -638,9 +690,11 @@ public class UIManager : MonoBehaviour
         if (singleDirectionAim[1].text != null)
         {
             turret.singleDirDirection = float.Parse(singleDirectionAim[1].text);
+            subwaveStorage.singleDirDirection[GetArraySlot()] = turret.singleDirDirection;
         }
     }
 
+    //saves bullet settings based on what targeting type is selected.
     void saveBulletPressed()
     {
         switch (turret.bulletFormation)
@@ -668,19 +722,23 @@ public class UIManager : MonoBehaviour
         if (bulletSpeedIncreaseCheck.isOn == true)
         {
             turret.bulletSpeedIncreaseCheck = true;
+            subwaveStorage.bulletSpeedIncreaseCheck[GetArraySlot()] = turret.bulletSpeedIncreaseCheck;
             if (bulletSpeedIncreaseAmmount[1].text != "")
             {
                 turret.bulletSpeedIncreaseAmmount = float.Parse(bulletSpeedIncreaseAmmount[1].text);
+                subwaveStorage.bulletSpeedIncreaseAmmount[GetArraySlot()] = turret.bulletSpeedIncreaseAmmount;
             }
         }
         else
         {
             turret.bulletSpeedIncreaseCheck = false;
+            subwaveStorage.bulletSpeedIncreaseCheck[GetArraySlot()] = turret.bulletSpeedIncreaseCheck;
         }
 
         if (streamNumberOfBul[1].text != "")
         {
             turret.numOfBullets = int.Parse(streamNumberOfBul[1].text);
+            subwaveStorage.numOfBullets[GetArraySlot()] = turret.numOfBullets;
         }
     }
     void saveShotgunSettings()
@@ -688,20 +746,24 @@ public class UIManager : MonoBehaviour
         if (straightShotgunShot.isOn == true)
         {
             turret.shotgunStraight = true;
+            subwaveStorage.shotgunStraight[GetArraySlot()] = turret.shotgunStraight;
         }
         else
         {
             turret.shotgunStraight = false;
+            subwaveStorage.shotgunStraight[GetArraySlot()] = turret.shotgunStraight;
         }
 
         if (shotgunNumberOfBul[1].text != "")
         {
             turret.numOfBullets = int.Parse(shotgunNumberOfBul[1].text);
+            subwaveStorage.numOfBullets[GetArraySlot()] = turret.numOfBullets;
         }
 
         if (angleBetweenBul[1].text != "")
         {
             turret.angleBetweenBullets = float.Parse(angleBetweenBul[1].text);
+            subwaveStorage.angleBetweenBullets[GetArraySlot()] = turret.angleBetweenBullets;
         }
     }
 
@@ -710,10 +772,12 @@ public class UIManager : MonoBehaviour
         if (randNumberOfBul[1].text != "")
         {
             turret.numOfBullets = int.Parse(randNumberOfBul[1].text);
+            subwaveStorage.numOfBullets[GetArraySlot()] = turret.numOfBullets;
         }
         if (randRange[1].text != "")
         {
             turret.bulletRandomRange = float.Parse(randRange[1].text);
+            subwaveStorage.bulletRandomRange[GetArraySlot()] = turret.bulletRandomRange;
         }
     }
 }
