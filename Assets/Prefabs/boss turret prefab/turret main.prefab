@@ -278,7 +278,7 @@ MonoBehaviour:
   numberActiveStreams: 0
   streamNumber: 1
   streamEnabled: 1
-  turretHealth: 0
+  turretHealth: 100
   fireType: 0
   targetingType: 0
   rotateSpeed: 0

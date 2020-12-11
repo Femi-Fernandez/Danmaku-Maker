@@ -77,6 +77,8 @@ public class OnGameStart : MonoBehaviour
         player.GetComponent<BoxCollider2D>().enabled = true;
         boss.transform.GetChild(0).GetComponent<BoxCollider2D>().enabled = true;
         boss.transform.GetChild(0).GetComponent<bossWaveControl>().fightingBoss = true;
-
+        boss.transform.GetChild(0).GetComponent<bossWaveControl>().wavesStarted = false;
+        boss.transform.GetChild(0).GetComponent<bossWaveControl>().currentWave = 0;
+        boss.transform.GetChild(0).GetComponent<bossWaveControl>().currentSubwave = 0;
     }
 }

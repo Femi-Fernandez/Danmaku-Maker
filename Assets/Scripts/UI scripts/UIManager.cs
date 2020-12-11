@@ -245,7 +245,6 @@ public class UIManager : MonoBehaviour
         fireType.onValueChanged.AddListener(delegate
         {
             turret.bulletFormation = fireType.value + 1;
-            subwaveStorage.bulletFormation[GetArraySlot()] = turret.bulletFormation;
             bulletFireType(fireType);
         }
         );
@@ -383,7 +382,6 @@ public class UIManager : MonoBehaviour
         bulletFireType(fireType);
 
         Debug.Log("array slot: " + GetArraySlot());
-        subwaveStorage.streamEnabled[GetArraySlot()] = turretChildren[0].GetComponent<Turret>().streamEnabled;
     }
 
     //enables and disables the firing scripts on the inputted turret. 
@@ -407,7 +405,6 @@ public class UIManager : MonoBehaviour
             turretChildren[i].GetComponent<Turret>().streamEnabled = true;
             turretChildren[i].GetComponent<Turret>().numberActiveStreams = change.value+1;
 
-            
             subwaveStorage.streamEnabled[GetArraySlot()] = turretChildren[i].GetComponent<Turret>().streamEnabled;
             subwaveStorage.numberActiveStreams[GetArraySlot()] = turretChildren[i].GetComponent<Turret>().numberActiveStreams;
         }
@@ -417,6 +414,9 @@ public class UIManager : MonoBehaviour
             turretChildren[i].SetActive(false);
             turretChildren[i].GetComponent<Turret>().streamEnabled = false;
             turretChildren[i].GetComponent<Turret>().numberActiveStreams = change.value+1;
+
+            subwaveStorage.streamEnabled[GetArraySlot()] = turretChildren[i].GetComponent<Turret>().streamEnabled;
+            subwaveStorage.numberActiveStreams[GetArraySlot()] = turretChildren[i].GetComponent<Turret>().numberActiveStreams;
         }
 
 
@@ -430,6 +430,7 @@ public class UIManager : MonoBehaviour
         streamToEdit.AddOptions(streamToEditOptions);
         bulletStreamToEdit.AddOptions(streamToEditOptions);
         bulletFireType(fireType);
+
 
         //Debug.Log(turretChildren[0].GetComponent<Turret>().numberActiveStreams);
     }
@@ -530,7 +531,7 @@ public class UIManager : MonoBehaviour
     void DropdownValueChanged(Dropdown change)
     {
         turret.targetingType = change.value + 1;
-        subwaveStorage.targetingType[GetArraySlot()] = turret.targetingType;
+
         switch (turret.targetingType)
         {
             case 1:
@@ -583,17 +584,16 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log("firerate set");
             turret.firerate = float.Parse(fireRateInput[1].text);
-            subwaveStorage.firerate[GetArraySlot()] = turret.firerate;
+
         }
 
         if (setTurretHealth[1].text != "")
         {
             turret.turretHealth = int.Parse(setTurretHealth[1].text);
-            subwaveStorage.turretHealth[waveNum] = turret.turretHealth;
+
         }
 
-        subwaveStorage.activeInWave[waveNum] = true;
-        subwaveStorage.streamEnabled[GetArraySlot()] = turretChildren[0].GetComponent<Turret>().streamEnabled;
+
         switch (turret.targetingType)
         {
             case 1:
@@ -612,6 +612,7 @@ public class UIManager : MonoBehaviour
             default:
                 break;
         }
+        setSubwaveStorage();
     }
 
     void saveTargetPlayerSettings()
@@ -620,25 +621,25 @@ public class UIManager : MonoBehaviour
         if (smoothTargetToggle.isOn == true)
         {
             turret.smoothTarget = true;
-            subwaveStorage.smoothTarget[GetArraySlot()] = turret.smoothTarget;
+
             if (smoothTargetSpeed[1].text != "")
             {
                 turret.smoothTargetSpeed = float.Parse(smoothTargetSpeed[1].text);
-                subwaveStorage.smoothTargetSpeed[GetArraySlot()] = turret.smoothTargetSpeed;
+
                 Debug.Log("slerp set");
             }
         }
         else
         {
             turret.smoothTarget = false;
-            subwaveStorage.smoothTarget[GetArraySlot()] = turret.smoothTarget;
+
         }
 
         if (targetingOffset[1].text != "")
         {
             Debug.Log("offset set");
             turret.targetPlayerOffsetAmmount = float.Parse(targetingOffset[1].text);
-            subwaveStorage.targetPlayerOffsetAmmount[GetArraySlot()] = turret.targetPlayerOffsetAmmount;
+
         }
     }
 
@@ -647,17 +648,17 @@ public class UIManager : MonoBehaviour
         if (arcSize[1].text != "")
         {
             turret.rotateAngleWidth = float.Parse(arcSize[1].text);
-            subwaveStorage.rotateAngleWidth[GetArraySlot()] = turret.rotateAngleWidth;
+            
         }
         if (arcDirection[1].text != "")
         {
             turret.rotateAngleDirection = float.Parse(arcDirection[1].text) + 90;
-            subwaveStorage.rotateAngleDirection[GetArraySlot()] = turret.rotateAngleDirection;
+            
         }
         if (rotationSpeed[1].text != "")
         {
             turret.rotateSpeed = float.Parse(rotationSpeed[1].text);
-            subwaveStorage.rotateSpeed[GetArraySlot()] = turret.rotateSpeed;
+            
         }
 
     }
@@ -669,19 +670,19 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log("spin on ");
             turret.spiralDirection = true;
-            subwaveStorage.spiralDirection[GetArraySlot()] = turret.spiralDirection;
+            
         }
         else
         {
             Debug.Log("spin off ");
             turret.spiralDirection = false;
-            subwaveStorage.spiralDirection[GetArraySlot()] = turret.spiralDirection;
+            
         }
 
         if (spiralRotationSpeed[1].text != null)
         {
             turret.rotateSpeed = float.Parse(spiralRotationSpeed[1].text);
-            subwaveStorage.rotateSpeed[GetArraySlot()] = turret.rotateSpeed;
+            
         }
     }
 
@@ -690,13 +691,15 @@ public class UIManager : MonoBehaviour
         if (singleDirectionAim[1].text != null)
         {
             turret.singleDirDirection = float.Parse(singleDirectionAim[1].text);
-            subwaveStorage.singleDirDirection[GetArraySlot()] = turret.singleDirDirection;
+            
         }
     }
 
     //saves bullet settings based on what targeting type is selected.
     void saveBulletPressed()
     {
+        turret.bulletBaseSpeed = 3;
+        
         switch (turret.bulletFormation)
         {
             case 1:
@@ -715,6 +718,7 @@ public class UIManager : MonoBehaviour
             default:
                 break;
         }
+        setSubwaveStorage();
     }
 
     void saveStreamShotSettings()
@@ -722,23 +726,23 @@ public class UIManager : MonoBehaviour
         if (bulletSpeedIncreaseCheck.isOn == true)
         {
             turret.bulletSpeedIncreaseCheck = true;
-            subwaveStorage.bulletSpeedIncreaseCheck[GetArraySlot()] = turret.bulletSpeedIncreaseCheck;
+            
             if (bulletSpeedIncreaseAmmount[1].text != "")
             {
                 turret.bulletSpeedIncreaseAmmount = float.Parse(bulletSpeedIncreaseAmmount[1].text);
-                subwaveStorage.bulletSpeedIncreaseAmmount[GetArraySlot()] = turret.bulletSpeedIncreaseAmmount;
+               
             }
         }
         else
         {
             turret.bulletSpeedIncreaseCheck = false;
-            subwaveStorage.bulletSpeedIncreaseCheck[GetArraySlot()] = turret.bulletSpeedIncreaseCheck;
+            
         }
 
         if (streamNumberOfBul[1].text != "")
         {
             turret.numOfBullets = int.Parse(streamNumberOfBul[1].text);
-            subwaveStorage.numOfBullets[GetArraySlot()] = turret.numOfBullets;
+           
         }
     }
     void saveShotgunSettings()
@@ -746,24 +750,24 @@ public class UIManager : MonoBehaviour
         if (straightShotgunShot.isOn == true)
         {
             turret.shotgunStraight = true;
-            subwaveStorage.shotgunStraight[GetArraySlot()] = turret.shotgunStraight;
+            
         }
         else
         {
             turret.shotgunStraight = false;
-            subwaveStorage.shotgunStraight[GetArraySlot()] = turret.shotgunStraight;
+            
         }
 
         if (shotgunNumberOfBul[1].text != "")
         {
             turret.numOfBullets = int.Parse(shotgunNumberOfBul[1].text);
-            subwaveStorage.numOfBullets[GetArraySlot()] = turret.numOfBullets;
+            
         }
 
         if (angleBetweenBul[1].text != "")
         {
             turret.angleBetweenBullets = float.Parse(angleBetweenBul[1].text);
-            subwaveStorage.angleBetweenBullets[GetArraySlot()] = turret.angleBetweenBullets;
+            
         }
     }
 
@@ -772,12 +776,47 @@ public class UIManager : MonoBehaviour
         if (randNumberOfBul[1].text != "")
         {
             turret.numOfBullets = int.Parse(randNumberOfBul[1].text);
-            subwaveStorage.numOfBullets[GetArraySlot()] = turret.numOfBullets;
+            
         }
         if (randRange[1].text != "")
         {
             turret.bulletRandomRange = float.Parse(randRange[1].text);
-            subwaveStorage.bulletRandomRange[GetArraySlot()] = turret.bulletRandomRange;
+            
         }
+    }
+
+    void setSubwaveStorage()
+    {
+        subwaveStorage.bulletFormation[GetArraySlot()] = turret.bulletFormation;
+        subwaveStorage.streamEnabled[GetArraySlot()] = turretChildren[0].GetComponent<Turret>().streamEnabled;
+
+        subwaveStorage.targetingType[GetArraySlot()] = turret.targetingType;
+        subwaveStorage.firerate[GetArraySlot()] = turret.firerate;
+        subwaveStorage.turretHealth[waveNum] = turret.turretHealth;
+        subwaveStorage.activeInWave[waveNum] = true;
+        subwaveStorage.streamEnabled[GetArraySlot()] = turretChildren[0].GetComponent<Turret>().streamEnabled;
+        subwaveStorage.smoothTarget[GetArraySlot()] = turret.smoothTarget;
+        subwaveStorage.smoothTargetSpeed[GetArraySlot()] = turret.smoothTargetSpeed;
+        subwaveStorage.smoothTarget[GetArraySlot()] = turret.smoothTarget;
+        subwaveStorage.targetPlayerOffsetAmmount[GetArraySlot()] = turret.targetPlayerOffsetAmmount;
+        subwaveStorage.rotateAngleWidth[GetArraySlot()] = turret.rotateAngleWidth;
+        subwaveStorage.rotateAngleDirection[GetArraySlot()] = turret.rotateAngleDirection;
+        subwaveStorage.rotateSpeed[GetArraySlot()] = turret.rotateSpeed;
+        subwaveStorage.spiralDirection[GetArraySlot()] = turret.spiralDirection;
+        subwaveStorage.spiralDirection[GetArraySlot()] = turret.spiralDirection;
+        subwaveStorage.rotateSpeed[GetArraySlot()] = turret.rotateSpeed;
+        subwaveStorage.singleDirDirection[GetArraySlot()] = turret.singleDirDirection;
+        subwaveStorage.bulletBaseSpeed[GetArraySlot()] = turret.bulletBaseSpeed;
+        subwaveStorage.bulletSpeedIncreaseCheck[GetArraySlot()] = turret.bulletSpeedIncreaseCheck;
+        subwaveStorage.bulletSpeedIncreaseAmmount[GetArraySlot()] = turret.bulletSpeedIncreaseAmmount;
+        subwaveStorage.bulletSpeedIncreaseCheck[GetArraySlot()] = turret.bulletSpeedIncreaseCheck;
+        subwaveStorage.numOfBullets[GetArraySlot()] = turret.numOfBullets;
+        subwaveStorage.shotgunStraight[GetArraySlot()] = turret.shotgunStraight;
+        subwaveStorage.shotgunStraight[GetArraySlot()] = turret.shotgunStraight;
+        subwaveStorage.numOfBullets[GetArraySlot()] = turret.numOfBullets;
+        subwaveStorage.angleBetweenBullets[GetArraySlot()] = turret.angleBetweenBullets;
+        subwaveStorage.numOfBullets[GetArraySlot()] = turret.numOfBullets;
+        subwaveStorage.bulletRandomRange[GetArraySlot()] = turret.bulletRandomRange;
+
     }
 }

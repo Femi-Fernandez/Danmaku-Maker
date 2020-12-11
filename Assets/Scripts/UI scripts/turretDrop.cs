@@ -56,6 +56,10 @@ public class turretDrop : MonoBehaviour, IDropHandler
                 childToSet.rotateAngleDirection = 90;
                 childToSet.rotateAngleWidth = 10;
                 childToSet.rotateSpeed = 5;
+                childToSet.bulletBaseSpeed = 3;
+                childToSet.numOfBullets = 4;
+                childToSet.firerate = 1;
+                childToSet.angleBetweenBullets = 10;
                 //childToSet.turretLocation = transform.position;
             }
         }

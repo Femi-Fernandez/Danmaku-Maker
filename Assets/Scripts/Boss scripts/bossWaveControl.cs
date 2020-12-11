@@ -10,8 +10,8 @@ public class bossWaveControl : MonoBehaviour
     int numOfWaves;
     int[] numOfSubwaves;
 
-    int currentWave;
-    int currentSubwave;
+    public int currentWave;
+    public int currentSubwave;
 
     bossHealth Health;
 
@@ -25,7 +25,7 @@ public class bossWaveControl : MonoBehaviour
 
     bool arraysSet;
 
-    bool wavesStarted;
+    public bool wavesStarted;
     // Start is called before the first frame update
     void Start()
     {  
@@ -93,13 +93,7 @@ public class bossWaveControl : MonoBehaviour
             {
                 Debug.Log("thats it... you won");
             }
-        }
-        else
-        {
-            currentWave = 0;
-            currentSubwave = 0;
-        }
-        
+        }      
     }
 
 
