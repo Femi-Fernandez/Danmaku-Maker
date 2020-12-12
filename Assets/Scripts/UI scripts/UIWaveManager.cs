@@ -143,6 +143,7 @@ public class UIWaveManager : MonoBehaviour
     void subwaveToEditChanged()
     {
         uiManager.subwaveNum = uiSubwaveToEdit.value;
+        uiManager.clearInputFields();
     }
 
     void setAllTurrets()

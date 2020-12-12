@@ -150,7 +150,7 @@ MonoBehaviour:
   numberActiveStreams: 0
   streamNumber: 2
   streamEnabled: 0
-  turretHealth: 0
+  turretHealth: 100
   fireType: 1
   targetingType: 2
   rotateSpeed: 5
@@ -406,7 +406,7 @@ MonoBehaviour:
   numberActiveStreams: 0
   streamNumber: 4
   streamEnabled: 0
-  turretHealth: 0
+  turretHealth: 100
   fireType: 1
   targetingType: 2
   rotateSpeed: 5
@@ -698,7 +698,7 @@ MonoBehaviour:
   numberActiveStreams: 0
   streamNumber: 3
   streamEnabled: 0
-  turretHealth: 0
+  turretHealth: 100
   fireType: 1
   targetingType: 2
   rotateSpeed: 5
@@ -869,6 +869,7 @@ MonoBehaviour:
   numberActiveStreams: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   streamEnabled: 00000000000000000000000000000000
   turretHealth: 00000000000000000000000000000000
+  turretSavedOnce: 00000000000000000000000000000000
   fireType: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   targetingType: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   rotateSpeed:
