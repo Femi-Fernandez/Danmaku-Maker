@@ -15,9 +15,10 @@ public class bossWaveControl : MonoBehaviour
 
     bossHealth Health;
 
-    GameObject[] mainTurrets;
-    GameObject[] turret;
-    Turret[] turretStreams;
+    public GameObject[] mainTurrets;
+    public GameObject[] turret;
+    public Turret[] turretStreams;
+    public turretSubwaveStorage TurretSubwaveStorage;
     GameObject[] turretChildren;
     float percentCutoff;
 
@@ -43,15 +44,15 @@ public class bossWaveControl : MonoBehaviour
         {
             mainTurrets = GameObject.FindGameObjectsWithTag("turret Main");
             turret = GameObject.FindGameObjectsWithTag("Turret");
-
+            TurretSubwaveStorage = mainTurrets[0].GetComponent<turretSubwaveStorage>();
             Array.Resize(ref turretStreams, turret.Length);
             for (int i = 0; i < turret.Length; i++)
             {
                 turretStreams[i] = turret[i].GetComponent<Turret>();
             }
 
-            numOfSubwaves = mainTurrets[0].GetComponent<turretSubwaveStorage>().SubwaveCount;
-            numOfWaves = mainTurrets[0].GetComponent<turretSubwaveStorage>().totalWaveCount;
+            numOfSubwaves = TurretSubwaveStorage.SubwaveCount;
+            numOfWaves = TurretSubwaveStorage.totalWaveCount;
 
             for (int i = 0; i < mainTurrets.Length; i++)
             {
@@ -129,49 +130,55 @@ public class bossWaveControl : MonoBehaviour
     /// <param name="subwaveNum"></param>
     void setValues(int subwaveNum)
     {
-        
-        for (int j = 0; j < 4; j++)
-        {
-            for (int i = 0; i < mainTurrets.Length; i++)
+        for (int i = 0; i < mainTurrets.Length; i++)
             {
-                turretStreams[i].streamEnabled = mainTurrets[0].GetComponent<turretSubwaveStorage>().streamEnabled[subwaveNum, j];
-                Debug.Log("Is stream enabled?" + mainTurrets[0].GetComponent<turretSubwaveStorage>().streamEnabled[subwaveNum, j]);
-                if (turretStreams[i].streamEnabled == true)
+            //Debug.Log("mainTurret: " + i);
+            for (int j = 0; j <4; j++)
                 {
-                    turretStreams[i].GetComponent<Turret_Fire>().enabled = true;
-                    turretStreams[i].GetComponent<Turret_Targeting>().enabled = true;
-                    turretStreams[i].GetComponent<Turret_BulletSetup>().enabled = true;
+               // Debug.Log(": " + i);
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().streamEnabled = TurretSubwaveStorage.streamEnabled[subwaveNum, j];
+                //Debug.Log("subwaveNum: " + subwaveNum);
+                if (TurretSubwaveStorage.streamEnabled[subwaveNum, j])
+                {
+                // Debug.Log("enable stream: " + j);
+                    mainTurrets[i].transform.GetChild(j).gameObject.SetActive(true);
+                    mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Fire>().enabled = true;
+                    mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Fire>().fireTimer = 0.0f;
+                    mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Fire>().readyToFire = true;
+                    mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Targeting>().enabled = true;
+                    mainTurrets[i].transform.GetChild(j).GetComponent<Turret_BulletSetup>().enabled = true;
                 }
                 else
                 {
-                    turretStreams[i].GetComponent<Turret_Fire>().enabled = false;
-                    turretStreams[i].GetComponent<Turret_Targeting>().enabled = false;
-                    turretStreams[i].GetComponent<Turret_BulletSetup>().enabled = false;
+                    mainTurrets[i].transform.GetChild(j).gameObject.SetActive(false);
+                    mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Fire>().enabled = false;
+                    mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Targeting>().enabled = false;
+                    mainTurrets[i].transform.GetChild(j).GetComponent<Turret_BulletSetup>().enabled = false;
                 }
 
 
-                turretStreams[i].turretHealth = mainTurrets[0].GetComponent<turretSubwaveStorage>().turretHealth[subwaveNum];
-                turretStreams[i].fireType = mainTurrets[0].GetComponent<turretSubwaveStorage>().fireType[subwaveNum, j];
-                turretStreams[i].targetingType = mainTurrets[0].GetComponent<turretSubwaveStorage>().targetingType[subwaveNum, j];
-                turretStreams[i].rotateSpeed = mainTurrets[0].GetComponent<turretSubwaveStorage>().rotateSpeed[subwaveNum, j];
-                turretStreams[i].smoothTarget = mainTurrets[0].GetComponent<turretSubwaveStorage>().smoothTarget[subwaveNum, j];
-                turretStreams[i].smoothTargetSpeed = mainTurrets[0].GetComponent<turretSubwaveStorage>().smoothTargetSpeed[subwaveNum, j];
-                turretStreams[i].targetPlayerOffsetAmmount = mainTurrets[0].GetComponent<turretSubwaveStorage>().targetPlayerOffsetAmmount[subwaveNum, j];
-                turretStreams[i].rotateAngleDirection = mainTurrets[0].GetComponent<turretSubwaveStorage>().rotateAngleDirection[subwaveNum, j];
-                turretStreams[i].rotateAngleWidth = mainTurrets[0].GetComponent<turretSubwaveStorage>().rotateAngleWidth[subwaveNum, j];
-                turretStreams[i].spiralDirection = mainTurrets[0].GetComponent<turretSubwaveStorage>().spiralDirection[subwaveNum, j];
-                turretStreams[i].singleDirDirection = mainTurrets[0].GetComponent<turretSubwaveStorage>().singleDirDirection[subwaveNum, j];
-                turretStreams[i].bulletFormation = mainTurrets[0].GetComponent<turretSubwaveStorage>().bulletFormation[subwaveNum, j];
-                turretStreams[i].numOfBullets = mainTurrets[0].GetComponent<turretSubwaveStorage>().numOfBullets[subwaveNum, j];
-                turretStreams[i].firerate = mainTurrets[0].GetComponent<turretSubwaveStorage>().firerate[subwaveNum, j];
-                turretStreams[i].bulletDelay = mainTurrets[0].GetComponent<turretSubwaveStorage>().bulletDelay[subwaveNum, j];
-                turretStreams[i].bulletSpeedIncreaseAmmount = mainTurrets[0].GetComponent<turretSubwaveStorage>().bulletSpeedIncreaseAmmount[subwaveNum, j];
-                turretStreams[i].angleBetweenBullets = mainTurrets[0].GetComponent<turretSubwaveStorage>().angleBetweenBullets[subwaveNum, j];
-                turretStreams[i].bulletRandomRange = mainTurrets[0].GetComponent<turretSubwaveStorage>().bulletRandomRange[subwaveNum, j];
-                turretStreams[i].shotgunStraight = mainTurrets[0].GetComponent<turretSubwaveStorage>().shotgunStraight[subwaveNum, j];
-                turretStreams[i].bulletSpeedIncreaseCheck = mainTurrets[0].GetComponent<turretSubwaveStorage>().bulletSpeedIncreaseCheck[subwaveNum, j];
-                turretStreams[i].bulletMovementType = mainTurrets[0].GetComponent<turretSubwaveStorage>().bulletMovementType[subwaveNum, j];
-                turretStreams[i].bulletBaseSpeed = mainTurrets[0].GetComponent<turretSubwaveStorage>().bulletBaseSpeed[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().turretHealth = TurretSubwaveStorage.turretHealth[subwaveNum];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().fireType = TurretSubwaveStorage.fireType[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().targetingType = TurretSubwaveStorage.targetingType[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().rotateSpeed = TurretSubwaveStorage.rotateSpeed[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().smoothTarget = TurretSubwaveStorage.smoothTarget[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().smoothTargetSpeed = TurretSubwaveStorage.smoothTargetSpeed[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().targetPlayerOffsetAmmount = TurretSubwaveStorage.targetPlayerOffsetAmmount[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().rotateAngleDirection = TurretSubwaveStorage.rotateAngleDirection[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().rotateAngleWidth = TurretSubwaveStorage.rotateAngleWidth[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().spiralDirection = TurretSubwaveStorage.spiralDirection[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().singleDirDirection = TurretSubwaveStorage.singleDirDirection[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletFormation = TurretSubwaveStorage.bulletFormation[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().numOfBullets = TurretSubwaveStorage.numOfBullets[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().firerate = TurretSubwaveStorage.firerate[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletDelay = TurretSubwaveStorage.bulletDelay[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletSpeedIncreaseAmmount = TurretSubwaveStorage.bulletSpeedIncreaseAmmount[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().angleBetweenBullets = TurretSubwaveStorage.angleBetweenBullets[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletRandomRange = TurretSubwaveStorage.bulletRandomRange[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().shotgunStraight = TurretSubwaveStorage.shotgunStraight[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletSpeedIncreaseCheck = TurretSubwaveStorage.bulletSpeedIncreaseCheck[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletMovementType = TurretSubwaveStorage.bulletMovementType[subwaveNum, j];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletBaseSpeed = TurretSubwaveStorage.bulletBaseSpeed[subwaveNum, j];
 
             }
         }

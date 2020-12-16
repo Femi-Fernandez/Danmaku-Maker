@@ -590,9 +590,7 @@ public class UIManager : MonoBehaviour
     {
         if (fireRateInput[1].text != "")
         {
-            Debug.Log("firerate set");
             turret.firerate = float.Parse(fireRateInput[1].text);
-
         }
 
         if (setTurretHealth[1].text != "")
@@ -601,6 +599,7 @@ public class UIManager : MonoBehaviour
 
         }
 
+        Debug.Log("Wavenum: " + waveNum + ", subWaveNum: " + subwaveNum + ", arraySlot: " + GetArraySlot());
         switch (turret.targetingType)
         {
             case 1:
@@ -795,14 +794,15 @@ public class UIManager : MonoBehaviour
 
     void setSubwaveStorage()
     {
+        Debug.Log("streamToEdit value: " + streamToEdit.value);
         subwaveStorage.bulletFormation[GetArraySlot(), streamToEdit.value] = turret.bulletFormation;
-        subwaveStorage.streamEnabled[GetArraySlot(), streamToEdit.value] = turretChildren[0].GetComponent<Turret>().streamEnabled;
+        subwaveStorage.streamEnabled[GetArraySlot(), streamToEdit.value] = turret.streamEnabled;
 
         subwaveStorage.targetingType[GetArraySlot(), streamToEdit.value] = turret.targetingType;
         subwaveStorage.firerate[GetArraySlot(), streamToEdit.value] = turret.firerate;
         subwaveStorage.turretHealth[waveNum] = turret.turretHealth;
         subwaveStorage.activeInWave[waveNum] = true;
-        subwaveStorage.streamEnabled[GetArraySlot(), streamToEdit.value] = turretChildren[0].GetComponent<Turret>().streamEnabled;
+     // subwaveStorage.streamEnabled[GetArraySlot(), streamToEdit.value] = turret.streamEnabled;
         subwaveStorage.smoothTarget[GetArraySlot(), streamToEdit.value] = turret.smoothTarget;
         subwaveStorage.smoothTargetSpeed[GetArraySlot(), streamToEdit.value] = turret.smoothTargetSpeed;
         subwaveStorage.smoothTarget[GetArraySlot(), streamToEdit.value] = turret.smoothTarget;
