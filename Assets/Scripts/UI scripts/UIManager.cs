@@ -148,9 +148,7 @@ public class UIManager : MonoBehaviour
         bulletPanel.SetActive(false);
         turretPanel.SetActive(false);
         optionPanel.SetActive(false);
-
     }
-
     //finds all the inputs and toggles for the Turret UI panels. 
     void setupTurretPanelsInputs()
     {
@@ -368,6 +366,8 @@ public class UIManager : MonoBehaviour
         SetActiveTurretUI();          
     }
    
+
+    //sets up the turret to fire while in the creation mode so the player can see the stream they are editing
     void setupTurret()
     {
 
@@ -450,6 +450,8 @@ public class UIManager : MonoBehaviour
         //Debug.Log(change.value);
         turret = turretChildren[change.value].GetComponent<Turret>();
         currentSelectedTurret = turretChildren[change.value];
+        currentSelectedTurret.GetComponent<Turret_Fire>().fireTimer = 0;
+        currentSelectedTurret.GetComponent<Turret_Fire>().readyToFire = true;
         turretName.text = "Selected turret \n" + currentSelectedTurret.name;
         aimType.value = turret.targetingType - 1;
         fireOnOrOffOnTurret(currentSelectedTurret, true);
@@ -599,7 +601,7 @@ public class UIManager : MonoBehaviour
 
         }
 
-        Debug.Log("Wavenum: " + waveNum + ", subWaveNum: " + subwaveNum + ", arraySlot: " + GetArraySlot());
+       Debug.Log("Wavenum: " + waveNum + ", subWaveNum: " + subwaveNum + ", arraySlot: " + GetArraySlot());
         switch (turret.targetingType)
         {
             case 1:
@@ -694,7 +696,7 @@ public class UIManager : MonoBehaviour
 
     void saveSingleDirSettings()
     {
-        if (singleDirectionAim[1].text != null)
+        if (singleDirectionAim[1].text != "")
         {
             turret.singleDirDirection = float.Parse(singleDirectionAim[1].text);
             
@@ -801,6 +803,9 @@ public class UIManager : MonoBehaviour
         subwaveStorage.targetingType[GetArraySlot(), streamToEdit.value] = turret.targetingType;
         subwaveStorage.firerate[GetArraySlot(), streamToEdit.value] = turret.firerate;
         subwaveStorage.turretHealth[waveNum] = turret.turretHealth;
+        //subwave count, numactivestreams
+        //subwaveStorage.SubwaveCount[wavenum] = 
+
         subwaveStorage.activeInWave[waveNum] = true;
      // subwaveStorage.streamEnabled[GetArraySlot(), streamToEdit.value] = turret.streamEnabled;
         subwaveStorage.smoothTarget[GetArraySlot(), streamToEdit.value] = turret.smoothTarget;
@@ -833,7 +838,8 @@ public class UIManager : MonoBehaviour
     public void clearInputFields()
     {
         //clear all turret inputs
-
+        //Debug.Log(turretPanel.activeSelf);
+        optionPanel.SetActive(true);
         if (turretPanel.activeSelf)
         {
             fireRateInput[1].GetComponentInParent<InputField>().text = "";
@@ -907,7 +913,7 @@ public class UIManager : MonoBehaviour
             fireRateInput[0].text = subwaveStorage.firerate[GetArraySlot(), i].ToString();
             aimType.value = subwaveStorage.targetingType[GetArraySlot(), i] - 1;
             numOfStreams.value = subwaveStorage.numberActiveStreams[GetArraySlot()] - 1;
-            setTurretHealth[0].text = subwaveStorage.turretHealth[GetArraySlot()].ToString();
+            setTurretHealth[0].text = subwaveStorage.turretHealth[waveNum].ToString();
 
             //target player options
             smoothTargetToggle.isOn = subwaveStorage.smoothTarget[GetArraySlot(), i];
@@ -938,13 +944,13 @@ public class UIManager : MonoBehaviour
     void SetAllValues()
     {
         turret.firerate = 1;
-        for (int i = 0; i < 4; i++)
-        {
+        int i = 0;
+      //  for (int i = 0; i < 4; i++)
+      //  {
             if (subwaveStorage.turretSavedOnce[GetArraySlot(), i])
                 {
                 turret.bulletFormation = subwaveStorage.bulletFormation[GetArraySlot(), i];
                 turretChildren[0].GetComponent<Turret>().streamEnabled = subwaveStorage.streamEnabled[GetArraySlot(), i];
-
                 turret.targetingType = subwaveStorage.targetingType[GetArraySlot(), i];
                 turret.firerate = subwaveStorage.firerate[GetArraySlot(), i];
                 turret.turretHealth = subwaveStorage.turretHealth[waveNum];
@@ -956,17 +962,11 @@ public class UIManager : MonoBehaviour
                 turret.rotateAngleWidth = subwaveStorage.rotateAngleWidth[GetArraySlot(), i];
                 turret.rotateAngleDirection = subwaveStorage.rotateAngleDirection[GetArraySlot(), i];
                 turret.rotateSpeed = subwaveStorage.rotateSpeed[GetArraySlot(), i];
-
                 turretChildren[i].GetComponent<Turret>().spiralDirection = subwaveStorage.spiralDirection[GetArraySlot(), i];
-
-
                 turret.rotateSpeed = subwaveStorage.rotateSpeed[GetArraySlot(), i];
                 turret.singleDirDirection = subwaveStorage.singleDirDirection[GetArraySlot(), i];
             }
-        }
+        //}
         setupTurret();
-
-
     }
-
 }

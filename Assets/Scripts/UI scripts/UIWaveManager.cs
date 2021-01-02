@@ -15,6 +15,8 @@ public class UIWaveManager : MonoBehaviour
     Button wavePanelButton;
     Button turretPanelButton;
 
+    Text SelectedWaveAndSubwave;
+
     GameObject wavePanel;
     GameObject turretPanel;
 
@@ -31,9 +33,9 @@ public class UIWaveManager : MonoBehaviour
         findInputs();
         setupDropdowns();
         setupButtons();
-
+     
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
-
+        SelectedWaveAndSubwave = GameObject.Find("selected wave and sub-wave Text").GetComponent<Text>();
 
         numberOfWavesChanged();
         numberOfSubwavesChanged();
@@ -124,6 +126,9 @@ public class UIWaveManager : MonoBehaviour
     void waveToEditChanged()
     {
         uiManager.waveNum = uiWaveToEdit.value;
+        //Debug.Log("current wave: " + uiManager.waveNum);
+        SelectedWaveAndSubwave.text = "Wave " + (uiWaveToEdit.value + 1) + " selected," + "\n" +"subwave "+(uiSubwaveToEdit.value +1) +" Selected";
+        setAllTurrets();
     }
 
     void numberOfSubwavesChanged()
@@ -144,6 +149,8 @@ public class UIWaveManager : MonoBehaviour
     {
         uiManager.subwaveNum = uiSubwaveToEdit.value;
         uiManager.clearInputFields();
+        SelectedWaveAndSubwave.text = "Wave " + (uiWaveToEdit.value + 1) + " selected," + "\n" + "subwave " + (uiSubwaveToEdit.value + 1) + " Selected";
+        setAllTurrets();
     }
 
     void setAllTurrets()

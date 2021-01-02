@@ -16,7 +16,7 @@ public class turretSubwaveStorage : MonoBehaviour
     public int TotalNumberOfTurrets;
     public bool[] activeInWave = new bool[4];
     public int[] numberActiveStreams = new int[16];
-  //  public int[] streamNumber = new int[16];
+    //public float[] streamNumber = new int[16];
     public bool[,] streamEnabled = new bool[16, 4];
 
     // generic turret settings (applies to all)

@@ -67,7 +67,7 @@ public class bossWaveControl : MonoBehaviour
                 }
             }
         }
-        percentCutoff = Health.health / numOfWaves;
+        
 
     }
     void Update()
@@ -78,16 +78,20 @@ public class bossWaveControl : MonoBehaviour
             arraysSet = true;
 
             if (!wavesStarted)
+            {
                 StartCoroutine(runSubwave(((currentWave) * 4) + currentSubwave));
+                percentCutoff = Health.health / numOfWaves;
+            }
 
             //Debug.Log(((currentWave) * 4) + currentSubwave);
             wavesStarted = true;
 
-           // Debug.Log("Current wave: " + currentWave);
-           // Debug.Log("percentCutoff: " + percentCutoff);
-           // Debug.Log("health check: " + ((numOfWaves-1 - currentWave) * percentCutoff));
+            // Debug.Log("Current wave: " + currentWave);
+            // Debug.Log("percentCutoff: " + percentCutoff);
+            // Debug.Log("health check: " + ((numOfWaves-1 - currentWave) * percentCutoff));
             if (Health.health < ((numOfWaves-1 - currentWave) * percentCutoff))
             {
+                Debug.Log("Curent wave increase!");
                 currentWave++;
             }
             
@@ -103,7 +107,7 @@ public class bossWaveControl : MonoBehaviour
     //   if (currentSubwave < numOfSubwaves[currentWave])
     IEnumerator runSubwave(int subwaveNum)
     {
-        Debug.Log("subwaveNum = " + subwaveNum);
+        //Debug.Log("subwaveNum = " + subwaveNum);
         if (currentSubwave < numOfSubwaves[currentWave])
             setValues(subwaveNum);
         currentSubwave++;
@@ -115,6 +119,7 @@ public class bossWaveControl : MonoBehaviour
         if (fightingBoss)
         {
             StartCoroutine(runSubwave(((currentWave) * 4) + currentSubwave));
+            Debug.Log("current wave: " + currentWave);
         }
         else
         {
@@ -157,7 +162,7 @@ public class bossWaveControl : MonoBehaviour
                 }
 
 
-                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().turretHealth = TurretSubwaveStorage.turretHealth[subwaveNum];
+                mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().turretHealth = TurretSubwaveStorage.turretHealth[currentWave];
                 mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().fireType = TurretSubwaveStorage.fireType[subwaveNum, j];
                 mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().targetingType = TurretSubwaveStorage.targetingType[subwaveNum, j];
                 mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().rotateSpeed = TurretSubwaveStorage.rotateSpeed[subwaveNum, j];
