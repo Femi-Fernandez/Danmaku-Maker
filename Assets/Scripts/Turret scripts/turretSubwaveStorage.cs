@@ -16,7 +16,7 @@ public class turretSubwaveStorage : MonoBehaviour
     public int TotalNumberOfTurrets;
     public bool[] activeInWave = new bool[4];
     public int[] numberActiveStreams = new int[16];
-    //public float[] streamNumber = new int[16];
+    public float[] subwaveDuration = new float[16];
     public bool[,] streamEnabled = new bool[16, 4];
 
     // generic turret settings (applies to all)
@@ -62,5 +62,9 @@ public class turretSubwaveStorage : MonoBehaviour
     //individual bullet settings (what movement type they use, their speed etc)
     public int[,] bulletMovementType = new int[16, 4];
     public float[,] bulletBaseSpeed = new float[16, 4];
+
+    public float[,] bulletAmplitude = new float[16, 4];
+    public float[,] bulletFrequency = new float[16, 4];
+    public float[,] bulletWaveLength = new float[16, 4];
 
 }

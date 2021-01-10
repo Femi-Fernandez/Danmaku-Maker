@@ -17,6 +17,9 @@ public class UIWaveManager : MonoBehaviour
 
     Text SelectedWaveAndSubwave;
 
+    Text[] subwaveDuration;
+    Button saveSubwaveDuration;
+
     GameObject wavePanel;
     GameObject turretPanel;
 
@@ -55,7 +58,11 @@ public class UIWaveManager : MonoBehaviour
 
         wavePanelButton = GameObject.Find("to Wave Settings").GetComponent<Button>();
         turretPanelButton = GameObject.Find("to Turret select").GetComponent<Button>();
+        
+        subwaveDuration = GameObject.Find("Subwave Duration Input").GetComponentsInChildren<Text>();
+        saveSubwaveDuration = GameObject.Find("Save subwave duration").GetComponent<Button>();
     }
+
     void setupDropdowns()
     {
         uiNnumberOfWaves.onValueChanged.AddListener(delegate
@@ -95,7 +102,14 @@ public class UIWaveManager : MonoBehaviour
         {
             toTurretSelect();
         });
+
+        saveSubwaveDuration.onClick.AddListener(delegate
+        {
+            uiManager.saveDurationSettings(float.Parse(subwaveDuration[1].text));
+        });
     }
+
+
 
     void toWaveSettings()
     {
@@ -118,7 +132,7 @@ public class UIWaveManager : MonoBehaviour
         {
             uiWaveToEditOptions.Add((i + 1).ToString());
         }
-
+        //uiManager.clearInputFields();
         uiWaveToEdit.AddOptions(uiWaveToEditOptions);
         setAllTurrets();
     }
@@ -126,6 +140,7 @@ public class UIWaveManager : MonoBehaviour
     void waveToEditChanged()
     {
         uiManager.waveNum = uiWaveToEdit.value;
+        uiManager.clearInputFields();
         //Debug.Log("current wave: " + uiManager.waveNum);
         SelectedWaveAndSubwave.text = "Wave " + (uiWaveToEdit.value + 1) + " selected," + "\n" +"subwave "+(uiSubwaveToEdit.value +1) +" Selected";
         setAllTurrets();
@@ -140,7 +155,11 @@ public class UIWaveManager : MonoBehaviour
         {
             uiSubwaveToEditOptions.Add((i + 1).ToString());
         }
-
+        //uiManager.clearInputFields();
+        if (uiNumberOfSubwaves.value == 0)
+        {
+            uiManager.subwaveNum = 0;
+        }
         uiSubwaveToEdit.AddOptions(uiSubwaveToEditOptions);
         setAllTurrets();
     }

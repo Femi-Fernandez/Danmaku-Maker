@@ -7,4 +7,9 @@ public class Bullet : MonoBehaviour
     public float movementType;
     public float lifeTime;
     public float speed;
+
+    //sine wave movement
+    public float amplitude;
+    public float frequency;
+    public float waveLength;
 }

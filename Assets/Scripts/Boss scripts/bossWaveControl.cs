@@ -19,7 +19,7 @@ public class bossWaveControl : MonoBehaviour
     public GameObject[] turret;
     public Turret[] turretStreams;
     public turretSubwaveStorage TurretSubwaveStorage;
-    GameObject[] turretChildren;
+   // GameObject[] turretChildren;
     float percentCutoff;
 
 
@@ -111,7 +111,7 @@ public class bossWaveControl : MonoBehaviour
         if (currentSubwave < numOfSubwaves[currentWave])
             setValues(subwaveNum);
         currentSubwave++;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(TurretSubwaveStorage.subwaveDuration[subwaveNum]);
 
         if (currentSubwave >= numOfSubwaves[currentWave])
             currentSubwave = 0;
