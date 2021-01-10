@@ -12,4 +12,9 @@ public class Bullet : MonoBehaviour
     public float amplitude;
     public float frequency;
     public float waveLength;
+
+    //varaible speed movement
+    public float maxSpeed;
+    public float minSpeed;
+    public float speedChangeFrequency;
 }

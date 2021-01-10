@@ -5,7 +5,8 @@ using UnityEngine;
 public class bullet_movement : MonoBehaviour
 {
     Bullet bullet;
-    float timer;
+    public float timer;
+    bool increasing;
     private void OnEnable()
     {
         bullet = GetComponent<Bullet>();
@@ -25,6 +26,10 @@ public class bullet_movement : MonoBehaviour
             case 1:
                 moveSineWave();
                 break;
+            case 2:
+                moveVariableSpeed();
+                break;
+
             default:
                 break;
         }
@@ -42,7 +47,40 @@ public class bullet_movement : MonoBehaviour
         Vector3 position = transform.position;
         position += transform.right * bullet.speed * Time.deltaTime;
         timer += Time.deltaTime;
-        transform.position = position + transform.up * Mathf.Cos( timer* bullet.frequency) * bullet.amplitude;
+        transform.position = position + transform.up * Mathf.Cos(timer * bullet.frequency) * bullet.amplitude;
+    }
+
+    void moveVariableSpeed()
+    {
+        float t;
+
+        Vector3 position = transform.position;
+        if (increasing)
+        {
+            timer += Time.deltaTime;
+            t = (bullet.speedChangeFrequency - timer) / bullet.speedChangeFrequency;
+            bullet.speed = Mathf.SmoothStep(bullet.maxSpeed, bullet.minSpeed, t);
+            if (timer > bullet.speedChangeFrequency)
+            {
+                increasing = false;
+            }
+        }
+
+        if (!increasing)
+        {
+            timer -= Time.deltaTime;
+            t = (bullet.speedChangeFrequency - timer) / bullet.speedChangeFrequency;
+            bullet.speed = Mathf.SmoothStep(bullet.maxSpeed, bullet.minSpeed, t);
+            if (timer < 0)
+            {
+                increasing = true;
+            }
+        }
+        position += transform.right * bullet.speed * Time.deltaTime;
+
+        transform.position = position;
+
+
     }
 
     private void Destroy()

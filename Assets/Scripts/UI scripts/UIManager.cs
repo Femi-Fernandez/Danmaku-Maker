@@ -61,14 +61,20 @@ public class UIManager : MonoBehaviour
     Dropdown fireType;
     Dropdown moveType;
     Button saveBulletSettings;
+    Text[] bulletBaseSpeed;
 
     //bullet movement panels
     GameObject sineMovementUI;
+    GameObject varableSpeedUI;
 
-    //sine movement variables
+    //sin movement variables
     Text[] amplitude;
     Text[] frequency;
-    Text[] wavelength;
+
+    //variable speed movement variables
+    Text[] maxSpeed;
+    Text[] minSpeed;
+    Text[] speedChangeFrequency;
 
     //stream bullet settings
     Text[] streamNumberOfBul;
@@ -197,6 +203,7 @@ public class UIManager : MonoBehaviour
         fireType = GameObject.Find("fire type input").GetComponent<Dropdown>();
         moveType = GameObject.Find("movement type input").GetComponent<Dropdown>();
         saveBulletSettings = GameObject.Find("Save bullet settings").GetComponent<Button>();
+        bulletBaseSpeed = GameObject.Find("bullet speed input").GetComponentsInChildren<Text>();
 
         //get bullet configuration panels
         streamshotUI = GameObject.Find("stream shot UI");
@@ -218,12 +225,18 @@ public class UIManager : MonoBehaviour
         randRange = GameObject.Find("rand burst range input").GetComponentsInChildren<Text>();
 
 
-        sineMovementUI = GameObject.Find("sine movement UI");
 
+        //individual bullet movement configuration panels 
+        sineMovementUI = GameObject.Find("sine movement UI");
+        varableSpeedUI = GameObject.Find("variable speed movement UI");
+        //sine movement inputs
         amplitude = GameObject.Find("Amplitude input").GetComponentsInChildren<Text>();
         frequency = GameObject.Find("Frequency input").GetComponentsInChildren<Text>();
-        wavelength = GameObject.Find("Wavelength input").GetComponentsInChildren<Text>();
 
+        //pingpong speed change inputs
+        maxSpeed = GameObject.Find("Fastest speed input").GetComponentsInChildren<Text>();
+        minSpeed = GameObject.Find("Slowest speed input").GetComponentsInChildren<Text>();
+        speedChangeFrequency = GameObject.Find("Speed change frequency input").GetComponentsInChildren<Text>();
     }
 
     //finds all the inputs and toggles for the Bullet UI panels. 
@@ -404,6 +417,7 @@ public class UIManager : MonoBehaviour
 
         fireType.value = turret.bulletFormation - 1;
         bulletFireType(fireType);
+        bulletMoveType(moveType);
     }
 
 
@@ -555,10 +569,17 @@ public class UIManager : MonoBehaviour
         {
             case 0:
                 sineMovementUI.SetActive(false);
+                varableSpeedUI.SetActive(false);
                 break;
             case 1:
                 sineMovementUI.SetActive(true);
+                varableSpeedUI.SetActive(false);
                 break;
+            case 2:
+                sineMovementUI.SetActive(false);
+                varableSpeedUI.SetActive(true);
+                break;
+
             default:
                 break;
         }
@@ -743,7 +764,15 @@ public class UIManager : MonoBehaviour
     //saves bullet settings based on what targeting type is selected.
     void saveBulletPressed()
     {
-        turret.bulletBaseSpeed = 3;
+        
+        if (bulletBaseSpeed[1].text == "")
+        {
+            turret.bulletBaseSpeed = 3;
+        }
+        else
+        {
+            turret.bulletBaseSpeed = float.Parse(bulletBaseSpeed[1].text);
+        }
 
         switch (turret.bulletFormation)
         {
@@ -771,7 +800,9 @@ public class UIManager : MonoBehaviour
             case 1:
                 saveSinMoveSettings();
                 break;
-
+            case 2:
+                saveVariablSpeedSettings();
+                break;
             default:
                 break;
         }
@@ -856,12 +887,26 @@ public class UIManager : MonoBehaviour
         {
             turret.bulletFrequency = float.Parse(frequency[1].text);
         }
+    }
 
-        if (wavelength[1].text != "")
+
+    //maxSpeed;
+    //minSpeed;
+    //speedChangeFrequency;
+    void saveVariablSpeedSettings()
+    {
+        if (maxSpeed[1].text != "")
         {
-            turret.bulletWaveLength = float.Parse(wavelength[1].text);
+            turret.bulletMaxSpeed = float.Parse(maxSpeed[1].text);
         }
-
+        if (minSpeed[1].text != "")
+        {
+            turret.bulletMinSpeed = float.Parse(minSpeed[1].text);
+        }
+        if (speedChangeFrequency[1].text != "")
+        {
+            turret.bulletSpeedChangeFrequency = float.Parse(speedChangeFrequency[1].text);
+        }
     }
 
     void setSubwaveStorage()
@@ -903,7 +948,10 @@ public class UIManager : MonoBehaviour
 
         subwaveStorage.bulletAmplitude[GetArraySlot(), streamToEdit.value] = turret.bulletAmplitude;
         subwaveStorage.bulletFrequency[GetArraySlot(), streamToEdit.value] = turret.bulletFrequency;
-        subwaveStorage.bulletWaveLength[GetArraySlot(), streamToEdit.value] = turret.bulletWaveLength;
+
+        subwaveStorage.bulletMaxSpeed[GetArraySlot(), streamToEdit.value] = turret.bulletMaxSpeed;
+        subwaveStorage.bulletMinSpeed[GetArraySlot(), streamToEdit.value] = turret.bulletMinSpeed;
+        subwaveStorage.bulletSpeedChangeFrequency[GetArraySlot(), streamToEdit.value] = turret.bulletSpeedChangeFrequency;
 
         subwaveStorage.turretSavedOnce[GetArraySlot(), streamToEdit.value] = true;
     }
@@ -1008,7 +1056,11 @@ public class UIManager : MonoBehaviour
 
             amplitude[0].text = subwaveStorage.bulletAmplitude[GetArraySlot(), i].ToString() ;
             frequency[0].text = subwaveStorage.bulletFrequency[GetArraySlot(), i].ToString() ;
-            wavelength[0].text = subwaveStorage.bulletWaveLength[GetArraySlot(), i].ToString();
+
+            maxSpeed[0].text = subwaveStorage.bulletMaxSpeed[GetArraySlot(), i].ToString();
+            minSpeed[0].text = subwaveStorage.bulletMinSpeed[GetArraySlot(), i].ToString();
+            speedChangeFrequency[0].text = subwaveStorage.bulletSpeedChangeFrequency[GetArraySlot(), i].ToString();
+
 
         }
         SetAllValues();
@@ -1041,7 +1093,11 @@ public class UIManager : MonoBehaviour
 
                 turret.bulletAmplitude = subwaveStorage.bulletAmplitude[GetArraySlot(), i];
                 turret.bulletFrequency = subwaveStorage.bulletFrequency[GetArraySlot(), i];
-                turret.bulletWaveLength =  subwaveStorage.bulletWaveLength[GetArraySlot(), i];
+
+                turret.bulletMaxSpeed = subwaveStorage.bulletMaxSpeed[GetArraySlot(), i];
+                turret.bulletMinSpeed = subwaveStorage.bulletMinSpeed[GetArraySlot(), i];
+                turret.bulletSpeedChangeFrequency = subwaveStorage.bulletSpeedChangeFrequency[GetArraySlot(), i] ;
+
 
             }
         }

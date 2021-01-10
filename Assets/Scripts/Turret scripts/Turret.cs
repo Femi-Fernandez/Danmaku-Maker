@@ -58,8 +58,13 @@ public class Turret : MonoBehaviour
     public int bulletMovementType;
     public float bulletBaseSpeed;
 
+    //sin wave settings
     public float bulletAmplitude;
     public float bulletFrequency;
-    public float bulletWaveLength;
+
+    //
+    public float bulletMaxSpeed;
+    public float bulletMinSpeed;
+    public float bulletSpeedChangeFrequency;
 
 }

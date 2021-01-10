@@ -63,8 +63,12 @@ public class turretSubwaveStorage : MonoBehaviour
     public int[,] bulletMovementType = new int[16, 4];
     public float[,] bulletBaseSpeed = new float[16, 4];
 
+    //sin wave storage
     public float[,] bulletAmplitude = new float[16, 4];
     public float[,] bulletFrequency = new float[16, 4];
-    public float[,] bulletWaveLength = new float[16, 4];
 
+    //variable speed storage
+    public float[,] bulletMaxSpeed = new float[16, 4];
+    public float[,] bulletMinSpeed = new float[16, 4];
+    public float[,] bulletSpeedChangeFrequency = new float[16, 4];
 }

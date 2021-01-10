@@ -55,8 +55,8 @@ public class Turret_BulletSetup : MonoBehaviour
         GameObject bullet = transform.GetComponentInParent<bullet_pool>().GetBullet();
         bullet.transform.position = transform.position;
         bullet.transform.rotation = transform.rotation;
-        bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
-        bullet.GetComponent<Bullet>().movementType = turret.bulletMovementType;
+
+         
         setBulletValues(bullet);
         bullet.SetActive(true);
         yield return new WaitForSeconds(turret.firerate);
@@ -70,8 +70,7 @@ public class Turret_BulletSetup : MonoBehaviour
             GameObject bullet = transform.GetComponentInParent<bullet_pool>().GetBullet();
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation;
-            bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
-            bullet.GetComponent<Bullet>().movementType = turret.bulletMovementType;
+             
             if (turret.bulletSpeedIncreaseCheck == true)
             {
                     bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed + (turret.bulletSpeedIncreaseAmmount * i);
@@ -96,8 +95,7 @@ public class Turret_BulletSetup : MonoBehaviour
                 if (i % 2 == 0)
                 {
                     bullet.transform.rotation = transform.rotation * Quaternion.AngleAxis(-(anglemanip * turret.angleBetweenBullets), transform.forward);
-                    bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
-                    bullet.GetComponent<Bullet>().movementType = turret.bulletMovementType;
+
                     if (turret.shotgunStraight == true)
                     {
                         bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed / Mathf.Cos(((turret.angleBetweenBullets * anglemanip) * Mathf.PI) / 180);
@@ -107,8 +105,8 @@ public class Turret_BulletSetup : MonoBehaviour
                 else
                 {
                     bullet.transform.rotation = transform.rotation * Quaternion.AngleAxis((anglemanip * turret.angleBetweenBullets), transform.forward);
-                    bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
-                    bullet.GetComponent<Bullet>().movementType = turret.bulletMovementType;
+                     
+
                     if (turret.shotgunStraight == true)
                     {
                         bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed / Mathf.Cos(((turret.angleBetweenBullets * anglemanip) * Mathf.PI) / 180);
@@ -127,8 +125,8 @@ public class Turret_BulletSetup : MonoBehaviour
                 if (i % 2 == 0)
                 {
                     bullet.transform.rotation = transform.rotation * Quaternion.AngleAxis(-((anglemanip * turret.angleBetweenBullets) + (turret.angleBetweenBullets / 2)), transform.forward);
-                    bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
-                    bullet.GetComponent<Bullet>().movementType = turret.bulletMovementType;
+                     
+                     
                     if (turret.shotgunStraight == true)
                     {
                         bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed / Mathf.Cos(((turret.angleBetweenBullets * anglemanip + (turret.angleBetweenBullets / 2)) * Mathf.PI) / 180);
@@ -137,8 +135,8 @@ public class Turret_BulletSetup : MonoBehaviour
                 else
                 {
                     bullet.transform.rotation = transform.rotation * Quaternion.AngleAxis((anglemanip * turret.angleBetweenBullets) + (turret.angleBetweenBullets / 2), transform.forward);
-                    bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
-                    bullet.GetComponent<Bullet>().movementType = turret.bulletMovementType;
+                     
+                     
                     if (turret.shotgunStraight == true)
                     {
                         bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed / Mathf.Cos(((turret.angleBetweenBullets * anglemanip + (turret.angleBetweenBullets / 2)) * Mathf.PI) / 180);
@@ -162,8 +160,6 @@ public class Turret_BulletSetup : MonoBehaviour
             GameObject bullet = transform.GetComponentInParent<bullet_pool>().GetBullet();
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation * Quaternion.AngleAxis(UnityEngine.Random.Range(-turret.bulletRandomRange / 2, turret.bulletRandomRange / 2), transform.forward);
-            bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
-            bullet.GetComponent<Bullet>().movementType = turret.bulletMovementType;
             setBulletValues(bullet);
             bullet.SetActive(true);
         }
@@ -174,6 +170,8 @@ public class Turret_BulletSetup : MonoBehaviour
 
     void setBulletValues(GameObject bullet)
     {
+        bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
+        bullet.GetComponent<Bullet>().movementType = turret.bulletMovementType;
         switch (turret.bulletMovementType)
         {
             case 0:
@@ -184,9 +182,13 @@ public class Turret_BulletSetup : MonoBehaviour
                 bullet.GetComponent<Bullet>().movementType = 1;
                 bullet.GetComponent<Bullet>().amplitude = turret.bulletAmplitude;
                 bullet.GetComponent<Bullet>().frequency = turret.bulletFrequency;
-                bullet.GetComponent<Bullet>().waveLength = turret.bulletWaveLength;
                 break;
-
+            case 2:
+                bullet.GetComponent<Bullet>().movementType = 2;
+                bullet.GetComponent<Bullet>().maxSpeed = turret.bulletMaxSpeed;
+                bullet.GetComponent<Bullet>().minSpeed = turret.bulletMinSpeed;
+                bullet.GetComponent<Bullet>().speedChangeFrequency = turret.bulletSpeedChangeFrequency;
+                break;
             default:
                 break;
         }
