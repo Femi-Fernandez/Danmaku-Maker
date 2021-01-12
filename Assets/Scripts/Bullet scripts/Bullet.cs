@@ -17,4 +17,8 @@ public class Bullet : MonoBehaviour
     public float maxSpeed;
     public float minSpeed;
     public float speedChangeFrequency;
+
+    public float timeUntilChange;
+    public int newTargetingType;
+    public float speedAfterTarget;
 }

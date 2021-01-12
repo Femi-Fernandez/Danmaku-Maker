@@ -62,9 +62,13 @@ public class Turret : MonoBehaviour
     public float bulletAmplitude;
     public float bulletFrequency;
 
-    //
+    //variable speed settings
     public float bulletMaxSpeed;
     public float bulletMinSpeed;
     public float bulletSpeedChangeFrequency;
 
+    //travel then target settings
+    public float bulletTimeUntilChange;
+    public int bulletNewTargetingType;
+    public float bulletSpeedAfterTarget;
 }

@@ -143,7 +143,7 @@ public class Turret_BulletSetup : MonoBehaviour
                     }
                     anglemanip++;
                 }
-
+                setBulletValues(bullet);
                 bullet.SetActive(true);
             }
 
@@ -170,7 +170,7 @@ public class Turret_BulletSetup : MonoBehaviour
 
     void setBulletValues(GameObject bullet)
     {
-        bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
+        //bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
         bullet.GetComponent<Bullet>().movementType = turret.bulletMovementType;
         switch (turret.bulletMovementType)
         {
@@ -188,6 +188,12 @@ public class Turret_BulletSetup : MonoBehaviour
                 bullet.GetComponent<Bullet>().maxSpeed = turret.bulletMaxSpeed;
                 bullet.GetComponent<Bullet>().minSpeed = turret.bulletMinSpeed;
                 bullet.GetComponent<Bullet>().speedChangeFrequency = turret.bulletSpeedChangeFrequency;
+                break;
+            case 3:
+                bullet.GetComponent<Bullet>().movementType = 3;
+                bullet.GetComponent<Bullet>().timeUntilChange = turret.bulletTimeUntilChange;
+                bullet.GetComponent<Bullet>().newTargetingType = turret.bulletNewTargetingType;
+                bullet.GetComponent<Bullet>().speedAfterTarget = turret.bulletSpeedAfterTarget;
                 break;
             default:
                 break;

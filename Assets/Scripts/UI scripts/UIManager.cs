@@ -66,6 +66,7 @@ public class UIManager : MonoBehaviour
     //bullet movement panels
     GameObject sineMovementUI;
     GameObject varableSpeedUI;
+    GameObject travelThenTargetUI;
 
     //sin movement variables
     Text[] amplitude;
@@ -75,6 +76,11 @@ public class UIManager : MonoBehaviour
     Text[] maxSpeed;
     Text[] minSpeed;
     Text[] speedChangeFrequency;
+
+    //travel then target variables
+    Text[] timeUntilChange;
+    Dropdown newTargetingType;
+    Text[] speedAfterTarget;
 
     //stream bullet settings
     Text[] streamNumberOfBul;
@@ -229,14 +235,21 @@ public class UIManager : MonoBehaviour
         //individual bullet movement configuration panels 
         sineMovementUI = GameObject.Find("sine movement UI");
         varableSpeedUI = GameObject.Find("variable speed movement UI");
+        travelThenTargetUI = GameObject.Find("travel then change movement UI");
+
         //sine movement inputs
         amplitude = GameObject.Find("Amplitude input").GetComponentsInChildren<Text>();
         frequency = GameObject.Find("Frequency input").GetComponentsInChildren<Text>();
 
-        //pingpong speed change inputs
+        //variable speed change inputs
         maxSpeed = GameObject.Find("Fastest speed input").GetComponentsInChildren<Text>();
         minSpeed = GameObject.Find("Slowest speed input").GetComponentsInChildren<Text>();
         speedChangeFrequency = GameObject.Find("Speed change frequency input").GetComponentsInChildren<Text>();
+
+        //travel then target inputs
+        timeUntilChange = GameObject.Find("time until change input").GetComponentsInChildren<Text>();
+        newTargetingType = GameObject.Find("new target type input").GetComponent<Dropdown>();
+        speedAfterTarget = GameObject.Find("Speed after target input").GetComponentsInChildren<Text>();
     }
 
     //finds all the inputs and toggles for the Bullet UI panels. 
@@ -280,6 +293,13 @@ public class UIManager : MonoBehaviour
             bulletMoveType(moveType);
         }
         );
+
+        newTargetingType.onValueChanged.AddListener(delegate
+        {
+            turret.bulletNewTargetingType = newTargetingType.value;
+        }
+        );
+
     }
 
     //sets listeners for all the buttons on the UI
@@ -570,16 +590,23 @@ public class UIManager : MonoBehaviour
             case 0:
                 sineMovementUI.SetActive(false);
                 varableSpeedUI.SetActive(false);
+                travelThenTargetUI.SetActive(false);
                 break;
             case 1:
                 sineMovementUI.SetActive(true);
                 varableSpeedUI.SetActive(false);
+                travelThenTargetUI.SetActive(false);
                 break;
             case 2:
                 sineMovementUI.SetActive(false);
                 varableSpeedUI.SetActive(true);
+                travelThenTargetUI.SetActive(false);
                 break;
-
+            case 3:
+                sineMovementUI.SetActive(false);
+                varableSpeedUI.SetActive(false);
+                travelThenTargetUI.SetActive(true);
+                break;
             default:
                 break;
         }
@@ -782,7 +809,6 @@ public class UIManager : MonoBehaviour
             case 2:
                 saveStreamShotSettings();
                 break;
-
             case 3:
                 saveShotgunSettings();
                 break;
@@ -802,6 +828,9 @@ public class UIManager : MonoBehaviour
                 break;
             case 2:
                 saveVariablSpeedSettings();
+                break;
+            case 3:
+                saveTravelThenTargetSettings();
                 break;
             default:
                 break;
@@ -889,10 +918,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
-    //maxSpeed;
-    //minSpeed;
-    //speedChangeFrequency;
     void saveVariablSpeedSettings()
     {
         if (maxSpeed[1].text != "")
@@ -907,6 +932,22 @@ public class UIManager : MonoBehaviour
         {
             turret.bulletSpeedChangeFrequency = float.Parse(speedChangeFrequency[1].text);
         }
+    }
+
+    void saveTravelThenTargetSettings()
+    {
+        if (timeUntilChange[1].text != "")
+        {
+            turret.bulletTimeUntilChange = float.Parse(timeUntilChange[1].text);
+        }
+
+        turret.bulletNewTargetingType = newTargetingType.value;
+
+        if (speedAfterTarget[1].text != "")
+        {
+            turret.bulletSpeedAfterTarget = float.Parse(speedAfterTarget[1].text);
+        }
+
     }
 
     void setSubwaveStorage()
