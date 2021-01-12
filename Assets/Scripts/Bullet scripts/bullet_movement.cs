@@ -99,16 +99,20 @@ public class bullet_movement : MonoBehaviour
             switch (bullet.newTargetingType)
             {
                 case 0:
-                    //Vector2 direction = _player.transform.position - transform.position;
-                    //Quaternion rotation = Quaternion.LookRotation(direction);
-                    //rotation.x = transform.rotation.x;
-                    //rotation.y = transform.rotation.y;
-                    //transform.rotation = rotation;
-
                     var dir = _player.transform.position - transform.position;
                     var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                     transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
+                    newTargetSet = true;
+                    break;
+                case 1:
+
+                    //var angle = -90.0f;
+                    transform.rotation = Quaternion.AngleAxis(-90.0f, Vector3.forward);
+                    newTargetSet = true;
+                    break;
+                case 2:
+                    transform.rotation = Quaternion.AngleAxis((UnityEngine.Random.Range(-180, 180)), Vector3.forward);
                     newTargetSet = true;
                     break;
                 default:
