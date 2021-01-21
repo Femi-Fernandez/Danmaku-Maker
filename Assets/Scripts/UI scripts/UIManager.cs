@@ -391,6 +391,8 @@ public class UIManager : MonoBehaviour
         mainTurret = currentTurret.transform.parent.gameObject;
         subwaveStorage = mainTurret.GetComponent<turretSubwaveStorage>();
 
+        //Debug.Log(mainTurret.name);
+
         turretChildren[0] = mainTurret.transform.GetChild(0).gameObject;
         turretChildren[1] = mainTurret.transform.GetChild(1).gameObject;
         turretChildren[2] = mainTurret.transform.GetChild(2).gameObject;
@@ -612,13 +614,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void saveDurationSettings(float Duration)
-    {
-        if (Duration != 0)
-        {
-            subwaveStorage.subwaveDuration[GetArraySlot()] = Duration;
-        }
-    }
+   // public void saveDurationSettings(float Duration)
+   // {
+   //     if (Duration != 0)
+   //     {
+   //         subwaveStorage.subwaveDuration[GetArraySlot()] = Duration;
+   //     }
+   // }
 
     //changes what turret UI is displayed based on the targetingType Dropdown
     void DropdownValueChanged(Dropdown change)
@@ -955,6 +957,7 @@ public class UIManager : MonoBehaviour
         Debug.Log("streamToEdit value: " + streamToEdit.value);
         subwaveStorage.bulletFormation[GetArraySlot(), streamToEdit.value] = turret.bulletFormation;
         subwaveStorage.streamEnabled[GetArraySlot(), streamToEdit.value] = turret.streamEnabled;
+        subwaveStorage.turretLocation = turret.turretLocation;
 
         subwaveStorage.targetingType[GetArraySlot(), streamToEdit.value] = turret.targetingType;
         subwaveStorage.firerate[GetArraySlot(), streamToEdit.value] = turret.firerate;
@@ -1107,7 +1110,7 @@ public class UIManager : MonoBehaviour
         SetAllValues();
     }
 
-    void SetAllValues()
+    public void SetAllValues()
     {
         turret.firerate = 1;
         for (int i = 0; i < 4; i++)
@@ -1143,5 +1146,24 @@ public class UIManager : MonoBehaviour
             }
         }
         setupTurret();
+    }
+
+    public void deselect()
+    {
+        optionPanel.gameObject.SetActive(false);
+        bulletPanel.gameObject.SetActive(false);
+
+        gameManager.GetComponent<OnGameStart>().TestMode();
+
+
+        GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
+        for (int i = 0; i < turrets.Length; i++)
+        {
+            turrets[i].GetComponent<Turret_Fire>().enabled = false;
+            turrets[i].GetComponent<Turret_Targeting>().enabled = false;
+            turrets[i].GetComponent<Turret_BulletSetup>().enabled = false;
+            turrets[i].transform.rotation = Quaternion.Euler(0, 0, -90);
+        }
+
     }
 }

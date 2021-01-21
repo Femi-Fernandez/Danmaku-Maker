@@ -103,10 +103,10 @@ public class UIWaveManager : MonoBehaviour
             toTurretSelect();
         });
 
-        saveSubwaveDuration.onClick.AddListener(delegate
-        {
-            uiManager.saveDurationSettings(float.Parse(subwaveDuration[1].text));
-        });
+      //  saveSubwaveDuration.onClick.AddListener(delegate
+      //  {
+      //      uiManager.saveDurationSettings(float.Parse(subwaveDuration[1].text));
+      //  });
     }
 
 

@@ -80,5 +80,7 @@ public class OnGameStart : MonoBehaviour
         boss.transform.GetChild(0).GetComponent<bossWaveControl>().wavesStarted = false;
         boss.transform.GetChild(0).GetComponent<bossWaveControl>().currentWave = 0;
         boss.transform.GetChild(0).GetComponent<bossWaveControl>().currentSubwave = 0;
+
+        //UIManager.GetComponent<UIManager>().SetAllValues();
     }
 }

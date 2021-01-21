@@ -8,8 +8,8 @@ public class turretDrop : MonoBehaviour, IDropHandler
 {
     public GameObject turret;
     public GameObject boss;
-    int numOfTurrets = 0;
-
+    public int numOfTurrets = 0;
+    int TotalNumberOfTurrets;
     public RectTransform restrictPlace;
 
     GameObject[] turrets;
@@ -35,11 +35,18 @@ public class turretDrop : MonoBehaviour, IDropHandler
 
             SetDefaultValues(spawnedTurret);
 
-            turrets = GameObject.FindGameObjectsWithTag("Turret");
+            turrets = GameObject.FindGameObjectsWithTag("turret Main");
+
+            if (turrets.Length ==1)
+            {
+                TotalNumberOfTurrets = 0;
+            }
+
+            TotalNumberOfTurrets++;
 
             for (int i = 0; i < turrets.Length; i++)
-            {
-                turrets[i].GetComponent<Turret>().TotalNumberOfTurrets++;
+            {   
+                turrets[i].GetComponent<turretSubwaveStorage>().TotalNumberOfTurrets = TotalNumberOfTurrets;
             }
         }
 

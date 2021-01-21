@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-[System.Serializable]
+
 public class turretSubwaveStorage : MonoBehaviour
 {
     /// <summary>
@@ -11,6 +11,7 @@ public class turretSubwaveStorage : MonoBehaviour
     /// </summary>
     public int totalWaveCount;
     public int[] SubwaveCount = new int[4];
+    public Vector3 turretLocation = new Vector3(0,0,0);
 
 
     public int TotalNumberOfTurrets;
@@ -26,6 +27,7 @@ public class turretSubwaveStorage : MonoBehaviour
     public int[,] targetingType = new int[16, 4];
     public float[,] rotateSpeed = new float[16, 4];
 
+    //public Vector4[] temp = new Vector4[16];
 
     // Target player settings
     public bool[,] smoothTarget = new bool[16, 4];

@@ -38,7 +38,7 @@ public class bossWaveControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void setArrays()
+    public void setArrays()
     {
         if (!arraysSet)
         {
@@ -111,7 +111,7 @@ public class bossWaveControl : MonoBehaviour
         if (currentSubwave < numOfSubwaves[currentWave])
             setValues(subwaveNum);
         currentSubwave++;
-        yield return new WaitForSeconds(TurretSubwaveStorage.subwaveDuration[subwaveNum]);
+        yield return new WaitForSeconds(5);
 
         if (currentSubwave >= numOfSubwaves[currentWave])
             currentSubwave = 0;
@@ -133,10 +133,11 @@ public class bossWaveControl : MonoBehaviour
     /// set each child active or not
     /// </summary>
     /// <param name="subwaveNum"></param>
-    void setValues(int subwaveNum)
+    public void setValues(int subwaveNum)
     {
         for (int i = 0; i < mainTurrets.Length; i++)
             {
+            TurretSubwaveStorage = mainTurrets[i].GetComponent<turretSubwaveStorage>();
             //Debug.Log("mainTurret: " + i);
             for (int j = 0; j <4; j++)
                 {
