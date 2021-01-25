@@ -729,6 +729,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 7378494740784649493, guid: ac4cb49db570a8d4487e8703cb426af5, type: 3}
   ShotDelay: 0.2
+  bullet_spin_left: 0
 --- !u!1 &48080026
 GameObject:
   m_ObjectHideFlags: 0
@@ -16317,6 +16318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turret: {fileID: 6694410550761159649, guid: 20a680b7fcef83344a07f27af004f464, type: 3}
   boss: {fileID: 1322674829}
+  numOfTurrets: 0
   restrictPlace: {fileID: 2006093117}
 --- !u!1 &1187944813
 GameObject:
@@ -17632,6 +17634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 7378494740784649493, guid: ac4cb49db570a8d4487e8703cb426af5, type: 3}
   ShotDelay: 0.2
+  bullet_spin_left: 0
 --- !u!1 &1263028645
 GameObject:
   m_ObjectHideFlags: 0
@@ -18704,6 +18707,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1322674830}
   - component: {fileID: 1322674831}
+  - component: {fileID: 1322674833}
+  - component: {fileID: 1322674832}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -18738,7 +18743,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d620f4fd0c46f7641afd52e2abfb38f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pooledBullet: {fileID: 7027877385424261443, guid: 3540339207d332d48b934fbb335df482, type: 3}
+  pooledBullet: {fileID: 9089366678800912496, guid: 7d486134a56a39547ac1980b0cf70320, type: 3}
+  bullets: []
+--- !u!114 &1322674832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322674829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794fc2459873d6544aec6d2bbf0c8dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet_type:
+  - {fileID: 1322674831}
+  - {fileID: 1322674833}
+--- !u!114 &1322674833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322674829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d620f4fd0c46f7641afd52e2abfb38f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledBullet: {fileID: 2104753400412204544, guid: 13ddf296c1d7e0546b156c56d2cfde51, type: 3}
   bullets: []
 --- !u!1 &1344689406
 GameObject:
@@ -23424,6 +23458,7 @@ MonoBehaviour:
   SaveText: 
   turret: {fileID: 6694410550761159649, guid: 20a680b7fcef83344a07f27af004f464, type: 3}
   boss: {fileID: 1322674829}
+  uIManager: {fileID: 0}
   turrets: []
   lines: []
   Filepath: []
@@ -26046,7 +26081,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1916807084
 Transform:
   m_ObjectHideFlags: 0

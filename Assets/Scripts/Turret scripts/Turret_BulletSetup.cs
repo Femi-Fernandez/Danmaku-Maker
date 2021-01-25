@@ -52,7 +52,7 @@ public class Turret_BulletSetup : MonoBehaviour
 
     IEnumerator Bul_Shot()
     {
-        GameObject bullet = transform.GetComponentInParent<bullet_pool>().GetBullet();
+        GameObject bullet = transform.GetComponentInParent<bullet_pool_manager>().GetBullet(1);
         bullet.transform.position = transform.position;
         bullet.transform.rotation = transform.rotation;
 

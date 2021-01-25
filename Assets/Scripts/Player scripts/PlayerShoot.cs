@@ -7,16 +7,18 @@ public class PlayerShoot : MonoBehaviour {
     public GameObject bullet;
     public float ShotDelay = .2f;
     private bool ReadyToShoot = true;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
+
+    GameObject bul;
+
+    public bool bullet_spin_left;
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKey(KeyCode.Z) && ReadyToShoot)
         {
-            Instantiate(bullet, transform.position, transform.rotation);
+            bul = Instantiate(bullet, transform.position, transform.rotation);
+            //bul.GetComponent<bullet_anim_controler>().spin_left = ReadyToShoot;
+            bul.GetComponent<Animator>().SetBool("Spin_Left", bullet_spin_left);
+
             ReadyToShoot = false;
             Invoke("ResetReadyToShoot", ShotDelay);
         }
