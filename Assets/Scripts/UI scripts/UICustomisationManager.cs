@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-public class UIWaveManager : MonoBehaviour
+public class UICustomisationManager : MonoBehaviour
 {
 
     Dropdown uiNnumberOfWaves;
@@ -14,6 +14,7 @@ public class UIWaveManager : MonoBehaviour
 
     Button wavePanelButton;
     Button turretPanelButton;
+    Button bulletPanelButton;
 
     Text SelectedWaveAndSubwave;
 
@@ -22,26 +23,45 @@ public class UIWaveManager : MonoBehaviour
 
     GameObject wavePanel;
     GameObject turretPanel;
-
+    GameObject bulletPanel;
 
     Turret turret;
     GameObject mainTurret;
     GameObject currentSelectedTurret;
 
+
+    Button bul_1_blue;
+    Button bul_1_pink;
+    Button bul_2_blue;
+    Button bul_2_pink;
+    Button bul_3_blue;
+    Button bul_3_pink;
+    Button bul_4_blue;
+    Button bul_4_pink;
+
     UIManager uiManager;
     // Dropdown uiPercentageToChangeAt;
+
+
     // Start is called before the first frame update
     void Start()
     {
         findInputs();
         setupDropdowns();
         setupButtons();
-     
+
+        setupBulletChangeButtons();
+
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
         SelectedWaveAndSubwave = GameObject.Find("selected wave and sub-wave Text").GetComponent<Text>();
 
         numberOfWavesChanged();
         numberOfSubwavesChanged();
+
+
+        wavePanel.SetActive(false);
+        turretPanel.SetActive(true);
+        bulletPanel.SetActive(false);
     }
 
 
@@ -51,16 +71,27 @@ public class UIWaveManager : MonoBehaviour
         uiWaveToEdit = GameObject.Find("wave to edit Input").GetComponent<Dropdown>();
         uiNumberOfSubwaves = GameObject.Find("number Of sub-waves Input").GetComponent<Dropdown>();
         uiSubwaveToEdit = GameObject.Find("sub-wave to edit Input").GetComponent<Dropdown>();
-        //uiPercentageToChangeAt = GameObject.Find("number Of Waves Input").GetComponent<Dropdown>();
 
         wavePanel = GameObject.Find("Wave Panel");
         turretPanel = GameObject.Find("turret panel");
+        bulletPanel = GameObject.Find("bullet panel");
+
 
         wavePanelButton = GameObject.Find("to Wave Settings").GetComponent<Button>();
         turretPanelButton = GameObject.Find("to Turret select").GetComponent<Button>();
-        
+        bulletPanelButton = GameObject.Find("to Bullet select").GetComponent<Button>();
+
         subwaveDuration = GameObject.Find("Subwave Duration Input").GetComponentsInChildren<Text>();
         saveSubwaveDuration = GameObject.Find("Save subwave duration").GetComponent<Button>();
+
+        bul_1_blue = GameObject.Find("Bullet 1 blue button").GetComponent<Button>();
+        bul_1_pink = GameObject.Find("Bullet 1 pink button").GetComponent<Button>();
+        bul_2_blue = GameObject.Find("Bullet 2 blue button").GetComponent<Button>();
+        bul_2_pink = GameObject.Find("Bullet 2 pink button").GetComponent<Button>();
+        bul_3_blue = GameObject.Find("Bullet 3 blue button").GetComponent<Button>();
+        bul_3_pink = GameObject.Find("Bullet 3 pink button").GetComponent<Button>();
+        bul_4_blue = GameObject.Find("Bullet 4 blue button").GetComponent<Button>();
+        bul_4_pink = GameObject.Find("Bullet 4 pink button").GetComponent<Button>();
     }
 
     void setupDropdowns()
@@ -103,24 +134,85 @@ public class UIWaveManager : MonoBehaviour
             toTurretSelect();
         });
 
-      //  saveSubwaveDuration.onClick.AddListener(delegate
-      //  {
-      //      uiManager.saveDurationSettings(float.Parse(subwaveDuration[1].text));
-      //  });
+        bulletPanelButton.onClick.AddListener(delegate
+        {
+            toBulletSelect();
+        });
+
+        //  saveSubwaveDuration.onClick.AddListener(delegate
+        //  {
+        //      uiManager.saveDurationSettings(float.Parse(subwaveDuration[1].text));
+        //  });
     }
 
+    void setupBulletChangeButtons() 
+    {
+        bul_1_blue.onClick.AddListener(delegate
+        {
+            bulletTypeChanged(0);
+        });
 
+        bul_1_pink.onClick.AddListener(delegate
+        {
+            bulletTypeChanged(1);
+        });
+
+        bul_2_blue.onClick.AddListener(delegate
+        {
+            bulletTypeChanged(2);
+        });
+
+        bul_2_pink.onClick.AddListener(delegate
+        {
+            bulletTypeChanged(3);
+        });
+
+        bul_3_blue.onClick.AddListener(delegate
+        {
+            bulletTypeChanged(4);
+        });
+
+        bul_3_pink.onClick.AddListener(delegate
+        {
+            bulletTypeChanged(5);
+        });
+
+        bul_4_blue.onClick.AddListener(delegate
+        {
+            bulletTypeChanged(6);
+        });
+
+        bul_4_pink.onClick.AddListener(delegate
+        {
+            bulletTypeChanged(7);
+        });
+    }
 
     void toWaveSettings()
     {
         wavePanel.SetActive(true);
         turretPanel.SetActive(false);
+        bulletPanel.SetActive(false);
     }
 
     void toTurretSelect()
     {
         wavePanel.SetActive(false);
         turretPanel.SetActive(true);
+        bulletPanel.SetActive(false);
+    }
+
+    void toBulletSelect()
+    {
+        wavePanel.SetActive(false);
+        turretPanel.SetActive(false);
+        bulletPanel.SetActive(true);
+    }
+
+    void bulletTypeChanged(int bulletNum)
+    {
+
+        uiManager.turret.bulletType = bulletNum;
     }
 
     void numberOfWavesChanged() 

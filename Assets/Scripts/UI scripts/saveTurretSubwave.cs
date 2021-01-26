@@ -78,4 +78,6 @@ public class saveTurretSubwave : MonoBehaviour
     public float[] timeUntilChange = new float[64];
     public int[] newTargetingType = new int[64];
     public float[] speedAfterTarget = new float[64];
+
+    public int[] bulletType = new int[64];
 }

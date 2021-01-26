@@ -20,7 +20,7 @@ public class Turret_BulletSetup : MonoBehaviour
     {
         if (_player != null)
         {
-            //GameObject bullet = transform.GetComponentInParent<bullet_pool>().GetBullet();
+            //GameObject bullet = transform.GetComponentInParent<bullet_pool_manager>().GetBullet(turret.bulletType);
             switch (turret.bulletFormation)
             {
                 //single shot downwards
@@ -52,7 +52,7 @@ public class Turret_BulletSetup : MonoBehaviour
 
     IEnumerator Bul_Shot()
     {
-        GameObject bullet = transform.GetComponentInParent<bullet_pool_manager>().GetBullet(1);
+        GameObject bullet = transform.GetComponentInParent<bullet_pool_manager>().GetBullet(turret.bulletType);
         bullet.transform.position = transform.position;
         bullet.transform.rotation = transform.rotation;
 
@@ -67,7 +67,7 @@ public class Turret_BulletSetup : MonoBehaviour
     {   
         for (int i = 0; i < turret.numOfBullets; i++)
         {
-            GameObject bullet = transform.GetComponentInParent<bullet_pool>().GetBullet();
+            GameObject bullet = transform.GetComponentInParent<bullet_pool_manager>().GetBullet(turret.bulletType);
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation;
              
@@ -90,7 +90,7 @@ public class Turret_BulletSetup : MonoBehaviour
         {
             for (int i = 0; i < turret.numOfBullets; i++)
             {
-                GameObject bullet = transform.GetComponentInParent<bullet_pool>().GetBullet();
+                GameObject bullet = transform.GetComponentInParent<bullet_pool_manager>().GetBullet(turret.bulletType);
                 bullet.transform.position = transform.position;
                 if (i % 2 == 0)
                 {
@@ -120,7 +120,7 @@ public class Turret_BulletSetup : MonoBehaviour
         {
             for (int i = 0; i < turret.numOfBullets; i++)
             {
-                GameObject bullet = transform.GetComponentInParent<bullet_pool>().GetBullet();
+                GameObject bullet = transform.GetComponentInParent<bullet_pool_manager>().GetBullet(turret.bulletType);
                 bullet.transform.position = transform.position;
                 if (i % 2 == 0)
                 {
@@ -157,7 +157,7 @@ public class Turret_BulletSetup : MonoBehaviour
         
         for (int i = 0; i < turret.numOfBullets; i++)
         {
-            GameObject bullet = transform.GetComponentInParent<bullet_pool>().GetBullet();
+            GameObject bullet = transform.GetComponentInParent<bullet_pool_manager>().GetBullet(turret.bulletType);
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation * Quaternion.AngleAxis(UnityEngine.Random.Range(-turret.bulletRandomRange / 2, turret.bulletRandomRange / 2), transform.forward);
             setBulletValues(bullet);

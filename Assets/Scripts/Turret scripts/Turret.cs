@@ -71,4 +71,6 @@ public class Turret : MonoBehaviour
     public float bulletTimeUntilChange;
     public int bulletNewTargetingType;
     public float bulletSpeedAfterTarget;
+
+    public int bulletType;
 }

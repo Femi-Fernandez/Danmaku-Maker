@@ -97,7 +97,7 @@ public class UIManager : MonoBehaviour
     Text[] randRange;
 
     //turret info
-    Turret turret;
+    public Turret turret;
     turretSubwaveStorage subwaveStorage;
     GameObject mainTurret;
     public GameObject currentSelectedTurret;
@@ -121,6 +121,8 @@ public class UIManager : MonoBehaviour
     public int waveNum;
     public int subwaveNum;
     public int arraySlot;
+
+    public int bulletType;
 
     // Start is called before the first frame update
     void Start()
@@ -997,6 +999,8 @@ public class UIManager : MonoBehaviour
         subwaveStorage.bulletMinSpeed[GetArraySlot(), streamToEdit.value] = turret.bulletMinSpeed;
         subwaveStorage.bulletSpeedChangeFrequency[GetArraySlot(), streamToEdit.value] = turret.bulletSpeedChangeFrequency;
 
+        subwaveStorage.bulletType[GetArraySlot(), streamToEdit.value] = turret.bulletType;
+
         subwaveStorage.turretSavedOnce[GetArraySlot(), streamToEdit.value] = true;
     }
 
@@ -1142,7 +1146,7 @@ public class UIManager : MonoBehaviour
                 turret.bulletMinSpeed = subwaveStorage.bulletMinSpeed[GetArraySlot(), i];
                 turret.bulletSpeedChangeFrequency = subwaveStorage.bulletSpeedChangeFrequency[GetArraySlot(), i] ;
 
-
+                turret.bulletType = subwaveStorage.bulletType[GetArraySlot(), i];
             }
         }
         setupTurret();

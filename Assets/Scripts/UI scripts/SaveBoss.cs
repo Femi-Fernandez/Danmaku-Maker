@@ -143,6 +143,7 @@ public class SaveBoss : MonoBehaviour
             save.newTargetingType[count] = temp.newTargetingType[j, i];
             save.speedAfterTarget[count] =temp.speedAfterTarget[j, i];
 
+                save.bulletType[count] = temp.bulletType[j, i];
 
             count++;
             }
@@ -237,6 +238,7 @@ public class SaveBoss : MonoBehaviour
                 load.newTargetingType[j, i] = temp.newTargetingType[count];
                 load.speedAfterTarget[j, i] = temp.speedAfterTarget[count];
 
+                load.bulletType[j, i] = temp.bulletType[count];
 
                 count++;
             }
@@ -330,6 +332,7 @@ public class SaveBoss : MonoBehaviour
                 turretToSet.newTargetingType[j, i] = temp.newTargetingType[j, i];
                 turretToSet.speedAfterTarget[j, i] = temp.speedAfterTarget[j, i];
 
+                turretToSet.bulletType[j, i] = temp.bulletType[j, i];
 
                 count++;
             }
@@ -343,11 +346,6 @@ public class SaveBoss : MonoBehaviour
         turrets[1] = turretBody.transform.GetChild(1).GetComponent<Turret>();
         turrets[2] = turretBody.transform.GetChild(2).GetComponent<Turret>();
         turrets[3] = turretBody.transform.GetChild(3).GetComponent<Turret>();
-
-        for (int i = 0; i < 4; i++)
-        {
-
-        }
     }
 
 
