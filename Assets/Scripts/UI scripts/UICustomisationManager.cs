@@ -7,7 +7,7 @@ using UnityEngine.Video;
 public class UICustomisationManager : MonoBehaviour
 {
 
-    Dropdown uiNnumberOfWaves;
+    Dropdown uiNumberOfWaves;
     Dropdown uiWaveToEdit;
     Dropdown uiNumberOfSubwaves;
     Dropdown uiSubwaveToEdit;
@@ -67,7 +67,7 @@ public class UICustomisationManager : MonoBehaviour
 
     void findInputs()
     {
-        uiNnumberOfWaves = GameObject.Find("number Of Waves Input").GetComponent<Dropdown>();
+        uiNumberOfWaves = GameObject.Find("number Of Waves Input").GetComponent<Dropdown>();
         uiWaveToEdit = GameObject.Find("wave to edit Input").GetComponent<Dropdown>();
         uiNumberOfSubwaves = GameObject.Find("number Of sub-waves Input").GetComponent<Dropdown>();
         uiSubwaveToEdit = GameObject.Find("sub-wave to edit Input").GetComponent<Dropdown>();
@@ -96,7 +96,7 @@ public class UICustomisationManager : MonoBehaviour
 
     void setupDropdowns()
     {
-        uiNnumberOfWaves.onValueChanged.AddListener(delegate
+        uiNumberOfWaves.onValueChanged.AddListener(delegate
         {
             numberOfWavesChanged();
         }
@@ -220,12 +220,13 @@ public class UICustomisationManager : MonoBehaviour
         List<string> uiWaveToEditOptions = new List<string> { };  
         uiWaveToEdit.ClearOptions();
 
-        for (int i = 0; i < uiNnumberOfWaves.value +1; i++)
+        for (int i = 0; i < uiNumberOfWaves.value +1; i++)
         {
             uiWaveToEditOptions.Add((i + 1).ToString());
         }
         //uiManager.clearInputFields();
         uiWaveToEdit.AddOptions(uiWaveToEditOptions);
+        uiManager.toggleWaveSelect(uiNumberOfWaves.value);
         setAllTurrets();
     }
 
@@ -269,7 +270,7 @@ public class UICustomisationManager : MonoBehaviour
          GameObject[] turrets = GameObject.FindGameObjectsWithTag("turret Main");
         for (int i = 0; i < turrets.Length; i++)
         {
-            turrets[i].GetComponent<turretSubwaveStorage>().totalWaveCount = uiNnumberOfWaves.value + 1;
+            turrets[i].GetComponent<turretSubwaveStorage>().totalWaveCount = uiNumberOfWaves.value + 1;
             turrets[i].GetComponent<turretSubwaveStorage>().SubwaveCount[uiWaveToEdit.value] = uiNumberOfSubwaves.value + 1;
         }
     }

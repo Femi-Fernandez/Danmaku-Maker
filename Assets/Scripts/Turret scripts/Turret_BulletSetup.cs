@@ -172,6 +172,7 @@ public class Turret_BulletSetup : MonoBehaviour
     {
         //bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
         bullet.GetComponent<Bullet>().movementType = turret.bulletMovementType;
+        bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
         switch (turret.bulletMovementType)
         {
             case 0:

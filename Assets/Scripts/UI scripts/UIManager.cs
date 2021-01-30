@@ -33,6 +33,11 @@ public class UIManager : MonoBehaviour
     Button saveTurretSettings;
     Text[] setTurretHealth;
 
+    Toggle activeWave1;
+    Toggle activeWave2;
+    Toggle activeWave3;
+    Toggle activeWave4;
+
     // target player variables
     Toggle smoothTargetToggle;
     Text[] smoothTargetSpeed;
@@ -180,6 +185,12 @@ public class UIManager : MonoBehaviour
         streamToEdit = GameObject.Find("stream to edit input").GetComponent<Dropdown>();
         saveTurretSettings = GameObject.Find("Save turret settings").GetComponent<Button>();
         setTurretHealth = GameObject.Find("turret health input").GetComponentsInChildren<Text>();
+
+        activeWave1 = GameObject.Find("wave 1 toggle").GetComponent<Toggle>();
+        activeWave2 = GameObject.Find("wave 2 toggle").GetComponent<Toggle>();
+        activeWave3 = GameObject.Find("wave 3 toggle").GetComponent<Toggle>();
+        activeWave4 = GameObject.Find("wave 4 toggle").GetComponent<Toggle>();
+
 
         //get targeted turret options
         smoothTargetToggle = GameObject.Find("Smooth targeting Toggle").GetComponent<Toggle>();
@@ -688,7 +699,7 @@ public class UIManager : MonoBehaviour
 
         }
 
-        Debug.Log("Wavenum: " + waveNum + ", subWaveNum: " + subwaveNum + ", arraySlot: " + GetArraySlot());
+       // Debug.Log("Wavenum: " + waveNum + ", subWaveNum: " + subwaveNum + ", arraySlot: " + GetArraySlot());
         switch (turret.targetingType)
         {
             case 1:
@@ -796,13 +807,16 @@ public class UIManager : MonoBehaviour
     void saveBulletPressed()
     {
         
-        if (bulletBaseSpeed[1].text == "")
+        if (bulletBaseSpeed[1].text != "")
         {
-            turret.bulletBaseSpeed = 3;
+            //turret.bulletBaseSpeed = 3;
+            turret.bulletBaseSpeed = float.Parse(bulletBaseSpeed[1].text);
         }
         else
         {
-            turret.bulletBaseSpeed = float.Parse(bulletBaseSpeed[1].text);
+            Debug.Log("Unga?");
+            turret.bulletBaseSpeed = 3;
+            //turret.bulletBaseSpeed = float.Parse(bulletBaseSpeed[1].text);
         }
 
         switch (turret.bulletFormation)
@@ -967,7 +981,12 @@ public class UIManager : MonoBehaviour
         //subwave count, numactivestreams
         //subwaveStorage.SubwaveCount[wavenum] = 
 
-        subwaveStorage.activeInWave[waveNum] = true;
+        //subwaveStorage.activeInWave[waveNum] = true;
+        subwaveStorage.activeInWave[0] = activeWave1.isOn;
+        subwaveStorage.activeInWave[1] = activeWave2.isOn;
+        subwaveStorage.activeInWave[2] = activeWave3.isOn;
+        subwaveStorage.activeInWave[3] = activeWave4.isOn;
+
         // subwaveStorage.streamEnabled[GetArraySlot(), streamToEdit.value] = turret.streamEnabled;
         subwaveStorage.smoothTarget[GetArraySlot(), streamToEdit.value] = turret.smoothTarget;
         subwaveStorage.smoothTargetSpeed[GetArraySlot(), streamToEdit.value] = turret.smoothTargetSpeed;
@@ -1066,6 +1085,7 @@ public class UIManager : MonoBehaviour
 
 
         }
+
         setInputFields();
     }
 
@@ -1108,7 +1128,6 @@ public class UIManager : MonoBehaviour
             maxSpeed[0].text = subwaveStorage.bulletMaxSpeed[GetArraySlot(), i].ToString();
             minSpeed[0].text = subwaveStorage.bulletMinSpeed[GetArraySlot(), i].ToString();
             speedChangeFrequency[0].text = subwaveStorage.bulletSpeedChangeFrequency[GetArraySlot(), i].ToString();
-
 
         }
         SetAllValues();
@@ -1169,5 +1188,24 @@ public class UIManager : MonoBehaviour
             turrets[i].transform.rotation = Quaternion.Euler(0, 0, -90);
         }
 
+    }
+
+    public void toggleWaveSelect(int numberOfWaves)
+    {
+        Toggle[] waveToggles = new Toggle[4];
+
+        waveToggles[0] = activeWave1;
+        waveToggles[1] = activeWave2;
+        waveToggles[2] = activeWave3;
+        waveToggles[3] = activeWave4;
+
+        for (int i = 0; i < numberOfWaves+1; i++)
+        {
+            waveToggles[i].gameObject.SetActive(true);
+        }
+        for (int i = numberOfWaves+1; i < 4; i++)
+        {
+            waveToggles[i].gameObject.SetActive(false);
+        }
     }
 }
