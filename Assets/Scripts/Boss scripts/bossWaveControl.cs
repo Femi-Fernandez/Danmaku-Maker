@@ -97,9 +97,10 @@ public class bossWaveControl : MonoBehaviour
         //Debug.Log("subwaveNum = " + subwaveNum);
         if (currentSubwave < numOfSubwaves[currentWave])
             setValues(subwaveNum);
+        yield return new WaitForSeconds(mainTurrets[0].GetComponent<turretSubwaveStorage>().subwaveDuration[currentSubwave]);
+        Debug.Log("current subwave: " + currentSubwave);
         currentSubwave++;
-        yield return new WaitForSeconds(5);
-
+        
         if (currentSubwave >= numOfSubwaves[currentWave])
             currentSubwave = 0;
 
@@ -126,7 +127,7 @@ public class bossWaveControl : MonoBehaviour
         for (int i = 0; i < mainTurrets.Length; i++)
         {
             mainTurrets[i].SetActive(mainTurrets[i].GetComponent<turretSubwaveStorage>().activeInWave[currentWave]);
-            Debug.Log("MainTurret " + i + " setactive = " + mainTurrets[i].GetComponent<turretSubwaveStorage>().activeInWave[currentWave]);
+            //Debug.Log("MainTurret " + i + " setactive = " + mainTurrets[i].GetComponent<turretSubwaveStorage>().activeInWave[currentWave]);
         }
 
 
@@ -146,8 +147,8 @@ public class bossWaveControl : MonoBehaviour
                         // Debug.Log("enable stream: " + j);
                         mainTurrets[i].transform.GetChild(j).gameObject.SetActive(true);
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Fire>().enabled = true;
-                        mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Fire>().fireTimer = 0.0f;
-                        mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Fire>().readyToFire = true;
+                        mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Fire>().fireTimer = 1000f;
+                       // mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Fire>().readyToFire = true;
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Targeting>().enabled = true;
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret_BulletSetup>().enabled = true;
                     }

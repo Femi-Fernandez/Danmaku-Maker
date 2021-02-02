@@ -42,6 +42,8 @@ public class OnGameStart : MonoBehaviour
         boss.transform.GetChild(0).GetComponent<bossHealth>().health = 1000;
         player.GetComponent<playerHealth>().health = 5;
         player.GetComponent<BoxCollider2D>().enabled = false;
+        player.transform.GetChild(1).GetComponent<PlayerShoot>().bulletCollidersOn = false;
+        player.transform.GetChild(2).GetComponent<PlayerShoot>().bulletCollidersOn = false;
         boss.transform.GetChild(0).GetComponent<BoxCollider2D>().enabled = false;
         boss.transform.GetChild(0).GetComponent<bossWaveControl>().fightingBoss = false;
 
@@ -68,13 +70,15 @@ public class OnGameStart : MonoBehaviour
         for (int i = 0; i < turretMain.Length; i++)
         {
             turretMain[i].GetComponent<TurretHealth>().health = turretMain[i].transform.GetChild(0).GetComponent<Turret>().turretHealth;
-           Debug.Log(turretMain[i].transform.GetChild(0));
+          // Debug.Log(turretMain[i].transform.GetChild(0));
             turretMain[i].GetComponent<BoxCollider2D>().enabled = true;
         }
 
         optionsPanel.SetActive(false);
         turretPanel.SetActive(false);
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.transform.GetChild(1).GetComponent<PlayerShoot>().bulletCollidersOn = true;
+        player.transform.GetChild(2).GetComponent<PlayerShoot>().bulletCollidersOn = true;
         boss.transform.GetChild(0).GetComponent<BoxCollider2D>().enabled = true;
         boss.transform.GetChild(0).GetComponent<bossWaveControl>().fightingBoss = true;
         boss.transform.GetChild(0).GetComponent<bossWaveControl>().wavesStarted = false;

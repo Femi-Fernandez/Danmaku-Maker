@@ -8,6 +8,8 @@ public class PlayerShoot : MonoBehaviour {
     public float ShotDelay = .2f;
     private bool ReadyToShoot = true;
 
+    public bool bulletCollidersOn;
+
     GameObject bul;
 
     public bool bullet_spin_left;
@@ -18,6 +20,11 @@ public class PlayerShoot : MonoBehaviour {
             bul = Instantiate(bullet, transform.position, transform.rotation);
             //bul.GetComponent<bullet_anim_controler>().spin_left = ReadyToShoot;
             bul.GetComponent<Animator>().SetBool("Spin_Left", bullet_spin_left);
+
+            if (!bulletCollidersOn)
+            {
+                bul.GetComponent<Collider2D>().enabled = false;
+            }
 
             ReadyToShoot = false;
             Invoke("ResetReadyToShoot", ShotDelay);

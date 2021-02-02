@@ -139,10 +139,14 @@ public class UICustomisationManager : MonoBehaviour
             toBulletSelect();
         });
 
-        //  saveSubwaveDuration.onClick.AddListener(delegate
-        //  {
-        //      uiManager.saveDurationSettings(float.Parse(subwaveDuration[1].text));
-        //  });
+        saveSubwaveDuration.onClick.AddListener(delegate
+        {
+            if (subwaveDuration[1].text != "")
+            {
+                uiManager.saveDurationSettings(float.Parse(subwaveDuration[1].text));
+            }
+           
+        });
     }
 
     void setupBulletChangeButtons() 

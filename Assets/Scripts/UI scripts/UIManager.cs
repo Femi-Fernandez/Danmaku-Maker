@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,10 +34,10 @@ public class UIManager : MonoBehaviour
     Button saveTurretSettings;
     Text[] setTurretHealth;
 
-    Toggle activeWave1;
-    Toggle activeWave2;
-    Toggle activeWave3;
-    Toggle activeWave4;
+    Toggle activeWave;
+    //Toggle activeWave2;
+    //Toggle activeWave3;
+    //Toggle activeWave4;
 
     // target player variables
     Toggle smoothTargetToggle;
@@ -158,6 +159,8 @@ public class UIManager : MonoBehaviour
         setupDropdowns();
         setupButtons();
 
+        TestBoss.interactable = false;
+
         //disable all turret setting pannels
         targetPlayerUI.SetActive(false);
         arcShotUI.SetActive(false);
@@ -186,10 +189,10 @@ public class UIManager : MonoBehaviour
         saveTurretSettings = GameObject.Find("Save turret settings").GetComponent<Button>();
         setTurretHealth = GameObject.Find("turret health input").GetComponentsInChildren<Text>();
 
-        activeWave1 = GameObject.Find("wave 1 toggle").GetComponent<Toggle>();
-        activeWave2 = GameObject.Find("wave 2 toggle").GetComponent<Toggle>();
-        activeWave3 = GameObject.Find("wave 3 toggle").GetComponent<Toggle>();
-        activeWave4 = GameObject.Find("wave 4 toggle").GetComponent<Toggle>();
+        activeWave = GameObject.Find("Active in wave toggle").GetComponent<Toggle>();
+       // activeWave2 = GameObject.Find("wave 2 toggle").GetComponent<Toggle>();
+       // activeWave3 = GameObject.Find("wave 3 toggle").GetComponent<Toggle>();
+       // activeWave4 = GameObject.Find("wave 4 toggle").GetComponent<Toggle>();
 
 
         //get targeted turret options
@@ -399,34 +402,66 @@ public class UIManager : MonoBehaviour
     /// <param name="currentTurret"></param>
     public void turretSelected(GameObject currentTurret)
     {
-        currentSelectedTurret = currentTurret;
-        turret = currentTurret.GetComponent<Turret>();
-        mainTurret = currentTurret.transform.parent.gameObject;
-        subwaveStorage = mainTurret.GetComponent<turretSubwaveStorage>();
 
-        //Debug.Log(mainTurret.name);
-
-        turretChildren[0] = mainTurret.transform.GetChild(0).gameObject;
-        turretChildren[1] = mainTurret.transform.GetChild(1).gameObject;
-        turretChildren[2] = mainTurret.transform.GetChild(2).gameObject;
-        turretChildren[3] = mainTurret.transform.GetChild(3).gameObject;
-
-        for (int i = 0; i < 4; i++)
+        if (currentSelectedTurret == currentTurret)
         {
-            turretChildren[i].GetComponent<Turret_Fire>().readyToFire = true;
+            turretChildren[0] = mainTurret.transform.GetChild(0).gameObject;
+            turretChildren[1] = mainTurret.transform.GetChild(1).gameObject;
+            turretChildren[2] = mainTurret.transform.GetChild(2).gameObject;
+            turretChildren[3] = mainTurret.transform.GetChild(3).gameObject;
+
+            for (int i = 0; i < 4; i++)
+            {
+                //turretChildren[i].GetComponent<Turret_Fire>().readyToFire = true;
+            }
+
+            turretName.text = "Selected turret \n" + currentSelectedTurret.name;
+
+            fireOnOrOffOnTurret(currentTurret, true);
+
+            setupTurret();//NEEDS TESTING
+            optionPanel.SetActive(true);
+            turretPanel.SetActive(true);
+            bulletPanel.SetActive(false);
+
+
+            SetActiveTurretUI();
+            setInputFields();
+
         }
+        else
+        {
+            currentSelectedTurret = currentTurret;
+            turret = currentTurret.GetComponent<Turret>();
+            mainTurret = currentTurret.transform.parent.gameObject;
+            subwaveStorage = mainTurret.GetComponent<turretSubwaveStorage>();
 
-        turretName.text = "Selected turret \n" + currentSelectedTurret.name;
+            //Debug.Log(mainTurret.name);
 
-        fireOnOrOffOnTurret(currentTurret, true);
+            turretChildren[0] = mainTurret.transform.GetChild(0).gameObject;
+            turretChildren[1] = mainTurret.transform.GetChild(1).gameObject;
+            turretChildren[2] = mainTurret.transform.GetChild(2).gameObject;
+            turretChildren[3] = mainTurret.transform.GetChild(3).gameObject;
 
-        setupTurret();//NEEDS TESTING
+            for (int i = 0; i < 4; i++)
+            {
+                turretChildren[i].GetComponent<Turret_Fire>().readyToFire = true;
+            }
 
-        optionPanel.SetActive(true);
-        turretPanel.SetActive(true);
-        bulletPanel.SetActive(false);
+            turretName.text = "Selected turret \n" + currentSelectedTurret.name;
 
-        SetActiveTurretUI();
+            fireOnOrOffOnTurret(currentTurret, true);
+
+            setupTurret();//NEEDS TESTING
+
+            optionPanel.SetActive(true);
+            turretPanel.SetActive(true);
+            bulletPanel.SetActive(false);
+
+
+            SetActiveTurretUI();
+            setInputFields();
+        }
     }
 
 
@@ -627,14 +662,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-   // public void saveDurationSettings(float Duration)
-   // {
-   //     if (Duration != 0)
-   //     {
-   //         subwaveStorage.subwaveDuration[GetArraySlot()] = Duration;
-   //     }
-   // }
-
+ 
     //changes what turret UI is displayed based on the targetingType Dropdown
     void DropdownValueChanged(Dropdown change)
     {
@@ -699,6 +727,8 @@ public class UIManager : MonoBehaviour
 
         }
 
+        subwaveStorage.activeInWave[waveNum] = activeWave.isOn;
+
        // Debug.Log("Wavenum: " + waveNum + ", subWaveNum: " + subwaveNum + ", arraySlot: " + GetArraySlot());
         switch (turret.targetingType)
         {
@@ -718,7 +748,9 @@ public class UIManager : MonoBehaviour
             default:
                 break;
         }
+       
         setSubwaveStorage();
+        TestBoss.interactable = true;
     }
 
     //void saveSineM
@@ -855,6 +887,7 @@ public class UIManager : MonoBehaviour
         }
 
         setSubwaveStorage();
+        TestBoss.interactable = true;
     }
 
     void saveStreamShotSettings()
@@ -981,11 +1014,12 @@ public class UIManager : MonoBehaviour
         //subwave count, numactivestreams
         //subwaveStorage.SubwaveCount[wavenum] = 
 
-        //subwaveStorage.activeInWave[waveNum] = true;
-        subwaveStorage.activeInWave[0] = activeWave1.isOn;
-        subwaveStorage.activeInWave[1] = activeWave2.isOn;
-        subwaveStorage.activeInWave[2] = activeWave3.isOn;
-        subwaveStorage.activeInWave[3] = activeWave4.isOn;
+        ////subwaveStorage.activeInWave[waveNum] = true;
+        //subwaveStorage.activeInWave[0] = activeWave1.isOn;
+        //subwaveStorage.activeInWave[1] = activeWave2.isOn;
+        //subwaveStorage.activeInWave[2] = activeWave3.isOn;
+        //subwaveStorage.activeInWave[3] = activeWave4.isOn;
+        //
 
         // subwaveStorage.streamEnabled[GetArraySlot(), streamToEdit.value] = turret.streamEnabled;
         subwaveStorage.smoothTarget[GetArraySlot(), streamToEdit.value] = turret.smoothTarget;
@@ -1129,6 +1163,8 @@ public class UIManager : MonoBehaviour
             minSpeed[0].text = subwaveStorage.bulletMinSpeed[GetArraySlot(), i].ToString();
             speedChangeFrequency[0].text = subwaveStorage.bulletSpeedChangeFrequency[GetArraySlot(), i].ToString();
 
+            activeWave.isOn = subwaveStorage.activeInWave[waveNum];
+
         }
         SetAllValues();
     }
@@ -1192,20 +1228,28 @@ public class UIManager : MonoBehaviour
 
     public void toggleWaveSelect(int numberOfWaves)
     {
-        Toggle[] waveToggles = new Toggle[4];
-
-        waveToggles[0] = activeWave1;
-        waveToggles[1] = activeWave2;
-        waveToggles[2] = activeWave3;
-        waveToggles[3] = activeWave4;
-
-        for (int i = 0; i < numberOfWaves+1; i++)
-        {
-            waveToggles[i].gameObject.SetActive(true);
-        }
-        for (int i = numberOfWaves+1; i < 4; i++)
-        {
-            waveToggles[i].gameObject.SetActive(false);
-        }
+       // Toggle[] waveToggles = new Toggle[4];
+       //
+       // waveToggles[0] = activeWave1;
+       // waveToggles[1] = activeWave2;
+       // waveToggles[2] = activeWave3;
+       // waveToggles[3] = activeWave4;
+       //
+       // for (int i = 0; i < numberOfWaves+1; i++)
+       // {
+       //     waveToggles[i].gameObject.SetActive(true);
+       // }
+       // for (int i = numberOfWaves+1; i < 4; i++)
+       // {
+       //     waveToggles[i].gameObject.SetActive(false);
+       // }
     }
+
+    public void saveDurationSettings(float durartion)
+    {
+
+        subwaveStorage.subwaveDuration[GetArraySlot()] = durartion;
+
+    }
+
 }
