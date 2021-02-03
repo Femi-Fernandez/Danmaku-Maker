@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 using System.Xml.Serialization;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -20,16 +22,26 @@ public class turretDrop : MonoBehaviour, IDropHandler
         if (!RectTransformUtility.RectangleContainsScreenPoint(turretPanel, Input.mousePosition) ||
             !RectTransformUtility.RectangleContainsScreenPoint(restrictPlace, Input.mousePosition))
         {
-            Debug.Log("object dragged from panel!");
+            //Debug.Log("object dragged from panel!");
 
             Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             GameObject spawnedTurret = Instantiate(turret, worldPosition, transform.rotation) as GameObject;
             spawnedTurret.name = "turret " + numOfTurrets;
             var currentPos = spawnedTurret.transform.position;
-            spawnedTurret.transform.position = new Vector3((Mathf.Round(currentPos.x * 10)) / 10,
-                                                           (Mathf.Round(currentPos.y * 10)) / 10,
-                                                           (Mathf.Round(currentPos.z * 10)) / 10);
+            spawnedTurret.transform.position = new Vector3((Mathf.Round(currentPos.x)),
+                                                           (Mathf.Round(currentPos.y)),
+                                                           (Mathf.Round(currentPos.z)));
             //numOfTurrets++;
+
+           spawnedTurret.transform.position = checkSurroundings(spawnedTurret.transform.position);
+
+            if (spawnedTurret.transform.position.x == 100)
+            {
+                Destroy(spawnedTurret);
+                return;
+            }
+            
+
 
             spawnedTurret.transform.parent = boss.transform;
 
@@ -48,27 +60,105 @@ public class turretDrop : MonoBehaviour, IDropHandler
             {   
                 turrets[i].GetComponent<turretSubwaveStorage>().TotalNumberOfTurrets = TotalNumberOfTurrets;
             }
+        }       
+    }
+    void SetDefaultValues(GameObject turret)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            Turret childToSet = turret.transform.GetChild(i).gameObject.GetComponent<Turret>();
+            childToSet.turretLocation.x = turret.transform.localPosition.x;
+            childToSet.turretLocation.y = turret.transform.localPosition.y;
+            childToSet.parentTurret = transform.name;
+            childToSet.numberActiveStreams = 1;
+
+            childToSet.rotateAngleDirection = 90;
+            childToSet.rotateAngleWidth = 10;
+            childToSet.rotateSpeed = 5;
+            childToSet.bulletBaseSpeed = 3;
+            childToSet.numOfBullets = 4;
+            childToSet.firerate = 1;
+            childToSet.angleBetweenBullets = 10;
+            //childToSet.turretLocation = transform.position;
+        }
+    }
+   
+    bool[] areSurroundingsFull = new bool[9];
+
+    Vector3 checkSurroundings(Vector3 turretPlaceAttempt)
+    {
+        Vector3 t = turretPlaceAttempt;
+        for (int i = 0; i < 8; i++)
+        {
+            areSurroundingsFull[i] = false;
         }
 
-        void SetDefaultValues(GameObject turret)
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                Turret childToSet = turret.transform.GetChild(i).gameObject.GetComponent<Turret>();
-                childToSet.turretLocation.x = turret.transform.localPosition.x;
-                childToSet.turretLocation.y = turret.transform.localPosition.y;
-                childToSet.parentTurret = transform.name;
-                childToSet.numberActiveStreams = 1;
+        areSurroundingsFull[8] = checkTurrets(t);
+        if (areSurroundingsFull[8] == true)
+            return t;
+        
 
-                childToSet.rotateAngleDirection = 90;
-                childToSet.rotateAngleWidth = 10;
-                childToSet.rotateSpeed = 5;
-                childToSet.bulletBaseSpeed = 3;
-                childToSet.numOfBullets = 4;
-                childToSet.firerate = 1;
-                childToSet.angleBetweenBullets = 10;
-                //childToSet.turretLocation = transform.position;
+        t.x++;
+        areSurroundingsFull[0] = checkTurrets(t);
+        if (areSurroundingsFull[0])
+            return t;
+
+        t.y--;
+        areSurroundingsFull[1] = checkTurrets(t);
+        if (areSurroundingsFull[1])
+            return t;
+
+
+        t.x--;
+        areSurroundingsFull[2] = checkTurrets(t);
+        if (areSurroundingsFull[2])
+            return t;
+
+        t.x--;
+        areSurroundingsFull[3] = checkTurrets(t);
+        if (areSurroundingsFull[3])
+            return t;
+
+        t.y++;
+        areSurroundingsFull[4] = checkTurrets(t);
+        if (areSurroundingsFull[4])
+            return t;
+
+        t.y++;
+        areSurroundingsFull[5] = checkTurrets(t);
+        if (areSurroundingsFull[5])
+            return t;
+
+        t.x++;
+        areSurroundingsFull[6] = checkTurrets(t);
+        if (areSurroundingsFull[6])
+            return t;
+
+        t.x++;
+        areSurroundingsFull[7] = checkTurrets(t);
+        if (areSurroundingsFull[7])
+            return t;
+
+        t.x = 100;
+        return t;
+        //condition ? expressionIfTrue : expressionIfFalse
+    }
+
+    bool checkTurrets( Vector3 t)
+    {
+        if (turrets != null)
+        {
+            for (int i = 0; i < turrets.Length; i++)
+            {
+                
+
+                if (turrets[i].transform.position == t)
+                {               
+                    return false;
+                }
             }
         }
+       
+        return true;
     }
 }
