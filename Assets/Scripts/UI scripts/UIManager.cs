@@ -554,7 +554,12 @@ public class UIManager : MonoBehaviour
         turretName.text = "Selected turret \n" + currentSelectedTurret.name;
         aimType.value = turret.targetingType - 1;
         fireOnOrOffOnTurret(currentSelectedTurret, true);
+
+        bulletStreamToEdit.value = change.value;
+        streamToEdit.value = change.value;
+
         bulletFireType(fireType);
+
     }
 
     //changes what turret UI is displayed based on the targetingType Dropdown
