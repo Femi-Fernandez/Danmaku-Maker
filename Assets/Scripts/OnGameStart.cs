@@ -63,6 +63,7 @@ public class OnGameStart : MonoBehaviour
             for (int j = 0; j < 4; j++)
             {
                 turretMain[i].GetComponent<turretSubwaveStorage>().hasBeenDestroyed[j] = false;
+                turretMain[i].transform.GetChild(j).GetComponent<Turret_Fire>().readyToFire = true;
             }
         }
     }

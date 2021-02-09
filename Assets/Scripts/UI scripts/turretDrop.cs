@@ -27,24 +27,13 @@ public class turretDrop : MonoBehaviour, IDropHandler
             GameObject spawnedTurret = Instantiate(turret, worldPosition, transform.rotation) as GameObject;
             spawnedTurret.name = "turret " + numOfTurrets;
             var currentPos = spawnedTurret.transform.position;
-            spawnedTurret.transform.position = new Vector3((Mathf.Round(currentPos.x)),
-                                                           (Mathf.Round(currentPos.y)),
-                                                           (Mathf.Round(currentPos.z)));
+           // Debug.Log(currentPos.x + ", " + currentPos.y + ", " + currentPos.z);
+            spawnedTurret.transform.position = new Vector3(  ((Mathf.Round(currentPos.x *2) * 0.5f)-0.5f),
+                                                             (Mathf.Round(currentPos.y *2) * 0.5f  ),
+                                                             (Mathf.Round(currentPos.z *2) * 0.5f  ));
             //numOfTurrets++;
 
-           spawnedTurret.transform.position = checkSurroundings(spawnedTurret.transform.position);
 
-            if (spawnedTurret.transform.position.x == 100)
-            {
-                Destroy(spawnedTurret);
-                return;
-            }
-            
-
-
-            spawnedTurret.transform.parent = boss.transform;
-
-            SetDefaultValues(spawnedTurret);
 
             turrets = GameObject.FindGameObjectsWithTag("turret Main");
 
@@ -52,6 +41,16 @@ public class turretDrop : MonoBehaviour, IDropHandler
             {
                 TotalNumberOfTurrets = 0;
             }
+
+            spawnedTurret.transform.position = checkSurroundings(spawnedTurret.transform.position);
+
+            if (spawnedTurret.transform.position.x == 100)
+            {
+                Destroy(spawnedTurret);
+                return;
+            }
+            spawnedTurret.transform.parent = boss.transform;
+            SetDefaultValues(spawnedTurret);
 
             TotalNumberOfTurrets++;
 
@@ -61,6 +60,11 @@ public class turretDrop : MonoBehaviour, IDropHandler
             }
         }       
     }
+    public static float RoundToNearestHalfSafer(float a)
+    {
+        return a = a - (a % 0.5f);
+    }
+
     void SetDefaultValues(GameObject turret)
     {
         for (int i = 0; i < 4; i++)

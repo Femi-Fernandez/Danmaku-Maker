@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Android;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -24,6 +25,7 @@ public class UICustomisationManager : MonoBehaviour
     GameObject wavePanel;
     GameObject turretPanel;
     GameObject bulletPanel;
+    Button saveWaveInfo;
 
     Turret turret;
     GameObject mainTurret;
@@ -83,6 +85,7 @@ public class UICustomisationManager : MonoBehaviour
 
         subwaveDuration = GameObject.Find("Subwave Duration Input").GetComponentsInChildren<Text>();
         saveSubwaveDuration = GameObject.Find("Save subwave duration").GetComponent<Button>();
+        saveWaveInfo = GameObject.Find("Save phase info").GetComponent<Button>();
 
         bul_1_blue = GameObject.Find("Bullet 1 blue button").GetComponent<Button>();
         bul_1_pink = GameObject.Find("Bullet 1 pink button").GetComponent<Button>();
@@ -147,6 +150,11 @@ public class UICustomisationManager : MonoBehaviour
                 uiManager.saveDurationSettings(float.Parse(subwaveDuration[1].text));
             }
            
+        });
+
+        saveWaveInfo.onClick.AddListener(delegate
+        {
+            setAllTurrets();
         });
     }
 
@@ -232,7 +240,7 @@ public class UICustomisationManager : MonoBehaviour
         //uiManager.clearInputFields();
         uiWaveToEdit.AddOptions(uiWaveToEditOptions);
         uiManager.toggleWaveSelect(uiNumberOfWaves.value);
-        setAllTurrets();
+        //setAllTurrets();
     }
 
     void waveToEditChanged()
@@ -241,7 +249,7 @@ public class UICustomisationManager : MonoBehaviour
         uiManager.clearInputFields();
         //Debug.Log("current wave: " + uiManager.waveNum);
         SelectedWaveAndSubwave.text = "Wave " + (uiWaveToEdit.value + 1) + " selected," + "\n" +"subwave "+(uiSubwaveToEdit.value +1) +" Selected";
-        setAllTurrets();
+        //setAllTurrets();
     }
 
     void numberOfSubwavesChanged()
@@ -259,7 +267,7 @@ public class UICustomisationManager : MonoBehaviour
             uiManager.subwaveNum = 0;
         }
         uiSubwaveToEdit.AddOptions(uiSubwaveToEditOptions);
-        setAllTurrets();
+        //setAllTurrets();
     }
 
     void subwaveToEditChanged()
@@ -267,7 +275,7 @@ public class UICustomisationManager : MonoBehaviour
         uiManager.subwaveNum = uiSubwaveToEdit.value;
         uiManager.clearInputFields();
         SelectedWaveAndSubwave.text = "Wave " + (uiWaveToEdit.value + 1) + " selected," + "\n" + "subwave " + (uiSubwaveToEdit.value + 1) + " Selected";
-        setAllTurrets();
+        //setAllTurrets();
     }
 
     void setAllTurrets()

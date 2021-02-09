@@ -162,7 +162,6 @@ public class bossWaveControl : MonoBehaviour
                             mainTurrets[i].transform.GetChild(j).gameObject.SetActive(true);
                             mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Fire>().enabled = true;
                             mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Fire>().fireTimer = 1000f;
-                            mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Fire>().readyToFire = true;
                             // mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Fire>().readyToFire = true;
                             mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Targeting>().enabled = true;
                             mainTurrets[i].transform.GetChild(j).GetComponent<Turret_BulletSetup>().enabled = true;

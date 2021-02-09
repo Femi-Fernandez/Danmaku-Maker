@@ -381,6 +381,9 @@ public class UIManager : MonoBehaviour
         {
             Destroy(boss.transform.GetChild(i).gameObject);
         }
+        bulletPanel.SetActive(false);
+        turretPanel.SetActive(false);
+        optionPanel.SetActive(false);
     }
 
     //checks for what turrets should be enabled, and enables their firing scripts. also deactivates the option panel. 

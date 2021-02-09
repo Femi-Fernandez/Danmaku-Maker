@@ -22,7 +22,7 @@ public class playerHealth : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(this);
+            //Destroy(this);
             youLoseText.enabled = true;
             youLoseText.text = "You died!";
             this.gameObject.SetActive(false);
