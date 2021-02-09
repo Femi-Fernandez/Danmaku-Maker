@@ -68,6 +68,8 @@ public class SaveBoss : MonoBehaviour
         save.TotalNumberOfTurrets = temp.TotalNumberOfTurrets;
         save.turretLocation = temp.turretLocation;
         save.activeInWave =temp.activeInWave;
+        save.isDestroyable = temp.isDestroyable;
+
         save.numberActiveStreams =temp.numberActiveStreams;
         save.subwaveDuration =temp.subwaveDuration;
 
@@ -163,6 +165,8 @@ public class SaveBoss : MonoBehaviour
         load.TotalNumberOfTurrets = temp.TotalNumberOfTurrets;
         load.turretLocation = temp.turretLocation;
         load.activeInWave = temp.activeInWave;
+        load.isDestroyable = temp.isDestroyable;
+
         load.numberActiveStreams = temp.numberActiveStreams;
         load.subwaveDuration = temp.subwaveDuration;
 
@@ -407,43 +411,81 @@ public class SaveBoss : MonoBehaviour
     public void LoadBoss(string[] filePath)
     {
         lines = File.ReadAllLines(filePath[0]);
- 
-        Debug.Log(lines[0]);
-        Debug.Log(lines[1]);
-        Debug.Log(lines[2]);
- 
- 
+
+
         for (int i = 1; i < boss.transform.childCount; i++)
         {
             Destroy(boss.transform.GetChild(i).gameObject);
         }
- 
- 
- 
+
+
+
         Debug.Log("lines read");
- 
- 
-        int x = 0;
-        int ActiveStreams = 1;
+
+
+        // int ActiveStreams = 1;
         int NumOfTurrets = 1;
         for (int i = 0; i < NumOfTurrets; i++)
         {
             GameObject spawnedTurret = Instantiate(turret, new Vector3(0, 0, 0), transform.rotation) as GameObject;
- 
-            for (int j = 0; j < ActiveStreams; j++)
-            {
-                JsonUtility.FromJsonOverwrite(lines[x], spawnedTurret.transform.GetChild(j).GetComponent<Turret>());
- 
-                if (!spawnedTurret.transform.GetChild(j).GetComponent<Turret>().streamEnabled)
-                    spawnedTurret.transform.GetChild(j).gameObject.SetActive(false);
-                ActiveStreams = spawnedTurret.transform.GetChild(j).GetComponent<Turret>().numberActiveStreams;
-                x++;
-            }
-            Debug.Log(spawnedTurret.transform.GetChild(0).GetComponent<Turret>().turretLocation);
-            NumOfTurrets = spawnedTurret.transform.GetChild(0).GetComponent<Turret>().TotalNumberOfTurrets;
- 
+
+            save = new saveTurretSubwave();
+            JsonUtility.FromJsonOverwrite(lines[i], save);
+
+            load = LoadSubwaveStorage(save);
+
+
+
+            setAll(load, spawnedTurret.GetComponent<turretSubwaveStorage>(), spawnedTurret);
+
+
             spawnedTurret.transform.parent = boss.transform;
-            spawnedTurret.transform.localPosition = spawnedTurret.transform.GetChild(0).GetComponent<Turret>().turretLocation;
+            spawnedTurret.transform.localPosition = spawnedTurret.GetComponent<turretSubwaveStorage>().turretLocation;
+            NumOfTurrets = spawnedTurret.GetComponent<turretSubwaveStorage>().TotalNumberOfTurrets;
+
+
+            Debug.Log(spawnedTurret.GetComponent<turretSubwaveStorage>().spiralDirection[0, 0]);
+            boss.transform.GetChild(0).GetComponent<bossWaveControl>().setArrays();
+            boss.transform.GetChild(0).GetComponent<bossWaveControl>().setValues(0);
         }
+        uIManager.deselect();
+
+        // Debug.Log(lines[0]);
+        // Debug.Log(lines[1]);
+        // Debug.Log(lines[2]);
+
+
+        //   for (int i = 1; i < boss.transform.childCount; i++)
+        //   {
+        //       Destroy(boss.transform.GetChild(i).gameObject);
+        //   }
+        //
+        //
+        //
+        //   Debug.Log("lines read");
+        //
+        //
+        //   int x = 0;
+        //   int ActiveStreams = 1;
+        //   int NumOfTurrets = 1;
+        //   for (int i = 0; i < NumOfTurrets; i++)
+        //   {
+        //       GameObject spawnedTurret = Instantiate(turret, new Vector3(0, 0, 0), transform.rotation) as GameObject;
+        //
+        //       for (int j = 0; j < ActiveStreams; j++)
+        //       {
+        //           JsonUtility.FromJsonOverwrite(lines[x], spawnedTurret.transform.GetChild(j).GetComponent<Turret>());
+        //
+        //           if (!spawnedTurret.transform.GetChild(j).GetComponent<Turret>().streamEnabled)
+        //               spawnedTurret.transform.GetChild(j).gameObject.SetActive(false);
+        //           ActiveStreams = spawnedTurret.transform.GetChild(j).GetComponent<Turret>().numberActiveStreams;
+        //           x++;
+        //       }
+        //       Debug.Log(spawnedTurret.transform.GetChild(0).GetComponent<Turret>().turretLocation);
+        //       NumOfTurrets = spawnedTurret.transform.GetChild(0).GetComponent<Turret>().TotalNumberOfTurrets;
+        //
+        //       spawnedTurret.transform.parent = boss.transform;
+        //       spawnedTurret.transform.localPosition = spawnedTurret.transform.GetChild(0).GetComponent<Turret>().turretLocation;
+        //   }
     }
 }

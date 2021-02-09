@@ -54,7 +54,7 @@ public class bullet_movement : MonoBehaviour
         Vector3 position = transform.position;
         position += transform.right * bullet.speed * Time.deltaTime;
         timer += Time.deltaTime;
-        transform.position = position + transform.up * Mathf.Cos(timer * bullet.frequency) * bullet.amplitude;
+        transform.position = position + transform.up * Mathf.Cos(timer * (bullet.frequency)) * (bullet.amplitude/100);
     }
 
     void moveVariableSpeed()

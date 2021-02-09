@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using UnityEditorInternal;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,6 +35,8 @@ public class UIManager : MonoBehaviour
     Text[] setTurretHealth;
 
     Toggle activeWave;
+
+    Toggle isDestructable;
     //Toggle activeWave2;
     //Toggle activeWave3;
     //Toggle activeWave4;
@@ -130,6 +132,8 @@ public class UIManager : MonoBehaviour
 
     public int bulletType;
 
+    public AnalyticsCommands AC;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -158,6 +162,10 @@ public class UIManager : MonoBehaviour
         setupBulletPanelsInputs();
         setupDropdowns();
         setupButtons();
+
+        activeWave.isOn = true;
+        isDestructable.isOn = true;
+
 
         TestBoss.interactable = false;
 
@@ -190,10 +198,10 @@ public class UIManager : MonoBehaviour
         setTurretHealth = GameObject.Find("turret health input").GetComponentsInChildren<Text>();
 
         activeWave = GameObject.Find("Active in wave toggle").GetComponent<Toggle>();
-       // activeWave2 = GameObject.Find("wave 2 toggle").GetComponent<Toggle>();
-       // activeWave3 = GameObject.Find("wave 3 toggle").GetComponent<Toggle>();
-       // activeWave4 = GameObject.Find("wave 4 toggle").GetComponent<Toggle>();
-
+        // activeWave2 = GameObject.Find("wave 2 toggle").GetComponent<Toggle>();
+        // activeWave3 = GameObject.Find("wave 3 toggle").GetComponent<Toggle>();
+        // activeWave4 = GameObject.Find("wave 4 toggle").GetComponent<Toggle>();
+        isDestructable= GameObject.Find("Is destructable toggle").GetComponent<Toggle>();
 
         //get targeted turret options
         smoothTargetToggle = GameObject.Find("Smooth targeting Toggle").GetComponent<Toggle>();
@@ -733,7 +741,7 @@ public class UIManager : MonoBehaviour
         }
 
         subwaveStorage.activeInWave[waveNum] = activeWave.isOn;
-
+        subwaveStorage.isDestroyable[waveNum] = isDestructable.isOn;
        // Debug.Log("Wavenum: " + waveNum + ", subWaveNum: " + subwaveNum + ", arraySlot: " + GetArraySlot());
         switch (turret.targetingType)
         {
@@ -756,6 +764,7 @@ public class UIManager : MonoBehaviour
        
         setSubwaveStorage();
         TestBoss.interactable = true;
+        AC.saveTurretPressed();
     }
 
     //void saveSineM
@@ -893,6 +902,7 @@ public class UIManager : MonoBehaviour
 
         setSubwaveStorage();
         TestBoss.interactable = true;
+        AC.saveBulletPressed();
     }
 
     void saveStreamShotSettings()
@@ -1169,7 +1179,7 @@ public class UIManager : MonoBehaviour
             speedChangeFrequency[0].text = subwaveStorage.bulletSpeedChangeFrequency[GetArraySlot(), i].ToString();
 
             activeWave.isOn = subwaveStorage.activeInWave[waveNum];
-
+            isDestructable.isOn = subwaveStorage.isDestroyable[waveNum];
         }
         SetAllValues();
     }

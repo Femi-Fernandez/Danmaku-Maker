@@ -13,7 +13,7 @@ public class playerHealth : MonoBehaviour
     [SerializeField]
     private Text youLoseText;
 
-
+    public AnalyticsCommands AC;
 
     public void Damage()
     {
@@ -26,6 +26,7 @@ public class playerHealth : MonoBehaviour
             youLoseText.enabled = true;
             youLoseText.text = "You died!";
             this.gameObject.SetActive(false);
+            AC.playerDefeated();
         }
     }
 

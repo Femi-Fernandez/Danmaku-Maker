@@ -6,7 +6,15 @@ public class TurretHealth : MonoBehaviour
 {
 
     public float health;
+    public turretSubwaveStorage subStor;
+    public bossWaveControl bossWaveCont;
+
     // Start is called before the first frame update
+    private void Start()
+    {
+        bossWaveCont = transform.parent.GetComponentInChildren<bossWaveControl>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player Bullet")
@@ -23,7 +31,10 @@ public class TurretHealth : MonoBehaviour
 
         if (health <= 0)
         {
+            subStor.hasBeenDestroyed[bossWaveCont.currentWave] = true;
             this.transform.gameObject.SetActive(false);
+            
+
            // youWinText.enabled = true;
            // youWinText.text = "YOU WIN! Congrats!";
         }

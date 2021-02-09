@@ -24,6 +24,8 @@ public class OnGameStart : MonoBehaviour
 
     GameObject[] bullets;
 
+    public AnalyticsCommands AC;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,22 +41,29 @@ public class OnGameStart : MonoBehaviour
         boss.SetActive(true);
         turretPanel.SetActive(true);
         wavePanel.SetActive(false);
-        boss.transform.GetChild(0).GetComponent<bossHealth>().health = 1000;
+        boss.transform.GetChild(0).GetComponent<bossHealth>().health = 3000;
         player.GetComponent<playerHealth>().health = 5;
         player.GetComponent<BoxCollider2D>().enabled = false;
         player.transform.GetChild(1).GetComponent<PlayerShoot>().bulletCollidersOn = false;
         player.transform.GetChild(2).GetComponent<PlayerShoot>().bulletCollidersOn = false;
+
         boss.transform.GetChild(0).GetComponent<BoxCollider2D>().enabled = false;
         boss.transform.GetChild(0).GetComponent<bossWaveControl>().fightingBoss = false;
 
-        //GameObject[] turrets = GameObject.FindGameObjectsWithTag("turret Main");
+        GameObject[] turrets = GameObject.FindGameObjectsWithTag("turret Main");
         for (int i = 0; i < turretMain.Length; i++)
         {
             turretMain[i].SetActive(true);
             if (turretMain[i].GetComponent<BoxCollider2D>())
             {
-                turretMain[i].GetComponent<TurretHealth>().health = 100000000000;
-            }  
+                turretMain[i].GetComponent<BoxCollider2D>().enabled = true;
+            }
+
+
+            for (int j = 0; j < 4; j++)
+            {
+                turretMain[i].GetComponent<turretSubwaveStorage>().hasBeenDestroyed[j] = false;
+            }
         }
     }
 
@@ -72,6 +81,12 @@ public class OnGameStart : MonoBehaviour
             turretMain[i].GetComponent<TurretHealth>().health = turretMain[i].transform.GetChild(0).GetComponent<Turret>().turretHealth;
           // Debug.Log(turretMain[i].transform.GetChild(0));
             turretMain[i].GetComponent<BoxCollider2D>().enabled = true;
+
+            for (int j = 0;  j< 4; j++)
+            {
+                turretMain[i].GetComponent<turretSubwaveStorage>().hasBeenDestroyed[j] = false;
+            }
+           
         }
 
         optionsPanel.SetActive(false);
@@ -85,6 +100,9 @@ public class OnGameStart : MonoBehaviour
         boss.transform.GetChild(0).GetComponent<bossWaveControl>().currentWave = 0;
         boss.transform.GetChild(0).GetComponent<bossWaveControl>().currentSubwave = 0;
 
+        player.transform.position = new Vector3(0, -4.1f, 0);
+
+        AC.testBossPressed();
         //UIManager.GetComponent<UIManager>().SetAllValues();
     }
 }

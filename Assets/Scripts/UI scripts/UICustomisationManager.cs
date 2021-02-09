@@ -42,7 +42,7 @@ public class UICustomisationManager : MonoBehaviour
     UIManager uiManager;
     // Dropdown uiPercentageToChangeAt;
 
-
+    public AnalyticsCommands AC;
     // Start is called before the first frame update
     void Start()
     {
@@ -141,6 +141,7 @@ public class UICustomisationManager : MonoBehaviour
 
         saveSubwaveDuration.onClick.AddListener(delegate
         {
+            AC.saveDurationPressed();
             if (subwaveDuration[1].text != "")
             {
                 uiManager.saveDurationSettings(float.Parse(subwaveDuration[1].text));

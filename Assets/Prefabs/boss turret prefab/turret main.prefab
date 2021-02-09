@@ -151,6 +151,7 @@ MonoBehaviour:
   streamNumber: 2
   streamEnabled: 0
   turretHealth: 100
+  isDestroyable: 0
   fireType: 1
   targetingType: 2
   rotateSpeed: 5
@@ -172,6 +173,15 @@ MonoBehaviour:
   bulletSpeedIncreaseCheck: 0
   bulletMovementType: 0
   bulletBaseSpeed: 3
+  bulletAmplitude: 0
+  bulletFrequency: 0
+  bulletMaxSpeed: 0
+  bulletMinSpeed: 0
+  bulletSpeedChangeFrequency: 0
+  bulletTimeUntilChange: 0
+  bulletNewTargetingType: 0
+  bulletSpeedAfterTarget: 0
+  bulletType: 0
 --- !u!114 &6694410549020178388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,6 +289,7 @@ MonoBehaviour:
   streamNumber: 1
   streamEnabled: 1
   turretHealth: 100
+  isDestroyable: 0
   fireType: 0
   targetingType: 0
   rotateSpeed: 0
@@ -300,6 +311,15 @@ MonoBehaviour:
   bulletSpeedIncreaseCheck: 0
   bulletMovementType: 0
   bulletBaseSpeed: 3
+  bulletAmplitude: 0
+  bulletFrequency: 0
+  bulletMaxSpeed: 0
+  bulletMinSpeed: 0
+  bulletSpeedChangeFrequency: 0
+  bulletTimeUntilChange: 0
+  bulletNewTargetingType: 0
+  bulletSpeedAfterTarget: 0
+  bulletType: 0
 --- !u!114 &6694410549475043806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,6 +427,7 @@ MonoBehaviour:
   streamNumber: 4
   streamEnabled: 0
   turretHealth: 100
+  isDestroyable: 0
   fireType: 1
   targetingType: 2
   rotateSpeed: 5
@@ -428,6 +449,15 @@ MonoBehaviour:
   bulletSpeedIncreaseCheck: 0
   bulletMovementType: 0
   bulletBaseSpeed: 3
+  bulletAmplitude: 0
+  bulletFrequency: 0
+  bulletMaxSpeed: 0
+  bulletMinSpeed: 0
+  bulletSpeedChangeFrequency: 0
+  bulletTimeUntilChange: 0
+  bulletNewTargetingType: 0
+  bulletSpeedAfterTarget: 0
+  bulletType: 0
 --- !u!114 &6694410549852429976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -699,6 +729,7 @@ MonoBehaviour:
   streamNumber: 3
   streamEnabled: 0
   turretHealth: 100
+  isDestroyable: 0
   fireType: 1
   targetingType: 2
   rotateSpeed: 5
@@ -720,6 +751,15 @@ MonoBehaviour:
   bulletSpeedIncreaseCheck: 0
   bulletMovementType: 0
   bulletBaseSpeed: 3
+  bulletAmplitude: 0
+  bulletFrequency: 0
+  bulletMaxSpeed: 0
+  bulletMinSpeed: 0
+  bulletSpeedChangeFrequency: 0
+  bulletTimeUntilChange: 0
+  bulletNewTargetingType: 0
+  bulletSpeedAfterTarget: 0
+  bulletType: 0
 --- !u!114 &6694410550629965110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -850,6 +890,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
+  subStor: {fileID: 1442139660}
+  bossWaveCont: {fileID: 0}
 --- !u!114 &1442139660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,225 +906,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalWaveCount: 1
   SubwaveCount: 00000000000000000000000000000000
+  turretLocation: {x: 0, y: 0, z: 0}
   TotalNumberOfTurrets: 1
-  activeInWave: 00000000
+  activeInWave: 01010101
   numberActiveStreams: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  streamEnabled: 00000000000000000000000000000000
+  subwaveDuration:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  isDestroyable: 01010101
+  hasBeenDestroyed: 00000000
   turretHealth: 00000000000000000000000000000000
-  turretSavedOnce: 00000000000000000000000000000000
-  fireType: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  targetingType: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  rotateSpeed:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  smoothTarget: 00000000000000000000000000000000
-  smoothTargetSpeed:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  targetPlayerOffsetAmmount:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  rotateAngleDirection:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  rotateAngleWidth:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  spiralDirection: 00000000000000000000000000000000
-  singleDirDirection:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  bulletFormation: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  numOfBullets: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  firerate:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  bulletDelay:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  bulletSpeedIncreaseAmmount:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  angleBetweenBullets:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  bulletRandomRange:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  shotgunStraight: 00000000000000000000000000000000
-  bulletSpeedIncreaseCheck: 00000000000000000000000000000000
-  bulletMovementType: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  bulletBaseSpeed:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
 --- !u!1 &7811414342321862926
 GameObject:
   m_ObjectHideFlags: 0
