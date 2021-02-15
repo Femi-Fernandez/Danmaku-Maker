@@ -114,7 +114,7 @@ public class UIManager : MonoBehaviour
     //save button
     Button saveBoss;
     Button TEMPLOAD;
-    Button TestBoss;
+    public Button TestBoss;
     Button clearAll;
 
     [SerializeField]
@@ -744,6 +744,7 @@ public class UIManager : MonoBehaviour
         }
 
         subwaveStorage.activeInWave[waveNum] = activeWave.isOn;
+        Debug.Log(waveNum);
         subwaveStorage.isDestroyable[waveNum] = isDestructable.isOn;
        // Debug.Log("Wavenum: " + waveNum + ", subWaveNum: " + subwaveNum + ", arraySlot: " + GetArraySlot());
         switch (turret.targetingType)

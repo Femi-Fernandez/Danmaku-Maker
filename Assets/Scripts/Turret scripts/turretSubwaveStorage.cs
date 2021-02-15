@@ -19,7 +19,7 @@ public class turretSubwaveStorage : MonoBehaviour
     public int[] numberActiveStreams = new int[16];
     public float[] subwaveDuration = new float[16];
     public bool[,] streamEnabled = new bool[16, 4];
-    public bool[] isDestroyable = new bool [4];
+    public bool[] isDestroyable = new bool[4];
     public bool[] hasBeenDestroyed = new bool[4];
 
     // generic turret settings (applies to all)

@@ -25218,6 +25218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turret: {fileID: 0}
   currentSelectedTurret: {fileID: 0}
+  TestBoss: {fileID: 0}
   player: {fileID: 1000297400}
   boss: {fileID: 1322674829}
   gameManager: {fileID: 2046958742}
@@ -25241,7 +25242,8 @@ MonoBehaviour:
   SaveText: 
   turret: {fileID: 6694410550761159649, guid: 20a680b7fcef83344a07f27af004f464, type: 3}
   boss: {fileID: 1322674829}
-  uIManager: {fileID: 0}
+  uIManager: {fileID: 1684217902}
+  uICustomisationManager: {fileID: 1684217905}
   turrets: []
   lines: []
   Filepath: []

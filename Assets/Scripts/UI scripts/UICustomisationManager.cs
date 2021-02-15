@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Android;
+//using UnityEditor.Android;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -46,7 +46,7 @@ public class UICustomisationManager : MonoBehaviour
 
     public AnalyticsCommands AC;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         findInputs();
         setupDropdowns();
@@ -248,7 +248,7 @@ public class UICustomisationManager : MonoBehaviour
         uiManager.waveNum = uiWaveToEdit.value;
         uiManager.clearInputFields();
         //Debug.Log("current wave: " + uiManager.waveNum);
-        SelectedWaveAndSubwave.text = "Wave " + (uiWaveToEdit.value + 1) + " selected," + "\n" +"subwave "+(uiSubwaveToEdit.value +1) +" Selected";
+        SelectedWaveAndSubwave.text = "Phase " + (uiWaveToEdit.value + 1) + " selected," + "\n" + "subPhase " + (uiSubwaveToEdit.value +1) +" Selected";
         //setAllTurrets();
     }
 
@@ -274,7 +274,7 @@ public class UICustomisationManager : MonoBehaviour
     {
         uiManager.subwaveNum = uiSubwaveToEdit.value;
         uiManager.clearInputFields();
-        SelectedWaveAndSubwave.text = "Wave " + (uiWaveToEdit.value + 1) + " selected," + "\n" + "subwave " + (uiSubwaveToEdit.value + 1) + " Selected";
+        SelectedWaveAndSubwave.text = "Phase " + (uiWaveToEdit.value + 1) + " selected," + "\n" + "subPhase " + (uiSubwaveToEdit.value + 1) + " Selected";
         //setAllTurrets();
     }
 
@@ -288,4 +288,9 @@ public class UICustomisationManager : MonoBehaviour
         }
     }
 
+    public void setWaveAndSubwaveValues(int numOfWaves, int numOfSubwaves) 
+    {
+        uiNumberOfWaves.value = numOfWaves-1;
+        uiNumberOfSubwaves.value = numOfSubwaves-1;
+    }
 }

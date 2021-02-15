@@ -15,12 +15,14 @@ public class SaveBoss : MonoBehaviour
     public GameObject turret;
     public GameObject boss;
     public UIManager uIManager;
+    public UICustomisationManager uICustomisationManager;
 
 
     private saveTurretSubwave save;
     private turretSubwaveStorage load;
 
     public GameObject[] turrets;
+    GameObject spawnedTurret;
     public string[] lines;
 
     public string[] Filepath;
@@ -32,7 +34,7 @@ public class SaveBoss : MonoBehaviour
         {
             LoadBoss(Filepath);
         }
-       uIManager = GetComponent<UIManager>();
+       //uIManager = GetComponent<UIManager>();
     }
 
     public void saveBoss()
@@ -68,6 +70,7 @@ public class SaveBoss : MonoBehaviour
         save.TotalNumberOfTurrets = temp.TotalNumberOfTurrets;
         save.turretLocation = temp.turretLocation;
         save.activeInWave =temp.activeInWave;
+
         save.isDestroyable = temp.isDestroyable;
 
         save.numberActiveStreams =temp.numberActiveStreams;
@@ -165,6 +168,8 @@ public class SaveBoss : MonoBehaviour
         load.TotalNumberOfTurrets = temp.TotalNumberOfTurrets;
         load.turretLocation = temp.turretLocation;
         load.activeInWave = temp.activeInWave;
+
+
         load.isDestroyable = temp.isDestroyable;
 
         load.numberActiveStreams = temp.numberActiveStreams;
@@ -263,6 +268,8 @@ public class SaveBoss : MonoBehaviour
         turretToSet.activeInWave = temp.activeInWave;
         turretToSet.numberActiveStreams = temp.numberActiveStreams;
         turretToSet.subwaveDuration = temp.subwaveDuration;
+
+        turretToSet.isDestroyable = temp.isDestroyable;
 
         turretToSet.turretHealth = temp.turretHealth;
 
@@ -425,18 +432,24 @@ public class SaveBoss : MonoBehaviour
 
         // int ActiveStreams = 1;
         int NumOfTurrets = 1;
+        
         for (int i = 0; i < NumOfTurrets; i++)
         {
-            GameObject spawnedTurret = Instantiate(turret, new Vector3(0, 0, 0), transform.rotation) as GameObject;
+            spawnedTurret = Instantiate(turret, new Vector3(0, 0, 0), transform.rotation) as GameObject;
 
             save = new saveTurretSubwave();
             JsonUtility.FromJsonOverwrite(lines[i], save);
 
             load = LoadSubwaveStorage(save);
 
-
+            //Debug.Log(spawnedTurret.GetComponent<turretSubwaveStorage>().isDestroyable[0]);
+            //Debug.Log(spawnedTurret.GetComponent<turretSubwaveStorage>().isDestroyable[1]);
 
             setAll(load, spawnedTurret.GetComponent<turretSubwaveStorage>(), spawnedTurret);
+
+            //Debug.Log("set all called...");
+            //Debug.Log(spawnedTurret.GetComponent<turretSubwaveStorage>().isDestroyable[0]);
+            //Debug.Log(spawnedTurret.GetComponent<turretSubwaveStorage>().isDestroyable[1]);
 
 
             spawnedTurret.transform.parent = boss.transform;
@@ -444,48 +457,18 @@ public class SaveBoss : MonoBehaviour
             NumOfTurrets = spawnedTurret.GetComponent<turretSubwaveStorage>().TotalNumberOfTurrets;
 
 
-            Debug.Log(spawnedTurret.GetComponent<turretSubwaveStorage>().spiralDirection[0, 0]);
+            //Debug.Log(spawnedTurret.GetComponent<turretSubwaveStorage>().spiralDirection[0, 0]);
             boss.transform.GetChild(0).GetComponent<bossWaveControl>().setArrays();
             boss.transform.GetChild(0).GetComponent<bossWaveControl>().setValues(0);
         }
+        Debug.Log("boss loaded");
+
+        uIManager.turretSelected(spawnedTurret.transform.GetChild(0).gameObject);
         uIManager.deselect();
-
-        // Debug.Log(lines[0]);
-        // Debug.Log(lines[1]);
-        // Debug.Log(lines[2]);
-
-
-        //   for (int i = 1; i < boss.transform.childCount; i++)
-        //   {
-        //       Destroy(boss.transform.GetChild(i).gameObject);
-        //   }
-        //
-        //
-        //
-        //   Debug.Log("lines read");
-        //
-        //
-        //   int x = 0;
-        //   int ActiveStreams = 1;
-        //   int NumOfTurrets = 1;
-        //   for (int i = 0; i < NumOfTurrets; i++)
-        //   {
-        //       GameObject spawnedTurret = Instantiate(turret, new Vector3(0, 0, 0), transform.rotation) as GameObject;
-        //
-        //       for (int j = 0; j < ActiveStreams; j++)
-        //       {
-        //           JsonUtility.FromJsonOverwrite(lines[x], spawnedTurret.transform.GetChild(j).GetComponent<Turret>());
-        //
-        //           if (!spawnedTurret.transform.GetChild(j).GetComponent<Turret>().streamEnabled)
-        //               spawnedTurret.transform.GetChild(j).gameObject.SetActive(false);
-        //           ActiveStreams = spawnedTurret.transform.GetChild(j).GetComponent<Turret>().numberActiveStreams;
-        //           x++;
-        //       }
-        //       Debug.Log(spawnedTurret.transform.GetChild(0).GetComponent<Turret>().turretLocation);
-        //       NumOfTurrets = spawnedTurret.transform.GetChild(0).GetComponent<Turret>().TotalNumberOfTurrets;
-        //
-        //       spawnedTurret.transform.parent = boss.transform;
-        //       spawnedTurret.transform.localPosition = spawnedTurret.transform.GetChild(0).GetComponent<Turret>().turretLocation;
-        //   }
+        //uIManager.SetAllValues();
+        uIManager.TestBoss.interactable = true;
+        int wavenum = spawnedTurret.GetComponent<turretSubwaveStorage>().totalWaveCount;
+        int subwavenum = spawnedTurret.GetComponent<turretSubwaveStorage>().SubwaveCount[0];
+        uICustomisationManager.setWaveAndSubwaveValues(wavenum, subwavenum);
     }
 }
