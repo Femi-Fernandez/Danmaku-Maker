@@ -166,11 +166,11 @@ MonoBehaviour:
   numOfBullets: 5
   firerate: 1
   bulletDelay: 0.1
+  bulletSpeedIncreaseCheck: 0
   bulletSpeedIncreaseAmmount: 0
   angleBetweenBullets: 0
   bulletRandomRange: 0
   shotgunStraight: 0
-  bulletSpeedIncreaseCheck: 0
   bulletMovementType: 0
   bulletBaseSpeed: 3
   bulletAmplitude: 0
@@ -304,11 +304,11 @@ MonoBehaviour:
   numOfBullets: 0
   firerate: 1
   bulletDelay: 0.1
+  bulletSpeedIncreaseCheck: 0
   bulletSpeedIncreaseAmmount: 0
   angleBetweenBullets: 0
   bulletRandomRange: 0
   shotgunStraight: 0
-  bulletSpeedIncreaseCheck: 0
   bulletMovementType: 0
   bulletBaseSpeed: 3
   bulletAmplitude: 0
@@ -442,11 +442,11 @@ MonoBehaviour:
   numOfBullets: 5
   firerate: 1
   bulletDelay: 0.1
+  bulletSpeedIncreaseCheck: 0
   bulletSpeedIncreaseAmmount: 0
   angleBetweenBullets: 0
   bulletRandomRange: 0
   shotgunStraight: 0
-  bulletSpeedIncreaseCheck: 0
   bulletMovementType: 0
   bulletBaseSpeed: 3
   bulletAmplitude: 0
@@ -744,11 +744,11 @@ MonoBehaviour:
   numOfBullets: 5
   firerate: 1
   bulletDelay: 0.1
+  bulletSpeedIncreaseCheck: 0
   bulletSpeedIncreaseAmmount: 0
   angleBetweenBullets: 0
   bulletRandomRange: 0
   shotgunStraight: 0
-  bulletSpeedIncreaseCheck: 0
   bulletMovementType: 0
   bulletBaseSpeed: 3
   bulletAmplitude: 0
@@ -827,7 +827,7 @@ Transform:
   m_GameObject: {fileID: 6694410550761159649}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.541, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 6694410550614339697}
   - {fileID: 6694410549020178384}
