@@ -7,7 +7,7 @@ public class bossGridCheck : MonoBehaviour
 {
     public Tilemap bossTileMap;
     public RuleTile smartTile;
-    //public bool touched;
+    public bool touched;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -18,7 +18,7 @@ public class bossGridCheck : MonoBehaviour
         Debug.Log(collision.gameObject.tag);
         Debug.Log(transform.position);
             Vector3Int currentCells = bossTileMap.WorldToCell(transform.position);
-            //touched = true;
+            touched = true;
         bossTileMap.SetTile(currentCells, smartTile);
 
         }
