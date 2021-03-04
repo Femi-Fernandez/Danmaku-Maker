@@ -13,13 +13,19 @@ public class bossGridCheck : MonoBehaviour
     {
         //Debug.Log(collision.gameObject.tag);
         //Debug.Log(collision.transform.position);
+        // || collision.gameObject.tag == "turret Main"
         if (collision.gameObject.tag == "boss grid")
         {
-        Debug.Log(collision.gameObject.tag);
-        Debug.Log(transform.position);
-            Vector3Int currentCells = bossTileMap.WorldToCell(transform.position);
-            touched = true;
-        bossTileMap.SetTile(currentCells, smartTile);
+            if (!touched)
+            {
+
+                Debug.Log(bossTileMap.WorldToCell(transform.position));
+                Vector3Int currentCells = bossTileMap.WorldToCell(transform.position);
+
+                touched = true;
+                bossTileMap.SetTile(currentCells, smartTile);
+            }
+            
 
         }
 

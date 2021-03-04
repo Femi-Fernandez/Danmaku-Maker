@@ -28,7 +28,7 @@ public class turretDrop : MonoBehaviour, IDropHandler
             spawnedTurret.name = "turret " + numOfTurrets;
             var currentPos = spawnedTurret.transform.position;
            // Debug.Log(currentPos.x + ", " + currentPos.y + ", " + currentPos.z);
-            spawnedTurret.transform.position = new Vector3(  ((Mathf.Round(currentPos.x) )-0.5f),
+            spawnedTurret.transform.position = new Vector3(  (Mathf.Round(currentPos.x) -1),
                                                              (Mathf.Round(currentPos.y)),
                                                              (Mathf.Round(currentPos.z)  ));
             //numOfTurrets++;
