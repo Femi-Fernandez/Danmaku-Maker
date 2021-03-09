@@ -28,7 +28,7 @@ public class turretDrop : MonoBehaviour, IDropHandler
             spawnedTurret.name = "turret " + numOfTurrets;
             var currentPos = spawnedTurret.transform.position;
            // Debug.Log(currentPos.x + ", " + currentPos.y + ", " + currentPos.z);
-            spawnedTurret.transform.position = new Vector3(  (Mathf.Round(currentPos.x) -1),
+            spawnedTurret.transform.position = new Vector3(  (Mathf.Round(currentPos.x)),
                                                              (Mathf.Round(currentPos.y)),
                                                              (Mathf.Round(currentPos.z)  ));
             //numOfTurrets++;
@@ -42,9 +42,9 @@ public class turretDrop : MonoBehaviour, IDropHandler
                 TotalNumberOfTurrets = 0;
             }
 
-            spawnedTurret.transform.position = checkSurroundings(spawnedTurret.transform.position);
+            spawnedTurret.transform.position = checkSurroundings(spawnedTurret);
 
-            if (spawnedTurret.transform.position.x == 100)
+            if (spawnedTurret.transform.position.x == .123)
             {
                 Destroy(spawnedTurret);
                 return;
@@ -88,75 +88,81 @@ public class turretDrop : MonoBehaviour, IDropHandler
    
     bool[] areSurroundingsFull = new bool[9];
 
-    Vector3 checkSurroundings(Vector3 turretPlaceAttempt)
+    Vector3 checkSurroundings(GameObject turretPlaceAttempt)
     {
-        Vector3 t = turretPlaceAttempt;
+        Vector3 t = turretPlaceAttempt.transform.position;
         for (int i = 0; i < 8; i++)
         {
             areSurroundingsFull[i] = false;
         }
 
-        areSurroundingsFull[8] = checkTurrets(t);
+        areSurroundingsFull[8] = checkTurrets(t, turretPlaceAttempt);
         if (areSurroundingsFull[8] == true)
             return t;
-        
+
 
         t.x++;
-        areSurroundingsFull[0] = checkTurrets(t);
+      
+        areSurroundingsFull[0] = checkTurrets(t, turretPlaceAttempt);
         if (areSurroundingsFull[0])
             return t;
 
+
         t.y--;
-        areSurroundingsFull[1] = checkTurrets(t);
+        areSurroundingsFull[1] = checkTurrets(t, turretPlaceAttempt);
         if (areSurroundingsFull[1])
             return t;
 
 
         t.x--;
-        areSurroundingsFull[2] = checkTurrets(t);
+        areSurroundingsFull[2] = checkTurrets(t, turretPlaceAttempt);
         if (areSurroundingsFull[2])
             return t;
 
         t.x--;
-        areSurroundingsFull[3] = checkTurrets(t);
+        areSurroundingsFull[3] = checkTurrets(t, turretPlaceAttempt);
         if (areSurroundingsFull[3])
             return t;
 
-        t.y++;
-        areSurroundingsFull[4] = checkTurrets(t);
+      
+        t.y++;    
+        areSurroundingsFull[4] = checkTurrets(t, turretPlaceAttempt);
         if (areSurroundingsFull[4])
             return t;
 
+
         t.y++;
-        areSurroundingsFull[5] = checkTurrets(t);
+        areSurroundingsFull[5] = checkTurrets(t, turretPlaceAttempt);
         if (areSurroundingsFull[5])
             return t;
 
+
         t.x++;
-        areSurroundingsFull[6] = checkTurrets(t);
+        areSurroundingsFull[6] = checkTurrets(t, turretPlaceAttempt);
         if (areSurroundingsFull[6])
             return t;
 
+
         t.x++;
-        areSurroundingsFull[7] = checkTurrets(t);
+        areSurroundingsFull[7] = checkTurrets(t, turretPlaceAttempt);
         if (areSurroundingsFull[7])
             return t;
 
-        t.x = 100;
+        t.x = .123;
         return t;
         //condition ? expressionIfTrue : expressionIfFalse
     }
 
-    bool checkTurrets( Vector3 t)
+    bool checkTurrets( Vector3 t, GameObject placedTur)
     {
         if (turrets != null)
         {
             for (int i = 0; i < turrets.Length; i++)
             {
                 
-
-                if (turrets[i].transform.position == t)
-                {               
+                if (turrets[i].transform.position == t && placedTur != turrets[i])
+                {
+                    
                     return false;
                 }
             }

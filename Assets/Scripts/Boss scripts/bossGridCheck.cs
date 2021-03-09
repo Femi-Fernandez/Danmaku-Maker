@@ -19,7 +19,7 @@ public class bossGridCheck : MonoBehaviour
             if (!touched)
             {
 
-                Debug.Log(bossTileMap.WorldToCell(transform.position));
+                //Debug.Log(bossTileMap.WorldToCell(transform.position));
                 Vector3Int currentCells = bossTileMap.WorldToCell(transform.position);
 
                 touched = true;
