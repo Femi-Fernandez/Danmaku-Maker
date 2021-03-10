@@ -14,6 +14,11 @@ public class UIManager : MonoBehaviour
     GameObject optionPanel;
     GameObject turretPanel;
     GameObject bulletPanel;
+    GameObject infoPanel;
+
+    //help buttons
+    Button turretHelpButton;
+    UIInfoPanel uiInfoPanel;
 
     //turret setting panels
     GameObject targetPlayerUI;
@@ -141,6 +146,8 @@ public class UIManager : MonoBehaviour
         optionPanel = GameObject.Find("Options panel");
         turretPanel = GameObject.Find("turret options");
         bulletPanel = GameObject.Find("bullet options");
+        infoPanel = GameObject.Find("Info Panel");
+        uiInfoPanel = GetComponent<UIInfoPanel>();
 
         //get turret settings panels
         targetPlayerUI = GameObject.Find("Target player UI");
@@ -153,6 +160,8 @@ public class UIManager : MonoBehaviour
         //get change settings buttons
         toTurretSettings = GameObject.Find("Turret settings").GetComponent<Button>();
         toBulletSettings = GameObject.Find("Bullet settings").GetComponent<Button>();
+
+        turretHelpButton = GameObject.Find("turret options info button").GetComponent<Button>();
 
         saveBoss = GameObject.Find("Save Boss").GetComponent<Button>();
         TEMPLOAD = GameObject.Find("TEMP load").GetComponent<Button>();
@@ -184,6 +193,7 @@ public class UIManager : MonoBehaviour
         bulletPanel.SetActive(false);
         turretPanel.SetActive(false);
         optionPanel.SetActive(false);
+        infoPanel.SetActive(false);
     }
     //finds all the inputs and toggles for the Turret UI panels. 
     void setupTurretPanelsInputs()
@@ -370,6 +380,12 @@ public class UIManager : MonoBehaviour
         clearAll.onClick.AddListener(delegate
         {
             clearAllTurrets();
+        });
+
+        turretHelpButton.onClick.AddListener(delegate
+        {
+            infoPanel.SetActive(true);
+            uiInfoPanel.displayInfo("turret");
         });
 
     }

@@ -44,7 +44,7 @@ public class turretDrop : MonoBehaviour, IDropHandler
 
             spawnedTurret.transform.position = checkSurroundings(spawnedTurret);
 
-            if (spawnedTurret.transform.position.x == .123)
+            if (spawnedTurret.transform.position.x == .123f)
             {
                 Destroy(spawnedTurret);
                 return;
@@ -148,7 +148,7 @@ public class turretDrop : MonoBehaviour, IDropHandler
         if (areSurroundingsFull[7])
             return t;
 
-        t.x = .123;
+        t.x = .123f;
         return t;
         //condition ? expressionIfTrue : expressionIfFalse
     }

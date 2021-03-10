@@ -14,7 +14,7 @@ public class turretSelect : MonoBehaviour
     {
         uiManager = GameObject.Find("UI Manager");
     }
-
+    RaycastHit hit;
     private void OnMouseDown()
     {
         turrets = GameObject.FindGameObjectsWithTag("Turret");
@@ -26,6 +26,8 @@ public class turretSelect : MonoBehaviour
             turrets[i].transform.rotation = Quaternion.Euler(0, 0, -90);
         }
 
-       uiManager.GetComponent<UIManager>().turretSelected(transform.GetChild(0).gameObject);       
+       uiManager.GetComponent<UIManager>().turretSelected(transform.GetChild(0).gameObject);    
+        
+
     }   
 }
