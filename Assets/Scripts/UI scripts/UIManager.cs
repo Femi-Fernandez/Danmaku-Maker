@@ -18,7 +18,20 @@ public class UIManager : MonoBehaviour
 
     //help buttons
     Button turretHelpButton;
+    Button bulletHelpButton;
+    Button streamHelpButton;
+    Button shotgunHelpButton;
+    Button randomHelpButton;
+    Button targetPlayerHelpButton;
+    Button arcShotHelpButton;
+    Button spiralShotHelpButton;
+    Button singleDirectionHelpButton;
+    Button sineMovementHelpButton;
+    Button variableSpeedHelpButton;
+    Button travelThenTargetHelpButtons;
+
     UIInfoPanel uiInfoPanel;
+    Button closeInfoPanel;
 
     //turret setting panels
     GameObject targetPlayerUI;
@@ -149,20 +162,19 @@ public class UIManager : MonoBehaviour
         infoPanel = GameObject.Find("Info Panel");
         uiInfoPanel = GetComponent<UIInfoPanel>();
 
+
         //get turret settings panels
         targetPlayerUI = GameObject.Find("Target player UI");
         arcShotUI = GameObject.Find("Arc shot UI");
         spiralShotUI = GameObject.Find("Spiral shot UI");
         singleDirectionUI = GameObject.Find("Single direction UI");
 
-
+        closeInfoPanel = GameObject.Find("close info panel").GetComponent<Button>();
 
         //get change settings buttons
         toTurretSettings = GameObject.Find("Turret settings").GetComponent<Button>();
         toBulletSettings = GameObject.Find("Bullet settings").GetComponent<Button>();
-
-        turretHelpButton = GameObject.Find("turret options info button").GetComponent<Button>();
-
+      
         saveBoss = GameObject.Find("Save Boss").GetComponent<Button>();
         TEMPLOAD = GameObject.Find("TEMP load").GetComponent<Button>();
         TestBoss = GameObject.Find("TEST").GetComponent<Button>();
@@ -171,6 +183,7 @@ public class UIManager : MonoBehaviour
         setupBulletPanelsInputs();
         setupDropdowns();
         setupButtons();
+        setupHelpButtons();
 
         activeWave.isOn = true;
         isDestructable.isOn = true;
@@ -193,7 +206,7 @@ public class UIManager : MonoBehaviour
         bulletPanel.SetActive(false);
         turretPanel.SetActive(false);
         optionPanel.SetActive(false);
-        infoPanel.SetActive(false);
+        //infoPanel.SetActive(false);
     }
     //finds all the inputs and toggles for the Turret UI panels. 
     void setupTurretPanelsInputs()
@@ -382,10 +395,94 @@ public class UIManager : MonoBehaviour
             clearAllTurrets();
         });
 
+        closeInfoPanel.onClick.AddListener(delegate
+        {
+            infoPanel.SetActive(false);
+        });
+
+    }
+
+    void setupHelpButtons()
+    {
+        turretHelpButton = GameObject.Find("turret options info button").GetComponent<Button>();
+        bulletHelpButton = GameObject.Find("bullet options info button").GetComponent<Button>();
+        streamHelpButton = GameObject.Find("stream shot info button").GetComponent<Button>();
+        shotgunHelpButton = GameObject.Find("stream shot info button").GetComponent<Button>();
+        randomHelpButton = GameObject.Find("random burst info button").GetComponent<Button>();
+        targetPlayerHelpButton = GameObject.Find("target player info button").GetComponent<Button>();
+        arcShotHelpButton = GameObject.Find("arc shot info button").GetComponent<Button>();
+        spiralShotHelpButton = GameObject.Find("spiral shot info button").GetComponent<Button>();
+        singleDirectionHelpButton = GameObject.Find("single direction info button").GetComponent<Button>();
+        sineMovementHelpButton = GameObject.Find("sine movement info button").GetComponent<Button>();
+        variableSpeedHelpButton = GameObject.Find("variable speed info button").GetComponent<Button>();
+        travelThenTargetHelpButtons = GameObject.Find(" travel then target info button").GetComponent<Button>();
+       
+
+
         turretHelpButton.onClick.AddListener(delegate
         {
             infoPanel.SetActive(true);
             uiInfoPanel.displayInfo("turret");
+        });
+
+        bulletHelpButton.onClick.AddListener(delegate
+        {
+            infoPanel.SetActive(true);
+            uiInfoPanel.displayInfo("bullet");
+        });
+
+        streamHelpButton.onClick.AddListener(delegate
+        {
+            infoPanel.SetActive(true);
+            uiInfoPanel.displayInfo("stream");
+        });
+
+        shotgunHelpButton.onClick.AddListener(delegate
+        {
+            infoPanel.SetActive(true);
+            uiInfoPanel.displayInfo("shotgun");
+        });
+
+        randomHelpButton.onClick.AddListener(delegate
+        {
+            infoPanel.SetActive(true);
+            uiInfoPanel.displayInfo("random");
+        });
+
+        targetPlayerHelpButton.onClick.AddListener(delegate
+        {
+            infoPanel.SetActive(true);
+            uiInfoPanel.displayInfo("target player");
+        });
+
+        arcShotHelpButton.onClick.AddListener(delegate
+        {
+            infoPanel.SetActive(true);
+            uiInfoPanel.displayInfo("arc shot");
+        });
+
+        spiralShotHelpButton.onClick.AddListener(delegate
+        {
+            infoPanel.SetActive(true);
+            uiInfoPanel.displayInfo("spiral shot");
+        });
+
+        singleDirectionHelpButton.onClick.AddListener(delegate
+        {
+            infoPanel.SetActive(true);
+            uiInfoPanel.displayInfo("single direction");
+        });
+
+        sineMovementHelpButton.onClick.AddListener(delegate
+        {
+            infoPanel.SetActive(true);
+            uiInfoPanel.displayInfo("sine movement");
+        });
+
+        variableSpeedHelpButton.onClick.AddListener(delegate
+        {
+            infoPanel.SetActive(true);
+            uiInfoPanel.displayInfo("variable speed");
         });
 
     }
