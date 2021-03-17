@@ -386,35 +386,27 @@ public class SaveBoss : MonoBehaviour
         Debug.Log("lines read");
 
 
-       // int ActiveStreams = 1;
-        int NumOfTurrets = 1;
-        for (int i = 0; i < NumOfTurrets; i++)
-        {
-            GameObject spawnedTurret = Instantiate(turret, new Vector3(0, 0, 0), transform.rotation) as GameObject;
+        NumOfTurrets = 1;
 
-            save = new saveTurretSubwave();
-            JsonUtility.FromJsonOverwrite(lines[i], save);
+        NumOfTurretsLeft = 0;
+        StartCoroutine(loadBossTile());
 
-            load = LoadSubwaveStorage(save);
-            
+        Debug.Log("boss loaded");
 
 
-            setAll(load, spawnedTurret.GetComponent<turretSubwaveStorage>(), spawnedTurret);
 
+        uIManager.turretSelected(spawnedTurret.transform.GetChild(0).gameObject);
+        uIManager.TestBoss.interactable = true;
+        int wavenum = spawnedTurret.GetComponent<turretSubwaveStorage>().totalWaveCount;
+        int subwavenum = spawnedTurret.GetComponent<turretSubwaveStorage>().SubwaveCount[0];
+        uICustomisationManager.setWaveAndSubwaveValues(wavenum, subwavenum);
 
-            spawnedTurret.transform.parent = boss.transform;
-            spawnedTurret.transform.localPosition = spawnedTurret.GetComponent<turretSubwaveStorage>().turretLocation;
-            NumOfTurrets = spawnedTurret.GetComponent<turretSubwaveStorage>().TotalNumberOfTurrets;
-
-           
-            Debug.Log(spawnedTurret.GetComponent<turretSubwaveStorage>().spiralDirection[0,0]);
-            boss.transform.GetChild(0).GetComponent<bossWaveControl>().setArrays();
-            boss.transform.GetChild(0).GetComponent<bossWaveControl>().setValues(0);
-        }
         uIManager.deselect();
 
     }
 
+    int NumOfTurretsLeft = 0;
+    int NumOfTurrets = 1;
     public void LoadBoss(string[] filePath)
     {
         lines = File.ReadAllLines(filePath[0]);
@@ -425,43 +417,18 @@ public class SaveBoss : MonoBehaviour
             Destroy(boss.transform.GetChild(i).gameObject);
         }
 
-
-
         Debug.Log("lines read");
 
 
-        // int ActiveStreams = 1;
-        int NumOfTurrets = 1;
-        
-        for (int i = 0; i < NumOfTurrets; i++)
-        {
-            spawnedTurret = Instantiate(turret, new Vector3(0, 0, 0), transform.rotation) as GameObject;
 
-            save = new saveTurretSubwave();
-            JsonUtility.FromJsonOverwrite(lines[i], save);
+        NumOfTurrets = 1;
+        NumOfTurretsLeft = 0;
 
-            load = LoadSubwaveStorage(save);
+        StartCoroutine(loadBossTile());
 
-            //Debug.Log(spawnedTurret.GetComponent<turretSubwaveStorage>().isDestroyable[0]);
-            //Debug.Log(spawnedTurret.GetComponent<turretSubwaveStorage>().isDestroyable[1]);
-
-            setAll(load, spawnedTurret.GetComponent<turretSubwaveStorage>(), spawnedTurret);
-
-            //Debug.Log("set all called...");
-            //Debug.Log(spawnedTurret.GetComponent<turretSubwaveStorage>().isDestroyable[0]);
-            //Debug.Log(spawnedTurret.GetComponent<turretSubwaveStorage>().isDestroyable[1]);
-
-
-            spawnedTurret.transform.parent = boss.transform;
-            spawnedTurret.transform.localPosition = spawnedTurret.GetComponent<turretSubwaveStorage>().turretLocation;
-            NumOfTurrets = spawnedTurret.GetComponent<turretSubwaveStorage>().TotalNumberOfTurrets;
-
-
-            //Debug.Log(spawnedTurret.GetComponent<turretSubwaveStorage>().spiralDirection[0, 0]);
-            boss.transform.GetChild(0).GetComponent<bossWaveControl>().setArrays();
-            boss.transform.GetChild(0).GetComponent<bossWaveControl>().setValues(0);
-        }
         Debug.Log("boss loaded");
+
+
 
         uIManager.turretSelected(spawnedTurret.transform.GetChild(0).gameObject);
         uIManager.deselect();
@@ -471,4 +438,42 @@ public class SaveBoss : MonoBehaviour
         int subwavenum = spawnedTurret.GetComponent<turretSubwaveStorage>().SubwaveCount[0];
         uICustomisationManager.setWaveAndSubwaveValues(wavenum, subwavenum);
     }
+    IEnumerator loadBossTile()
+    {
+
+            spawnedTurret = Instantiate(turret, new Vector3(0, 0, 0), transform.rotation) as GameObject;
+
+            save = new saveTurretSubwave();
+            JsonUtility.FromJsonOverwrite(lines[NumOfTurretsLeft], save);
+
+            load = LoadSubwaveStorage(save);
+
+            setAll(load, spawnedTurret.GetComponent<turretSubwaveStorage>(), spawnedTurret);
+
+            spawnedTurret.transform.parent = boss.transform;
+            spawnedTurret.transform.localPosition = spawnedTurret.GetComponent<turretSubwaveStorage>().turretLocation;
+            NumOfTurrets = spawnedTurret.GetComponent<turretSubwaveStorage>().TotalNumberOfTurrets;
+
+
+
+
+            //Debug.Log(spawnedTurret.GetComponent<turretSubwaveStorage>().spiralDirection[0, 0]);
+            boss.transform.GetChild(0).GetComponent<bossWaveControl>().setArrays();
+            boss.transform.GetChild(0).GetComponent<bossWaveControl>().setValues(0);
+            NumOfTurretsLeft++;
+
+            if (NumOfTurretsLeft >= NumOfTurrets)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            else
+            {
+                yield return new WaitForEndOfFrame();
+            StartCoroutine(loadBossTile());
+            }
+        
+
+    }
+
+
 }

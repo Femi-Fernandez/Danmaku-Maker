@@ -52,6 +52,10 @@ public class turretDrop : MonoBehaviour, IDropHandler
             spawnedTurret.transform.parent = boss.transform;
             SetDefaultValues(spawnedTurret);
 
+            spawnedTurret.GetComponent<turretSubwaveStorage>().turretLocation = spawnedTurret.transform.position;
+            spawnedTurret.GetComponent<turretSubwaveStorage>().turretLocation.y--;
+            spawnedTurret.GetComponent<turretSubwaveStorage>().turretLocation.y--;
+            spawnedTurret.GetComponent<turretSubwaveStorage>().turretLocation.y--;
             TotalNumberOfTurrets++;
 
             for (int i = 0; i < turrets.Length; i++)
@@ -59,10 +63,6 @@ public class turretDrop : MonoBehaviour, IDropHandler
                 turrets[i].GetComponent<turretSubwaveStorage>().TotalNumberOfTurrets = TotalNumberOfTurrets;
             }
         }       
-    }
-    public static float RoundToNearestHalfSafer(float a)
-    {
-        return a = a - (a % 0.5f);
     }
 
     void SetDefaultValues(GameObject turret)

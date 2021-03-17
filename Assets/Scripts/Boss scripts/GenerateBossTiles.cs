@@ -21,6 +21,11 @@ public class GenerateBossTiles : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SpawnTiles();
+    }
+
+    public void SpawnTiles()
+    {
         turretLocations = GameObject.FindGameObjectsWithTag("turret Main");
 
         for (int i = 0; i < turretLocations.Length; i++)
@@ -29,10 +34,10 @@ public class GenerateBossTiles : MonoBehaviour
             {
                 linePoints.Clear();
             }
-           
-            linePoints.Add(new Vector2(0,0));
 
-            linePoints.Add(new Vector2(turretLocations[i].transform.position.x, turretLocations[i].transform.position.y -2.5f));
+            linePoints.Add(new Vector2(0, 0));
+
+            linePoints.Add(new Vector2(turretLocations[i].transform.position.x, turretLocations[i].transform.position.y - 2.5f));
 
             //Debug.Log(turretLocations[i].transform.position.x + " " + turretLocations[i].transform.position.y);
 
@@ -45,6 +50,5 @@ public class GenerateBossTiles : MonoBehaviour
             //Debug.Log(currentCells);
             bossTileMap.SetTile(currentCells, smartTile);
         }
-
     }
 }

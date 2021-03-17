@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossTileMap: {fileID: 0}
-  smartTile: {fileID: 0}
+  smartTile: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
   touched: 0
 --- !u!50 &478358298564797477
 Rigidbody2D:

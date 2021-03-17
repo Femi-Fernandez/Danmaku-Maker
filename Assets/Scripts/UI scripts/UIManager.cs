@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -144,6 +145,9 @@ public class UIManager : MonoBehaviour
 
     GameObject[] turrets;
 
+    GameObject[] coreTiles;
+    GameObject[] tiles;
+
     public int waveNum;
     public int subwaveNum;
     public int arraySlot;
@@ -185,6 +189,8 @@ public class UIManager : MonoBehaviour
         setupButtons();
         setupHelpButtons();
 
+        coreTiles = GameObject.FindGameObjectsWithTag("coreTiles");
+        tiles = GameObject.FindGameObjectsWithTag("tiles");
         activeWave.isOn = true;
         isDestructable.isOn = true;
 
@@ -393,6 +399,7 @@ public class UIManager : MonoBehaviour
         clearAll.onClick.AddListener(delegate
         {
             clearAllTurrets();
+
         });
 
         closeInfoPanel.onClick.AddListener(delegate
@@ -415,7 +422,7 @@ public class UIManager : MonoBehaviour
         singleDirectionHelpButton = GameObject.Find("single direction info button").GetComponent<Button>();
         sineMovementHelpButton = GameObject.Find("sine movement info button").GetComponent<Button>();
         variableSpeedHelpButton = GameObject.Find("variable speed info button").GetComponent<Button>();
-        travelThenTargetHelpButtons = GameObject.Find(" travel then target info button").GetComponent<Button>();
+        travelThenTargetHelpButtons = GameObject.Find("travel then target info button").GetComponent<Button>();
        
 
 
@@ -485,6 +492,13 @@ public class UIManager : MonoBehaviour
             uiInfoPanel.displayInfo("variable speed");
         });
 
+        travelThenTargetHelpButtons.onClick.AddListener(delegate
+        {
+            infoPanel.SetActive(true);
+            uiInfoPanel.displayInfo("travel then target");
+        });
+
+
     }
 
     //deletes all the currently placed turrets. 
@@ -494,9 +508,16 @@ public class UIManager : MonoBehaviour
         {
             Destroy(boss.transform.GetChild(i).gameObject);
         }
+
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            tiles[i].GetComponent<bossGridCheck>().removeTile();
+        }
+
         bulletPanel.SetActive(false);
         turretPanel.SetActive(false);
         optionPanel.SetActive(false);
+
     }
 
     //checks for what turrets should be enabled, and enables their firing scripts. also deactivates the option panel. 
@@ -881,7 +902,7 @@ public class UIManager : MonoBehaviour
        
         setSubwaveStorage();
         TestBoss.interactable = true;
-        AC.saveTurretPressed();
+        //AC.saveTurretPressed();
     }
 
     //void saveSineM
