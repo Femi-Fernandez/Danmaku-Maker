@@ -9,6 +9,8 @@ TagManager:
   - Boss Bullet
   - turret Main
   - boss grid
+  - tiles
+  - coreTiles
   layers:
   - Default
   - TransparentFX

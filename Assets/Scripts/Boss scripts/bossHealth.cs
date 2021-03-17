@@ -6,14 +6,15 @@ using UnityEngine.UI;
 public class bossHealth : MonoBehaviour
 {
 
-    public float health;
+    public int health;
     [SerializeField]
     private Text bossHealthText;
 
     [SerializeField]
     private Text youWinText;
 
-
+    [SerializeField]
+    private bossHealthBar bossHPBar;
 
     private void Start()
     {
@@ -33,7 +34,7 @@ public class bossHealth : MonoBehaviour
     {
         health -= 10;
         updateBossHealthText();
-
+        bossHPBar.setHealth(health);
         if (health <= 0)
         {
             this.transform.parent.gameObject.SetActive(false);
