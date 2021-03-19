@@ -198,7 +198,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateState: 0
-  parentRot: {fileID: 6694410550614339697}
   anim: {fileID: 4899521424046077465}
 --- !u!1 &6694410549020178399
 GameObject:
