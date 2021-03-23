@@ -782,7 +782,7 @@ GameObject:
   m_Component:
   - component: {fileID: 45179618}
   - component: {fileID: 45179619}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Barrel Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1045,18 +1045,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.5
@@ -1193,7 +1185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 68551696}
   - component: {fileID: 68551697}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: player Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1251,18 +1243,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.5
@@ -2505,18 +2489,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.5
@@ -3148,18 +3124,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -3504,18 +3472,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5
@@ -3881,18 +3841,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.5
@@ -4370,18 +4322,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5
@@ -5179,18 +5123,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.5
@@ -5408,18 +5344,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.5
@@ -5782,6 +5710,10 @@ PrefabInstance:
       value: coreTile
       objectReference: {fileID: 0}
     - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_TagString
       value: coreTiles
       objectReference: {fileID: 0}
@@ -5789,10 +5721,6 @@ PrefabInstance:
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -5851,6 +5779,10 @@ PrefabInstance:
       value: coreTile
       objectReference: {fileID: 0}
     - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_TagString
       value: coreTiles
       objectReference: {fileID: 0}
@@ -5858,10 +5790,6 @@ PrefabInstance:
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -6219,18 +6147,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.5
@@ -7302,18 +7222,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5
@@ -7666,18 +7578,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.5
@@ -9010,6 +8914,10 @@ PrefabInstance:
       value: coreTile
       objectReference: {fileID: 0}
     - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_TagString
       value: coreTiles
       objectReference: {fileID: 0}
@@ -9017,10 +8925,6 @@ PrefabInstance:
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5
@@ -10672,7 +10576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -10707,18 +10611,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5
@@ -11160,6 +11056,10 @@ PrefabInstance:
       value: coreTile
       objectReference: {fileID: 0}
     - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_TagString
       value: coreTiles
       objectReference: {fileID: 0}
@@ -11167,10 +11067,6 @@ PrefabInstance:
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5
@@ -11746,18 +11642,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5
@@ -14437,18 +14325,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.5
@@ -14839,18 +14719,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5
@@ -15282,18 +15154,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.5
@@ -16344,18 +16208,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.5
@@ -17013,18 +16869,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5
@@ -17502,18 +17350,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -18619,7 +18459,7 @@ GameObject:
   - component: {fileID: 1000297403}
   - component: {fileID: 1000297408}
   - component: {fileID: 1000297409}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -18663,7 +18503,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000297400}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -18949,6 +18789,10 @@ PrefabInstance:
       value: coreTile
       objectReference: {fileID: 0}
     - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_TagString
       value: coreTiles
       objectReference: {fileID: 0}
@@ -18956,10 +18800,6 @@ PrefabInstance:
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5
@@ -19286,18 +19126,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5
@@ -19614,18 +19446,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.5
@@ -19770,6 +19594,10 @@ PrefabInstance:
       value: coreTile
       objectReference: {fileID: 0}
     - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_TagString
       value: coreTiles
       objectReference: {fileID: 0}
@@ -19777,10 +19605,6 @@ PrefabInstance:
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -22921,18 +22745,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5
@@ -23064,7 +22880,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1252252537}
   - component: {fileID: 1252252538}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Barrel Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23191,18 +23007,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5
@@ -24528,7 +24336,7 @@ GameObject:
   - component: {fileID: 1319668421}
   - component: {fileID: 1319668423}
   - component: {fileID: 1319668425}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Boss_tiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24647,11 +24455,11 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 6593663734871968339, guid: cfded613084904b4983433e68c444226, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: -1977950109294284620, guid: cfded613084904b4983433e68c444226, type: 3}
+    m_Data: {fileID: -1738434385651662413, guid: cfded613084904b4983433e68c444226, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -6770326729019500706, guid: cfded613084904b4983433e68c444226, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: -7077577620977706036, guid: cfded613084904b4983433e68c444226, type: 3}
+    m_Data: {fileID: -1683722311523554130, guid: cfded613084904b4983433e68c444226, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -5384108141263491676, guid: cfded613084904b4983433e68c444226, type: 3}
   - m_RefCount: 1
@@ -24972,18 +24780,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.5
@@ -26124,18 +25924,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5
@@ -26426,10 +26218,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
@@ -26527,18 +26315,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -27151,18 +26931,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5
@@ -27706,18 +27478,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.5
@@ -27775,18 +27539,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5
@@ -28214,18 +27970,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.5
@@ -28538,18 +28286,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.5
@@ -28607,22 +28347,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
-    - target: {fileID: 478358298564797477, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5
@@ -28840,6 +28568,10 @@ PrefabInstance:
       value: coreTile
       objectReference: {fileID: 0}
     - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_TagString
       value: coreTiles
       objectReference: {fileID: 0}
@@ -28847,10 +28579,6 @@ PrefabInstance:
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5
@@ -29164,18 +28892,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5
@@ -31253,18 +30973,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.5
@@ -32184,18 +31896,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.5
@@ -32453,7 +32157,7 @@ GameObject:
   - component: {fileID: 1734187898}
   - component: {fileID: 1734187897}
   - component: {fileID: 1734187900}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Grid
   m_TagString: boss grid
   m_Icon: {fileID: 0}
@@ -33978,18 +33682,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5
@@ -34047,18 +33743,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.5
@@ -34195,18 +33883,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.5
@@ -34669,18 +34349,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.5
@@ -36612,18 +36284,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.5
@@ -37135,6 +36799,10 @@ PrefabInstance:
       value: coreTile
       objectReference: {fileID: 0}
     - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_TagString
       value: coreTiles
       objectReference: {fileID: 0}
@@ -37142,10 +36810,6 @@ PrefabInstance:
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5
@@ -37645,18 +37309,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.5
@@ -38386,18 +38042,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.5
@@ -39013,18 +38661,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile
       objectReference: {fileID: 0}
-    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: m_TagString
-      value: tiles
-      objectReference: {fileID: 0}
     - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5
@@ -39944,6 +39584,10 @@ PrefabInstance:
       value: coreTile
       objectReference: {fileID: 0}
     - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 139824088956053689, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_TagString
       value: coreTiles
       objectReference: {fileID: 0}
@@ -39951,10 +39595,6 @@ PrefabInstance:
       propertyPath: bossTileMap
       value: 
       objectReference: {fileID: 1319668421}
-    - target: {fileID: 1283457055553410317, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
-      propertyPath: smartTile
-      value: 
-      objectReference: {fileID: 11400000, guid: dba2883fe184fcb47b792c20bef0d405, type: 2}
     - target: {fileID: 5505460635938241522, guid: b507a1d9be632a340815ea8d1c4d46a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5

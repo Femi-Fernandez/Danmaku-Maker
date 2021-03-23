@@ -444,12 +444,12 @@ MonoBehaviour:
   bulletBaseSpeed: 3
   bulletAmplitude: 0
   bulletFrequency: 0
-  bulletMaxSpeed: 0
-  bulletMinSpeed: 0
-  bulletSpeedChangeFrequency: 0
-  bulletTimeUntilChange: 0
+  bulletMaxSpeed: 4
+  bulletMinSpeed: 1
+  bulletSpeedChangeFrequency: 0.5
+  bulletTimeUntilChange: 1.5
   bulletNewTargetingType: 0
-  bulletSpeedAfterTarget: 0
+  bulletSpeedAfterTarget: 3
   bulletType: 0
 --- !u!114 &6694410549020178388
 MonoBehaviour:
@@ -582,12 +582,12 @@ MonoBehaviour:
   bulletBaseSpeed: 3
   bulletAmplitude: 0
   bulletFrequency: 0
-  bulletMaxSpeed: 0
-  bulletMinSpeed: 0
-  bulletSpeedChangeFrequency: 0
-  bulletTimeUntilChange: 0
+  bulletMaxSpeed: 4
+  bulletMinSpeed: 1
+  bulletSpeedChangeFrequency: 0.5
+  bulletTimeUntilChange: 1.5
   bulletNewTargetingType: 0
-  bulletSpeedAfterTarget: 0
+  bulletSpeedAfterTarget: 3
   bulletType: 0
 --- !u!114 &6694410549475043806
 MonoBehaviour:
@@ -720,12 +720,12 @@ MonoBehaviour:
   bulletBaseSpeed: 3
   bulletAmplitude: 0
   bulletFrequency: 0
-  bulletMaxSpeed: 0
-  bulletMinSpeed: 0
-  bulletSpeedChangeFrequency: 0
-  bulletTimeUntilChange: 0
+  bulletMaxSpeed: 4
+  bulletMinSpeed: 1
+  bulletSpeedChangeFrequency: 0.5
+  bulletTimeUntilChange: 1.5
   bulletNewTargetingType: 0
-  bulletSpeedAfterTarget: 0
+  bulletSpeedAfterTarget: 3
   bulletType: 0
 --- !u!114 &6694410549852429976
 MonoBehaviour:
@@ -940,12 +940,12 @@ MonoBehaviour:
   bulletBaseSpeed: 3
   bulletAmplitude: 0
   bulletFrequency: 0
-  bulletMaxSpeed: 0
-  bulletMinSpeed: 0
-  bulletSpeedChangeFrequency: 0
-  bulletTimeUntilChange: 0
+  bulletMaxSpeed: 4
+  bulletMinSpeed: 1
+  bulletSpeedChangeFrequency: 0.5
+  bulletTimeUntilChange: 1.5
   bulletNewTargetingType: 0
-  bulletSpeedAfterTarget: 0
+  bulletSpeedAfterTarget: 3
   bulletType: 0
 --- !u!114 &6694410550629965110
 MonoBehaviour:
