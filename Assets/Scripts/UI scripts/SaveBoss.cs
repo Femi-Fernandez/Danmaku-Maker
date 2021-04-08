@@ -367,41 +367,36 @@ public class SaveBoss : MonoBehaviour
         if (readFileBoxBuild.Length != 0)
         {
             lines = File.ReadAllLines(readFileBoxBuild[0]);
+            NumOfTurrets = 1;
 
+            //Debug.Log(lines[0]);
+            //Debug.Log(lines[1]);
+            //Debug.Log(lines[2]);
+
+
+            for (int i = 1; i < boss.transform.childCount; i++)
+            {
+                Destroy(boss.transform.GetChild(i).gameObject);
+            }
+
+            NumOfTurretsLeft = 0;
+            StartCoroutine(loadBossTile());
+
+            Debug.Log("boss loaded");
+
+
+
+            uIManager.turretSelected(spawnedTurret.transform.GetChild(0).gameObject);
+            uIManager.TestBoss.interactable = true;
+            int wavenum = spawnedTurret.GetComponent<turretSubwaveStorage>().totalWaveCount;
+            int subwavenum = spawnedTurret.GetComponent<turretSubwaveStorage>().SubwaveCount[0];
+            uICustomisationManager.setWaveAndSubwaveValues(wavenum, subwavenum);
+
+            uIManager.deselect();
         }
 #endif
 
-        //Debug.Log(lines[0]);
-        //Debug.Log(lines[1]);
-        //Debug.Log(lines[2]);
 
-
-        for (int i = 1; i < boss.transform.childCount; i++)
-        {
-            Destroy(boss.transform.GetChild(i).gameObject);
-        }
-        
-
-
-        Debug.Log("lines read");
-
-
-        NumOfTurrets = 1;
-
-        NumOfTurretsLeft = 0;
-        StartCoroutine(loadBossTile());
-
-        Debug.Log("boss loaded");
-
-
-
-        uIManager.turretSelected(spawnedTurret.transform.GetChild(0).gameObject);
-        uIManager.TestBoss.interactable = true;
-        int wavenum = spawnedTurret.GetComponent<turretSubwaveStorage>().totalWaveCount;
-        int subwavenum = spawnedTurret.GetComponent<turretSubwaveStorage>().SubwaveCount[0];
-        uICustomisationManager.setWaveAndSubwaveValues(wavenum, subwavenum);
-
-        uIManager.deselect();
 
     }
 
