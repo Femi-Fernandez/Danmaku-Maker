@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -501,7 +502,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    //deletes all the currently placed turrets. 
+    //deletes all the currently placed turrets and resets tilemap. 
     void clearAllTurrets()
     {
         for (int i = 1; i < boss.transform.childCount; i++)
@@ -509,15 +510,21 @@ public class UIManager : MonoBehaviour
             Destroy(boss.transform.GetChild(i).gameObject);
         }
 
-        for (int i = 0; i < tiles.Length; i++)
-        {
-            tiles[i].GetComponent<bossGridCheck>().removeTile();
-        }
+        StartCoroutine(clearTiles());
 
         bulletPanel.SetActive(false);
         turretPanel.SetActive(false);
         optionPanel.SetActive(false);
 
+    }
+     IEnumerator clearTiles()
+    {
+        yield return new WaitForEndOfFrame();
+
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            tiles[i].GetComponent<bossGridCheck>().removeTile();
+        }
     }
 
     //checks for what turrets should be enabled, and enables their firing scripts. also deactivates the option panel. 
