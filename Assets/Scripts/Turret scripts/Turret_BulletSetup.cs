@@ -55,8 +55,8 @@ public class Turret_BulletSetup : MonoBehaviour
         GameObject bullet = transform.GetComponentInParent<bullet_pool_manager>().GetBullet(turret.bulletType);
         bullet.transform.position = transform.position;
         bullet.transform.rotation = transform.rotation;
+        bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
 
-         
         setBulletValues(bullet);
         bullet.SetActive(true);
         yield return new WaitForSeconds(turret.firerate);
@@ -70,7 +70,7 @@ public class Turret_BulletSetup : MonoBehaviour
             GameObject bullet = transform.GetComponentInParent<bullet_pool_manager>().GetBullet(turret.bulletType);
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation;
-             
+            bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
             if (turret.bulletSpeedIncreaseCheck == true)
             {
                     bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed + (turret.bulletSpeedIncreaseAmmount * i);
@@ -160,6 +160,7 @@ public class Turret_BulletSetup : MonoBehaviour
             GameObject bullet = transform.GetComponentInParent<bullet_pool_manager>().GetBullet(turret.bulletType);
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation * Quaternion.AngleAxis(UnityEngine.Random.Range(-turret.bulletRandomRange / 2, turret.bulletRandomRange / 2), transform.forward);
+            bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
             setBulletValues(bullet);
             bullet.SetActive(true);
         }
@@ -172,7 +173,6 @@ public class Turret_BulletSetup : MonoBehaviour
     {
         //bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
         bullet.GetComponent<Bullet>().movementType = turret.bulletMovementType;
-        bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
         switch (turret.bulletMovementType)
         {
             case 0:

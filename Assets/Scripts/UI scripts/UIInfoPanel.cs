@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class UIInfoPanel : MonoBehaviour
 {
-    public GameObject[] helpBoxes = new GameObject[7];
+    GameObject[] helpBoxes = new GameObject[7];
 
-    public GameObject infoPanel;
+     GameObject infoPanel;
     Button close;
     // Start is called before the first frame update
     private void Start()

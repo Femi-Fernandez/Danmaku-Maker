@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
@@ -127,6 +128,8 @@ public class UIManager : MonoBehaviour
     //turret info
     public Turret turret;
     turretSubwaveStorage subwaveStorage;
+
+    TurretMinMaxVal turValCheck;
     GameObject mainTurret;
     public GameObject currentSelectedTurret;
     GameObject[] turretChildren = new GameObject[4];
@@ -192,6 +195,8 @@ public class UIManager : MonoBehaviour
 
         coreTiles = GameObject.FindGameObjectsWithTag("coreTiles");
         tiles = GameObject.FindGameObjectsWithTag("tiles");
+        turValCheck = GetComponent<TurretMinMaxVal>();
+
         activeWave.isOn = true;
         isDestructable.isOn = true;
 
@@ -517,6 +522,8 @@ public class UIManager : MonoBehaviour
         optionPanel.SetActive(false);
 
     }
+    //wait a frame to clear all tiles
+    //weird bug occurs if not where tiles with turrets would not dissapear
      IEnumerator clearTiles()
     {
         yield return new WaitForEndOfFrame();
@@ -870,23 +877,19 @@ public class UIManager : MonoBehaviour
         bulletPanel.SetActive(true);
     }
 
+    bool checkTurretVal(float userNum, float[] minMaxVal) 
+    {
+        return userNum >= minMaxVal[0] && userNum <= minMaxVal[1];
+    }
+
+    bool checkTurretVal(int userNum, int[] minMaxVal)
+    {
+        return userNum >= minMaxVal[0] && userNum <= minMaxVal[1];
+    }
     //saves turret settings based on what targeting type is selected. 
     void saveTurretPressed()
     {
-        if (fireRateInput[1].text != "")
-        {
-            turret.firerate = float.Parse(fireRateInput[1].text);
-        }
-
-        if (setTurretHealth[1].text != "")
-        {
-            turret.turretHealth = int.Parse(setTurretHealth[1].text);
-
-        }
-
-        subwaveStorage.activeInWave[waveNum] = activeWave.isOn;
-        Debug.Log(waveNum);
-        subwaveStorage.isDestroyable[waveNum] = isDestructable.isOn;
+        saveTurretBaseSettings();
        // Debug.Log("Wavenum: " + waveNum + ", subWaveNum: " + subwaveNum + ", arraySlot: " + GetArraySlot());
         switch (turret.targetingType)
         {
@@ -912,6 +915,30 @@ public class UIManager : MonoBehaviour
         //AC.saveTurretPressed();
     }
 
+    void saveTurretBaseSettings()
+    {
+        if (fireRateInput[1].text != "")
+        {
+            if (checkTurretVal(float.Parse(fireRateInput[1].text), turValCheck.firerate))
+            {
+                turret.firerate = float.Parse(fireRateInput[1].text);
+                //Debug.Log("Value correct!");
+            }
+        }
+
+        if (setTurretHealth[1].text != "")
+        {
+            if (checkTurretVal(int.Parse(setTurretHealth[1].text), turValCheck.turretHealth))
+            {
+                turret.turretHealth = int.Parse(setTurretHealth[1].text);
+            }
+           
+        }
+
+        subwaveStorage.activeInWave[waveNum] = activeWave.isOn;
+        //Debug.Log(waveNum);
+        subwaveStorage.isDestroyable[waveNum] = isDestructable.isOn;
+    }
     //void saveSineM
 
     void saveTargetPlayerSettings()
@@ -923,22 +950,24 @@ public class UIManager : MonoBehaviour
 
             if (smoothTargetSpeed[1].text != "")
             {
-                turret.smoothTargetSpeed = float.Parse(smoothTargetSpeed[1].text);
-
-                Debug.Log("slerp set");
+                if (checkTurretVal(float.Parse(smoothTargetSpeed[1].text), turValCheck.smoothTargetSpeed))
+                {
+                    turret.smoothTargetSpeed = float.Parse(smoothTargetSpeed[1].text);
+                }
             }
         }
         else
         {
             turret.smoothTarget = false;
-
         }
 
         if (targetingOffset[1].text != "")
         {
-            Debug.Log("offset set");
-            turret.targetPlayerOffsetAmmount = float.Parse(targetingOffset[1].text);
-
+            //Debug.Log("offset set");               
+            if (checkTurretVal(float.Parse(targetingOffset[1].text), turValCheck.targetPlayerOffsetAmmount))
+            {
+                 turret.targetPlayerOffsetAmmount = float.Parse(targetingOffset[1].text);
+            }
         }
     }
 
@@ -946,18 +975,28 @@ public class UIManager : MonoBehaviour
     {
         if (arcSize[1].text != "")
         {
-            turret.rotateAngleWidth = float.Parse(arcSize[1].text);
+            
+            if (checkTurretVal(float.Parse(arcSize[1].text), turValCheck.rotateAngleWidth))
+            {
+                turret.rotateAngleWidth = float.Parse(arcSize[1].text);
+            }
 
         }
         if (arcDirection[1].text != "")
         {
-            turret.rotateAngleDirection = float.Parse(arcDirection[1].text) + 90;
-
+           
+            if (checkTurretVal(float.Parse(arcDirection[1].text), turValCheck.rotateAngleDirection))
+            {
+                turret.rotateAngleDirection = float.Parse(arcDirection[1].text) + 90;
+            }
         }
         if (rotationSpeed[1].text != "")
         {
-            turret.rotateSpeed = float.Parse(rotationSpeed[1].text);
-
+            
+            if (checkTurretVal(float.Parse(rotationSpeed[1].text), turValCheck.rotateSpeed))
+            {
+                turret.rotateSpeed = float.Parse(rotationSpeed[1].text);
+            }
         }
 
     }
@@ -980,8 +1019,11 @@ public class UIManager : MonoBehaviour
 
         if (spiralRotationSpeed[1].text != "")
         {
-            turret.rotateSpeed = float.Parse(spiralRotationSpeed[1].text);
-
+           
+            if (checkTurretVal(float.Parse(spiralRotationSpeed[1].text), turValCheck.rotateSpeed))
+            {
+                turret.rotateSpeed = float.Parse(spiralRotationSpeed[1].text);
+            }
         }
     }
 
@@ -989,26 +1031,19 @@ public class UIManager : MonoBehaviour
     {
         if (singleDirectionAim[1].text != "")
         {
-            turret.singleDirDirection = float.Parse(singleDirectionAim[1].text);
-
+           
+            if (checkTurretVal(float.Parse(singleDirectionAim[1].text), turValCheck.singleDirDirection))
+            {
+                turret.singleDirDirection = float.Parse(singleDirectionAim[1].text);
+            }
         }
     }
 
     //saves bullet settings based on what targeting type is selected.
     void saveBulletPressed()
     {
-        
-        if (bulletBaseSpeed[1].text != "")
-        {
-            //turret.bulletBaseSpeed = 3;
-            turret.bulletBaseSpeed = float.Parse(bulletBaseSpeed[1].text);
-        }
-        else
-        {
-            Debug.Log("Unga?");
-            turret.bulletBaseSpeed = 3;
-            //turret.bulletBaseSpeed = float.Parse(bulletBaseSpeed[1].text);
-        }
+
+        saveBulletBase();
 
         switch (turret.bulletFormation)
         {
@@ -1050,6 +1085,23 @@ public class UIManager : MonoBehaviour
         AC.saveBulletPressed();
     }
 
+    //save bullet firing style methods
+    void saveBulletBase()
+    {
+        if (bulletBaseSpeed[1].text != "")
+        {
+            //turret.bulletBaseSpeed = 3;
+            if (checkTurretVal(float.Parse(bulletBaseSpeed[1].text), turValCheck.bulletBaseSpeed))
+            {
+                turret.bulletBaseSpeed = float.Parse(bulletBaseSpeed[1].text);
+            }
+        }
+        else
+        {
+            turret.bulletBaseSpeed = 3;
+        }
+    }
+
     void saveStreamShotSettings()
     {
         if (bulletSpeedIncreaseCheck.isOn == true)
@@ -1058,8 +1110,11 @@ public class UIManager : MonoBehaviour
 
             if (bulletSpeedIncreaseAmmount[1].text != "")
             {
-                turret.bulletSpeedIncreaseAmmount = float.Parse(bulletSpeedIncreaseAmmount[1].text);
-
+               
+                if (checkTurretVal(float.Parse(bulletSpeedIncreaseAmmount[1].text), turValCheck.bulletSpeedIncreaseAmmount))
+                {
+                    turret.bulletSpeedIncreaseAmmount = float.Parse(bulletSpeedIncreaseAmmount[1].text);
+                }
             }
         }
         else
@@ -1070,8 +1125,11 @@ public class UIManager : MonoBehaviour
 
         if (streamNumberOfBul[1].text != "")
         {
-            turret.numOfBullets = int.Parse(streamNumberOfBul[1].text);
-
+           
+            if (checkTurretVal(int.Parse(streamNumberOfBul[1].text), turValCheck.numOfBullets))
+            {
+                turret.numOfBullets = int.Parse(streamNumberOfBul[1].text);
+            }
         }
     }
 
@@ -1090,42 +1148,62 @@ public class UIManager : MonoBehaviour
 
         if (shotgunNumberOfBul[1].text != "")
         {
-            turret.numOfBullets = int.Parse(shotgunNumberOfBul[1].text);
+           
+            if (checkTurretVal(int.Parse(shotgunNumberOfBul[1].text), turValCheck.numOfBullets))
+            {
+                turret.numOfBullets = int.Parse(shotgunNumberOfBul[1].text);
+            }
 
         }
 
         if (angleBetweenBul[1].text != "")
         {
-            turret.angleBetweenBullets = float.Parse(angleBetweenBul[1].text);
-
+            
+            if (checkTurretVal(float.Parse(angleBetweenBul[1].text), turValCheck.angleBetweenBullets))
+            {
+                turret.angleBetweenBullets = float.Parse(angleBetweenBul[1].text);
+            }
         }
     }
 
     void saveRandomBurstSettings()
     {
         if (randNumberOfBul[1].text != "")
-        {
-            turret.numOfBullets = int.Parse(randNumberOfBul[1].text);
-
+        {        
+            if (checkTurretVal(int.Parse(randNumberOfBul[1].text), turValCheck.numOfBullets))
+            {
+                turret.numOfBullets = int.Parse(randNumberOfBul[1].text);
+            }
         }
-        if (randRange[1].text != "")
-        {
-            turret.bulletRandomRange = float.Parse(randRange[1].text);
 
+        if (randRange[1].text != "")
+        {        
+            if (checkTurretVal(float.Parse(randRange[1].text), turValCheck.bulletRandomRange))
+            {
+                turret.bulletRandomRange = float.Parse(randRange[1].text);
+            }
         }
     }
 
-
+    //save bullet movement style methods
     void saveSinMoveSettings()
     {
         if (amplitude[1].text != "")
         {
-            turret.bulletAmplitude = float.Parse(amplitude[1].text);
+            if (checkTurretVal(float.Parse(amplitude[1].text), turValCheck.bulletAmplitude))
+            {
+                turret.bulletAmplitude = float.Parse(amplitude[1].text);
+            }
+            
         }
 
         if (frequency[1].text != "")
         {
-            turret.bulletFrequency = float.Parse(frequency[1].text);
+            if (checkTurretVal(float.Parse(frequency[1].text), turValCheck.bulletFrequency))
+            {
+                turret.bulletFrequency = float.Parse(frequency[1].text);
+            }
+            
         }
     }
 
@@ -1133,15 +1211,27 @@ public class UIManager : MonoBehaviour
     {
         if (maxSpeed[1].text != "")
         {
-            turret.bulletMaxSpeed = float.Parse(maxSpeed[1].text);
+
+            if (checkTurretVal(float.Parse(maxSpeed[1].text), turValCheck.bulletMaxSpeed))
+            {
+                turret.bulletMaxSpeed = float.Parse(maxSpeed[1].text);
+            }
         }
         if (minSpeed[1].text != "")
         {
-            turret.bulletMinSpeed = float.Parse(minSpeed[1].text);
+
+            if (checkTurretVal(float.Parse(minSpeed[1].text), turValCheck.bulletMinSpeed))
+            {
+                turret.bulletMinSpeed = float.Parse(minSpeed[1].text);
+            }
         }
         if (speedChangeFrequency[1].text != "")
         {
-            turret.bulletSpeedChangeFrequency = float.Parse(speedChangeFrequency[1].text);
+           
+            if (checkTurretVal(float.Parse(speedChangeFrequency[1].text), turValCheck.bulletSpeedChangeFrequency))
+            {
+                turret.bulletSpeedChangeFrequency = float.Parse(speedChangeFrequency[1].text);
+            }
         }
     }
 
@@ -1149,14 +1239,20 @@ public class UIManager : MonoBehaviour
     {
         if (timeUntilChange[1].text != "")
         {
-            turret.bulletTimeUntilChange = float.Parse(timeUntilChange[1].text);
+            if (checkTurretVal(float.Parse(timeUntilChange[1].text), turValCheck.bulletTimeUntilChange))
+            {
+                turret.bulletTimeUntilChange = float.Parse(timeUntilChange[1].text);
+            }
         }
 
         turret.bulletNewTargetingType = newTargetingType.value;
 
         if (speedAfterTarget[1].text != "")
         {
-            turret.bulletSpeedAfterTarget = float.Parse(speedAfterTarget[1].text);
+            if (checkTurretVal(float.Parse(speedAfterTarget[1].text), turValCheck.bulletSpeedAfterTarget))
+            {
+                turret.bulletSpeedAfterTarget = float.Parse(speedAfterTarget[1].text);
+            }
         }
 
     }
