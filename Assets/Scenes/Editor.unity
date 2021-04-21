@@ -20665,6 +20665,8 @@ MonoBehaviour:
   fightingBoss: 0
   wavesStarted: 0
   AC: {fileID: 395859635}
+  timeToWait: 0
+  currTime: 0
 --- !u!114 &1115833688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31938,6 +31940,7 @@ MonoBehaviour:
   turrets: []
   lines: []
   Filepath: []
+  ongameStart: {fileID: 2046958743}
 --- !u!114 &1684217904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38118,7 +38121,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 3d04cd5601b690b4d99fcf9798e31dd2, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 93471b8486b7bac4c92d53bb7e58d108, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: 950a90a17d6d9d64e9b88e9c275663f8, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted

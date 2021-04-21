@@ -27,6 +27,8 @@ public class SaveBoss : MonoBehaviour
 
     public string[] Filepath;
 
+    public OnGameStart ongameStart;
+
     private void Start()
     {
         Filepath = StaticFilePath.filePath;
@@ -392,12 +394,35 @@ public class SaveBoss : MonoBehaviour
             int subwavenum = spawnedTurret.GetComponent<turretSubwaveStorage>().SubwaveCount[0];
             uICustomisationManager.setWaveAndSubwaveValues(wavenum, subwavenum);
 
+            //StartCoroutine(waitaFrame());
             uIManager.deselect();
+            StartCoroutine(noFire());
         }
 #endif
+    }
+    IEnumerator noFire()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            yield return null;
+        }
+        
+        ongameStart.TestMode();
+
+        // gameManager.GetComponent<OnGameStart>().TestMode();
 
 
-
+        GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
+        Debug.Log(turrets.Length);
+        for (int i = 0; i < turrets.Length; i++)
+        {
+            turrets[i].GetComponent<Turret_Fire>().enabled = false;
+            turrets[i].GetComponent<Turret_Targeting>().enabled = false;
+            turrets[i].GetComponent<Turret_BulletSetup>().enabled = false;
+            turrets[i].GetComponentInParent<BoxCollider2D>().enabled = false;
+            turrets[i].GetComponentInParent<BoxCollider2D>().enabled = true;
+            turrets[i].transform.rotation = Quaternion.Euler(0, 0, -90);
+        }
     }
 
     int NumOfTurretsLeft = 0;
@@ -427,11 +452,16 @@ public class SaveBoss : MonoBehaviour
 
         uIManager.turretSelected(spawnedTurret.transform.GetChild(0).gameObject);
         uIManager.deselect();
+
+        turrets = GameObject.FindGameObjectsWithTag("Turret");
+
         //uIManager.SetAllValues();
         uIManager.TestBoss.interactable = true;
         int wavenum = spawnedTurret.GetComponent<turretSubwaveStorage>().totalWaveCount;
         int subwavenum = spawnedTurret.GetComponent<turretSubwaveStorage>().SubwaveCount[0];
         uICustomisationManager.setWaveAndSubwaveValues(wavenum, subwavenum);
+        uIManager.deselect();
+        ongameStart.TestMode();
     }
     IEnumerator loadBossTile()
     {
@@ -447,6 +477,7 @@ public class SaveBoss : MonoBehaviour
 
             spawnedTurret.transform.parent = boss.transform;
             spawnedTurret.transform.localPosition = spawnedTurret.GetComponent<turretSubwaveStorage>().turretLocation;
+
             NumOfTurrets = spawnedTurret.GetComponent<turretSubwaveStorage>().TotalNumberOfTurrets;
 
 
