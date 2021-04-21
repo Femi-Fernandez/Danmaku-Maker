@@ -238,7 +238,10 @@ public class UICustomisationManager : MonoBehaviour
             uiWaveToEditOptions.Add((i + 1).ToString());
         }
         //uiManager.clearInputFields();
+        setAllTurrets();
+
         uiWaveToEdit.AddOptions(uiWaveToEditOptions);
+        uiWaveToEdit.value = 0;
         uiManager.toggleWaveSelect(uiNumberOfWaves.value);
         //setAllTurrets();
     }
@@ -267,14 +270,16 @@ public class UICustomisationManager : MonoBehaviour
             uiManager.subwaveNum = 0;
         }
         uiSubwaveToEdit.AddOptions(uiSubwaveToEditOptions);
+        uiSubwaveToEdit.value = 0;
+        setAllTurrets();
         //setAllTurrets();
     }
 
     void subwaveToEditChanged()
     {
-        uiManager.subwaveNum = uiSubwaveToEdit.value;
-        uiManager.clearInputFields();
+        uiManager.subwaveNum = uiSubwaveToEdit.value;  
         SelectedWaveAndSubwave.text = "Phase " + (uiWaveToEdit.value + 1) + " selected," + "\n" + "subPhase " + (uiSubwaveToEdit.value + 1) + " Selected";
+        uiManager.clearInputFields();
         //setAllTurrets();
     }
 

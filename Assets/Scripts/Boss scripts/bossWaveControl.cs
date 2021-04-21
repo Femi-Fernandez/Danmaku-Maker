@@ -93,7 +93,8 @@ public class bossWaveControl : MonoBehaviour
     }
 
 
-
+    public float timeToWait;
+    public float currTime;
     //   if (currentSubwave < numOfSubwaves[currentWave])
     IEnumerator runSubwave(int subwaveNum)
     {
@@ -101,13 +102,18 @@ public class bossWaveControl : MonoBehaviour
         if ((currentSubwave < numOfSubwaves[currentWave]) || (numOfSubwaves[currentWave] == 0))
             setValues(subwaveNum);
 
-        float timeToWait = mainTurrets[0].GetComponent<turretSubwaveStorage>().subwaveDuration[currentSubwave];
+        timeToWait = mainTurrets[0].GetComponent<turretSubwaveStorage>().subwaveDuration[currentSubwave];
         if (timeToWait == 0)
         {
             timeToWait = 5;
         }
-
-        yield return new WaitForSeconds(timeToWait);
+        currTime = 0;
+        while (currTime < timeToWait)
+        {
+            currTime += Time.deltaTime;
+            yield return null;
+        }
+        //yield return new WaitForSeconds(timeToWait);
         currentSubwave++;
         
         if (currentSubwave >= numOfSubwaves[currentWave])
@@ -174,7 +180,7 @@ public class bossWaveControl : MonoBehaviour
                             mainTurrets[i].transform.GetChild(j).GetComponent<Turret_BulletSetup>().enabled = false;
                         }
 
-
+                        //turret firing style settings
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().turretHealth = TurretSubwaveStorage.turretHealth[currentWave];
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().fireType = TurretSubwaveStorage.fireType[subwaveNum, j];
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().targetingType = TurretSubwaveStorage.targetingType[subwaveNum, j];
@@ -186,17 +192,34 @@ public class bossWaveControl : MonoBehaviour
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().rotateAngleWidth = TurretSubwaveStorage.rotateAngleWidth[subwaveNum, j];
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().spiralDirection = TurretSubwaveStorage.spiralDirection[subwaveNum, j];
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().singleDirDirection = TurretSubwaveStorage.singleDirDirection[subwaveNum, j];
+
+                        //bullet formation settings
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletFormation = TurretSubwaveStorage.bulletFormation[subwaveNum, j];
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().numOfBullets = TurretSubwaveStorage.numOfBullets[subwaveNum, j];
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().firerate = TurretSubwaveStorage.firerate[subwaveNum, j];
-                     //   mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletDelay = TurretSubwaveStorage.bulletDelay[subwaveNum, j];
+                     // mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletDelay = TurretSubwaveStorage.bulletDelay[subwaveNum, j];
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletSpeedIncreaseAmmount = TurretSubwaveStorage.bulletSpeedIncreaseAmmount[subwaveNum, j];
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().angleBetweenBullets = TurretSubwaveStorage.angleBetweenBullets[subwaveNum, j];
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletRandomRange = TurretSubwaveStorage.bulletRandomRange[subwaveNum, j];
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().shotgunStraight = TurretSubwaveStorage.shotgunStraight[subwaveNum, j];
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletSpeedIncreaseCheck = TurretSubwaveStorage.bulletSpeedIncreaseCheck[subwaveNum, j];
+
+
+                        //individual bullet movement settings
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletMovementType = TurretSubwaveStorage.bulletMovementType[subwaveNum, j];
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletBaseSpeed = TurretSubwaveStorage.bulletBaseSpeed[subwaveNum, j];
+
+                        mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletAmplitude = TurretSubwaveStorage.bulletAmplitude[subwaveNum, j];
+                        mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletFrequency = TurretSubwaveStorage.bulletFrequency[subwaveNum, j];
+
+                        mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletMaxSpeed = TurretSubwaveStorage.bulletMaxSpeed[subwaveNum, j];
+                        mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletMinSpeed = TurretSubwaveStorage.bulletMinSpeed[subwaveNum, j];
+                        mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletSpeedChangeFrequency = TurretSubwaveStorage.bulletSpeedChangeFrequency[subwaveNum, j];
+
+                        mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletTimeUntilChange = TurretSubwaveStorage.timeUntilChange[subwaveNum, j];
+                        mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletNewTargetingType = TurretSubwaveStorage.newTargetingType[subwaveNum, j];
+                        mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletSpeedAfterTarget = TurretSubwaveStorage.speedAfterTarget[subwaveNum, j];
+
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().bulletType = TurretSubwaveStorage.bulletType[subwaveNum, j];
 
                     }

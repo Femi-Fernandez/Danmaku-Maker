@@ -1200,6 +1200,7 @@ public class UIManager : MonoBehaviour
                 break;
             case 3:
                 saveTravelThenTargetSettings();
+                Debug.Log("travel target saved?");
                 break;
             default:
                 break;
@@ -1440,7 +1441,7 @@ public class UIManager : MonoBehaviour
 
     void setSubwaveStorage()
     {
-        Debug.Log("streamToEdit value: " + streamToEdit.value);
+        //Debug.Log("streamToEdit value: " + streamToEdit.value);
         subwaveStorage.bulletFormation[GetArraySlot(), streamToEdit.value] = turret.bulletFormation;
         subwaveStorage.streamEnabled[GetArraySlot(), streamToEdit.value] = turret.streamEnabled;
         subwaveStorage.turretLocation = turret.turretLocation;
@@ -1482,12 +1483,18 @@ public class UIManager : MonoBehaviour
         subwaveStorage.numOfBullets[GetArraySlot(), streamToEdit.value] = turret.numOfBullets;
         subwaveStorage.bulletRandomRange[GetArraySlot(), streamToEdit.value] = turret.bulletRandomRange;
 
+
+        subwaveStorage.bulletMovementType[GetArraySlot(), streamToEdit.value] = turret.bulletMovementType;
         subwaveStorage.bulletAmplitude[GetArraySlot(), streamToEdit.value] = turret.bulletAmplitude;
         subwaveStorage.bulletFrequency[GetArraySlot(), streamToEdit.value] = turret.bulletFrequency;
 
         subwaveStorage.bulletMaxSpeed[GetArraySlot(), streamToEdit.value] = turret.bulletMaxSpeed;
         subwaveStorage.bulletMinSpeed[GetArraySlot(), streamToEdit.value] = turret.bulletMinSpeed;
         subwaveStorage.bulletSpeedChangeFrequency[GetArraySlot(), streamToEdit.value] = turret.bulletSpeedChangeFrequency;
+
+        subwaveStorage.timeUntilChange[GetArraySlot(), streamToEdit.value] = turret.bulletTimeUntilChange;
+        subwaveStorage.newTargetingType[GetArraySlot(), streamToEdit.value] = turret.bulletNewTargetingType;
+        subwaveStorage.speedAfterTarget[GetArraySlot(), streamToEdit.value] = turret.bulletSpeedAfterTarget;
 
         subwaveStorage.bulletType[GetArraySlot(), streamToEdit.value] = turret.bulletType;
 
@@ -1562,85 +1569,115 @@ public class UIManager : MonoBehaviour
 
     void setInputFields()
     {
-        for (int i = 0; i < 4; i++)
+        //for (int i = 0; i < 4; i++)
+        //{
+        bool TPanCheck = false;
+        bool BPancheck = false;
+        
+
+        if (!turretPanel.activeInHierarchy)
         {
-            //general turret options
-            fireRateInput[0].text = subwaveStorage.firerate[GetArraySlot(), i].ToString();
-            aimType.value = subwaveStorage.targetingType[GetArraySlot(), i] - 1;
+            TPanCheck = true;
+            turretPanel.SetActive(true);
+        }
+
+        //general turret options
+        fireRateInput[0].text = subwaveStorage.firerate[GetArraySlot(), streamToEdit.value].ToString();
+            aimType.value = subwaveStorage.targetingType[GetArraySlot(), streamToEdit.value] - 1;
             numOfStreams.value = subwaveStorage.numberActiveStreams[GetArraySlot()] - 1;
             setTurretHealth[0].text = subwaveStorage.turretHealth[waveNum].ToString();
 
             //target player options
-            smoothTargetToggle.isOn = subwaveStorage.smoothTarget[GetArraySlot(), i];
-            smoothTargetSpeed[0].text = subwaveStorage.smoothTargetSpeed[GetArraySlot(), i].ToString();
-            targetingOffset[0].text = subwaveStorage.targetPlayerOffsetAmmount[GetArraySlot(), i].ToString();
+            smoothTargetToggle.isOn = subwaveStorage.smoothTarget[GetArraySlot(), streamToEdit.value];
+            smoothTargetSpeed[0].text = subwaveStorage.smoothTargetSpeed[GetArraySlot(), streamToEdit.value].ToString();
+            targetingOffset[0].text = subwaveStorage.targetPlayerOffsetAmmount[GetArraySlot(), streamToEdit.value].ToString();
 
             //arc shot options
-            arcSize[0].text = subwaveStorage.rotateAngleWidth[GetArraySlot(), i].ToString();
-            arcDirection[0].text = subwaveStorage.rotateAngleDirection[GetArraySlot(), i].ToString();
-            rotationSpeed[0].text = subwaveStorage.rotateSpeed[GetArraySlot(), i].ToString();
+            arcSize[0].text = subwaveStorage.rotateAngleWidth[GetArraySlot(), streamToEdit.value].ToString();
+            arcDirection[0].text = subwaveStorage.rotateAngleDirection[GetArraySlot(), streamToEdit.value].ToString();
+            rotationSpeed[0].text = subwaveStorage.rotateSpeed[GetArraySlot(), streamToEdit.value].ToString();
 
             //spiral shot options
-            spiralRotationSpeed[0].text = subwaveStorage.rotateSpeed[GetArraySlot(), i].ToString();
+            spiralRotationSpeed[0].text = subwaveStorage.rotateSpeed[GetArraySlot(), streamToEdit.value].ToString();
             //CHECK
 
-            spiralDirection.isOn = subwaveStorage.spiralDirection[GetArraySlot(), i];
+            spiralDirection.isOn = subwaveStorage.spiralDirection[GetArraySlot(), streamToEdit.value];
 
+        if (!bulletPanel.activeInHierarchy)
+        {
+            BPancheck = true;
+            bulletPanel.SetActive(true);
+        }
 
+            
 
             //single direction options
-            singleDirectionAim[0].text = subwaveStorage.singleDirDirection[GetArraySlot(), i].ToString();
+            singleDirectionAim[0].text = subwaveStorage.singleDirDirection[GetArraySlot(), streamToEdit.value].ToString();
 
-            shotgunNumberOfBul[0].text = subwaveStorage.numOfBullets[GetArraySlot(), i].ToString();
+            fireType.value = subwaveStorage.fireType[GetArraySlot(), streamToEdit.value];
 
-            amplitude[0].text = subwaveStorage.bulletAmplitude[GetArraySlot(), i].ToString() ;
-            frequency[0].text = subwaveStorage.bulletFrequency[GetArraySlot(), i].ToString() ;
+            shotgunNumberOfBul[0].text = subwaveStorage.numOfBullets[GetArraySlot(), streamToEdit.value].ToString();
 
-            maxSpeed[0].text = subwaveStorage.bulletMaxSpeed[GetArraySlot(), i].ToString();
-            minSpeed[0].text = subwaveStorage.bulletMinSpeed[GetArraySlot(), i].ToString();
-            speedChangeFrequency[0].text = subwaveStorage.bulletSpeedChangeFrequency[GetArraySlot(), i].ToString();
+            amplitude[0].text = subwaveStorage.bulletAmplitude[GetArraySlot(), streamToEdit.value].ToString();
+            frequency[0].text = subwaveStorage.bulletFrequency[GetArraySlot(), streamToEdit.value].ToString();
+
+            maxSpeed[0].text = subwaveStorage.bulletMaxSpeed[GetArraySlot(), streamToEdit.value].ToString();
+            minSpeed[0].text = subwaveStorage.bulletMinSpeed[GetArraySlot(), streamToEdit.value].ToString();
+            speedChangeFrequency[0].text = subwaveStorage.bulletSpeedChangeFrequency[GetArraySlot(), streamToEdit.value].ToString();
 
             activeWave.isOn = subwaveStorage.activeInWave[waveNum];
             isDestructable.isOn = subwaveStorage.isDestroyable[waveNum];
+
+        if (BPancheck)
+        {
+            bulletPanel.SetActive(false);
         }
+
+        if (TPanCheck)
+        {
+            turretPanel.SetActive(false);
+        }
+        //}
         SetAllValues();
     }
 
     public void SetAllValues()
     {
         turret.firerate = 1;
-        for (int i = 0; i < 4; i++)
-        {
-            if (subwaveStorage.turretSavedOnce[GetArraySlot(), i])
+        //for (int i = 0; i < 4; i++)
+        //{
+            if (subwaveStorage.turretSavedOnce[GetArraySlot(), streamToEdit.value])
             {
-                turret.bulletFormation = subwaveStorage.bulletFormation[GetArraySlot(), i];
-                turretChildren[0].GetComponent<Turret>().streamEnabled = subwaveStorage.streamEnabled[GetArraySlot(), i];
+                turret.bulletFormation = subwaveStorage.bulletFormation[GetArraySlot(), streamToEdit.value];
+                turretChildren[0].GetComponent<Turret>().streamEnabled = subwaveStorage.streamEnabled[GetArraySlot(), streamToEdit.value];
 
-                turret.targetingType = subwaveStorage.targetingType[GetArraySlot(), i];
-                turret.firerate = subwaveStorage.firerate[GetArraySlot(), i];
+                turret.targetingType = subwaveStorage.targetingType[GetArraySlot(), streamToEdit.value];
+                turret.firerate = subwaveStorage.firerate[GetArraySlot(), streamToEdit.value];
                 turret.turretHealth = subwaveStorage.turretHealth[waveNum];
-                turretChildren[0].GetComponent<Turret>().streamEnabled = subwaveStorage.streamEnabled[GetArraySlot(), i];
-                turret.smoothTarget = subwaveStorage.smoothTarget[GetArraySlot(), i];
-                turret.smoothTargetSpeed = subwaveStorage.smoothTargetSpeed[GetArraySlot(), i];
-                turret.smoothTarget = subwaveStorage.smoothTarget[GetArraySlot(), i];
-                turret.targetPlayerOffsetAmmount = subwaveStorage.targetPlayerOffsetAmmount[GetArraySlot(), i];
-                turret.rotateAngleWidth = subwaveStorage.rotateAngleWidth[GetArraySlot(), i];
-                turret.rotateAngleDirection = subwaveStorage.rotateAngleDirection[GetArraySlot(), i];
-                turret.rotateSpeed = subwaveStorage.rotateSpeed[GetArraySlot(), i];
-                turretChildren[i].GetComponent<Turret>().spiralDirection = subwaveStorage.spiralDirection[GetArraySlot(), i];
-                turret.rotateSpeed = subwaveStorage.rotateSpeed[GetArraySlot(), i];
-                turret.singleDirDirection = subwaveStorage.singleDirDirection[GetArraySlot(), i];
+                turretChildren[0].GetComponent<Turret>().streamEnabled = subwaveStorage.streamEnabled[GetArraySlot(), streamToEdit.value];
+                turret.smoothTarget = subwaveStorage.smoothTarget[GetArraySlot(), streamToEdit.value];
+                turret.smoothTargetSpeed = subwaveStorage.smoothTargetSpeed[GetArraySlot(), streamToEdit.value];
+                turret.smoothTarget = subwaveStorage.smoothTarget[GetArraySlot(), streamToEdit.value];
+                turret.targetPlayerOffsetAmmount = subwaveStorage.targetPlayerOffsetAmmount[GetArraySlot(), streamToEdit.value];
+                turret.rotateAngleWidth = subwaveStorage.rotateAngleWidth[GetArraySlot(), streamToEdit.value];
+                turret.rotateAngleDirection = subwaveStorage.rotateAngleDirection[GetArraySlot(), streamToEdit.value];
+                turret.rotateSpeed = subwaveStorage.rotateSpeed[GetArraySlot(), streamToEdit.value];
+                turretChildren[streamToEdit.value].GetComponent<Turret>().spiralDirection = subwaveStorage.spiralDirection[GetArraySlot(), streamToEdit.value];
+                turret.rotateSpeed = subwaveStorage.rotateSpeed[GetArraySlot(), streamToEdit.value];
+                turret.singleDirDirection = subwaveStorage.singleDirDirection[GetArraySlot(), streamToEdit.value];
 
-                turret.bulletAmplitude = subwaveStorage.bulletAmplitude[GetArraySlot(), i];
-                turret.bulletFrequency = subwaveStorage.bulletFrequency[GetArraySlot(), i];
+                turret.bulletFormation = subwaveStorage.bulletFormation[GetArraySlot(), streamToEdit.value];
+                
+                turret.bulletAmplitude = subwaveStorage.bulletAmplitude[GetArraySlot(), streamToEdit.value];
+                turret.bulletFrequency = subwaveStorage.bulletFrequency[GetArraySlot(), streamToEdit.value];
 
-                turret.bulletMaxSpeed = subwaveStorage.bulletMaxSpeed[GetArraySlot(), i];
-                turret.bulletMinSpeed = subwaveStorage.bulletMinSpeed[GetArraySlot(), i];
-                turret.bulletSpeedChangeFrequency = subwaveStorage.bulletSpeedChangeFrequency[GetArraySlot(), i] ;
+                turret.bulletMaxSpeed = subwaveStorage.bulletMaxSpeed[GetArraySlot(), streamToEdit.value];
+                turret.bulletMinSpeed = subwaveStorage.bulletMinSpeed[GetArraySlot(), streamToEdit.value];
+                turret.bulletSpeedChangeFrequency = subwaveStorage.bulletSpeedChangeFrequency[GetArraySlot(), streamToEdit.value] ;
 
-                turret.bulletType = subwaveStorage.bulletType[GetArraySlot(), i];
+                turret.bulletType = subwaveStorage.bulletType[GetArraySlot(), streamToEdit.value];
             }
-        }
+        //}
         setupTurret();
     }
 
