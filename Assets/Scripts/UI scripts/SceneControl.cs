@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.IO;
 using SFB;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class SceneControl : MonoBehaviour
 {
@@ -21,10 +22,10 @@ public class SceneControl : MonoBehaviour
     {
 
         enterEditorWithBoss = GameObject.Find("Load boss button").GetComponent<Button>();
-        
+
         enterEditor = GameObject.Find("Enter editor button").GetComponent<Button>();
 
-        
+
         enterEditorWithBoss.onClick.AddListener(delegate
         {
             openEditorSceneWithBoss();
@@ -39,7 +40,7 @@ public class SceneControl : MonoBehaviour
 
     void openEditorScene()
     {
-        StartCoroutine(ExitScene());
+        StartCoroutine(ExitScene("editor"));
     }
 
     void openEditorSceneWithBoss()
@@ -49,10 +50,10 @@ public class SceneControl : MonoBehaviour
         string[] readFileBoxBuild = StandaloneFileBrowser.OpenFilePanel("Load a boss", "", "txt", false);
 
 #endif        
-        if (readFileBoxBuild.Length > 0) 
+        if (readFileBoxBuild.Length > 0)
         {
             StaticFilePath.filePath = readFileBoxBuild;
-            StartCoroutine(ExitScene());
+            StartCoroutine(ExitScene("editor"));
         }
     }
 
@@ -60,7 +61,7 @@ public class SceneControl : MonoBehaviour
     {
         float timePassed = 0;
         float t = timePassed / 2f;
-     
+
         t = t * t * (3f - 2f * t);
         sceneTransition.fillClockwise = false;
         while (timePassed < 2f)
@@ -68,11 +69,11 @@ public class SceneControl : MonoBehaviour
             t = timePassed / 2f;
             sceneTransition.fillAmount = Mathf.Lerp(1, 0, t);
             timePassed += Time.deltaTime;
-          yield return null;
+            yield return null;
         }
     }
 
-    public IEnumerator ExitScene()
+    public IEnumerator ExitScene(string sceneToOpen)
     {
         float timePassed = 0;
         float t = timePassed / 2f;
@@ -83,18 +84,35 @@ public class SceneControl : MonoBehaviour
             t = timePassed / 2f;
             sceneTransition.fillAmount = Mathf.SmoothStep(0, 1, t);
             timePassed += Time.deltaTime;
-      
+
             if (timePassed >= 2f)
             {
-              loadEditorScene();
+                switch (sceneToOpen)
+                {
+                    case "editor":
+                        loadEditorScene();
+                        break;
+
+                    case "main menu":
+                        loadMenuScene();
+                        break;
+                    default:
+                        break;
+                }
+                
             }
-          yield return null;
-       }
+            yield return null;
+        }
     }
-    
+
     void loadEditorScene()
     {
         SceneManager.LoadScene("editor");
+    }
+
+    void loadMenuScene()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 }
 
