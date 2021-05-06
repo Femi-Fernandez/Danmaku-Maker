@@ -45,13 +45,13 @@ public class bossWaveControl : MonoBehaviour
         if (!arraysSet)
         {
             mainTurrets = GameObject.FindGameObjectsWithTag("turret Main");
-            turret = GameObject.FindGameObjectsWithTag("Turret");
+            //turret = GameObject.FindGameObjectsWithTag("Turret");
             TurretSubwaveStorage = mainTurrets[0].GetComponent<turretSubwaveStorage>();
-            Array.Resize(ref turretStreams, turret.Length);
-            for (int i = 0; i < turret.Length; i++)
-            {
-                turretStreams[i] = turret[i].GetComponent<Turret>();
-            }
+           // Array.Resize(ref turretStreams, turret.Length);
+           // for (int i = 0; i < turret.Length; i++)
+           // {
+           //     turretStreams[i] = turret[i].GetComponent<Turret>();
+           // }
 
             numOfSubwaves = TurretSubwaveStorage.SubwaveCount;
             numOfWaves = TurretSubwaveStorage.totalWaveCount;
@@ -89,36 +89,45 @@ public class bossWaveControl : MonoBehaviour
                 AC.bossDefeated();
                 Debug.Log("thats it... you won");
             }
+        }
+        else
+        {
+            arraysSet = false;
+
         }      
     }
 
 
     public float timeToWait;
     public float currTime;
-    //   if (currentSubwave < numOfSubwaves[currentWave])
+    //sub-Phase control
     IEnumerator runSubwave(int subwaveNum)
     {
-        //Debug.Log("subwaveNum = " + subwaveNum);
+        //if current sub-phase exists, set values of all turrets
         if ((currentSubwave < numOfSubwaves[currentWave]) || (numOfSubwaves[currentWave] == 0))
             setValues(subwaveNum);
 
+        //how long is the sub-phase? if no value present, set it to default of 5 seconds
         timeToWait = mainTurrets[0].GetComponent<turretSubwaveStorage>().subwaveDuration[currentSubwave];
         if (timeToWait == 0)
         {
             timeToWait = 5;
         }
         currTime = 0;
+        //loop until it has been 5 seconds. 
         while (currTime < timeToWait)
         {
             currTime += Time.deltaTime;
             yield return null;
         }
-        //yield return new WaitForSeconds(timeToWait);
+        //once 5 seconds are up, increase sub-phase count
         currentSubwave++;
-        
+
+        //if sub-phase count goes over the number present in the current phase, reset subphase counter.
         if (currentSubwave >= numOfSubwaves[currentWave])
             currentSubwave = 0;
 
+        //if still fighting boss, reset coroutine, otherwise cancel.
         if (fightingBoss)
         {
             StartCoroutine(runSubwave(((currentWave) * 4) + currentSubwave));
@@ -130,14 +139,11 @@ public class bossWaveControl : MonoBehaviour
         
 
     }
-    /// <summary>
-    /// for every turret,
-    /// set each child active or not
-    /// </summary>
-    /// <param name="subwaveNum"></param>
+
     public void setValues(int subwaveNum)
     {
 
+        //for each turret, checks if it is active/destroyable in current wave and sets its values to ones stored. 
         for (int i = 0; i < mainTurrets.Length; i++)
         {
             mainTurrets[i].SetActive(mainTurrets[i].GetComponent<turretSubwaveStorage>().activeInWave[currentWave]);
@@ -146,25 +152,25 @@ public class bossWaveControl : MonoBehaviour
             // Debug.Log("should hitbox be off?" + mainTurrets[i].GetComponent<turretSubwaveStorage>().isDestroyable[currentWave]);     
         }
 
-
+        //for each turret
         for (int i = 0; i < mainTurrets.Length; i++)
         {
-
+            //safety check
             if (mainTurrets[i].GetComponent<turretSubwaveStorage>() != null)
             {
                 TurretSubwaveStorage = mainTurrets[i].GetComponent<turretSubwaveStorage>();
-               // Debug.Log("has the turret been destroyed?" + mainTurrets[i].GetComponent<turretSubwaveStorage>().hasBeenDestroyed[currentWave]);
+                //if the turret hasnt been destroyed, 
                 if (TurretSubwaveStorage.hasBeenDestroyed[currentWave] == false)
                 {
-                    //Debug.Log("only here if its not dead");
+                    //for each stream 
                     for (int j = 0; j < 4; j++)
                     {
-                        // Debug.Log(": " + i);
+                        //enable the stream (if stream was enabled)
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().streamEnabled = TurretSubwaveStorage.streamEnabled[subwaveNum, j];
-                        //Debug.Log("subwaveNum: " + subwaveNum);
+                        
                         if (TurretSubwaveStorage.streamEnabled[subwaveNum, j])
                         {
-                            // Debug.Log("enable stream: " + j);
+                            //if stream is enabled, set it to be ready to fire. 
                             mainTurrets[i].transform.GetChild(j).gameObject.SetActive(true);
                             mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Fire>().enabled = true;
                             mainTurrets[i].transform.GetChild(j).GetComponent<Turret_Fire>().fireTimer = 1000f;
@@ -180,6 +186,7 @@ public class bossWaveControl : MonoBehaviour
                             mainTurrets[i].transform.GetChild(j).GetComponent<Turret_BulletSetup>().enabled = false;
                         }
 
+                        //set all values for the stream
                         //turret firing style settings
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().turretHealth = TurretSubwaveStorage.turretHealth[currentWave];
                         mainTurrets[i].transform.GetChild(j).GetComponent<Turret>().fireType = TurretSubwaveStorage.fireType[subwaveNum, j];

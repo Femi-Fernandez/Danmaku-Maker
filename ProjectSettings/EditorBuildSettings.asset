@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Editor.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Tutorials/bullet_panel_tutorial.unity
+    guid: 76f9468dc36e6ed45b7de888c348e8b7
+  - enabled: 1
+    path: Assets/Scenes/Tutorials/Phase_panel_tutorial.unity
+    guid: 15d2f75ecc33e2e4886a493773d56fcd
+  - enabled: 1
+    path: Assets/Scenes/Tutorials/Turret_panel_tutorial.unity
+    guid: c42ff00e058042840a48bd91116d58cb
   m_configObjects: {}

@@ -4479,12 +4479,13 @@ GameObject:
   m_Component:
   - component: {fileID: 269291159}
   - component: {fileID: 269291158}
+  - component: {fileID: 269291160}
   m_Layer: 0
   m_Name: Tutorial Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &269291158
 MonoBehaviour:
@@ -4493,7 +4494,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 269291157}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef7244f1e0a0f71439b58adf3f5ea9a8, type: 3}
   m_Name: 
@@ -4517,6 +4518,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &269291160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269291157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d519c9d7f221448ad91b8602fc3fe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialTextBox: {fileID: 1579925895}
+  pressKeyText: {fileID: 802706897}
+  waitTime: 2
+  currentWaitTime: 0
+  sceneControl: {fileID: 1684217904}
+  wavePanel: {fileID: 1771121132}
 --- !u!1 &270737033
 GameObject:
   m_ObjectHideFlags: 0
@@ -21880,7 +21899,7 @@ MonoBehaviour:
     m_Options:
     - m_Text: Single shot
       m_Image: {fileID: 0}
-    - m_Text: staggered burst
+    - m_Text: Stream shot
       m_Image: {fileID: 0}
     - m_Text: shotgun burst
       m_Image: {fileID: 0}
@@ -32318,7 +32337,7 @@ MonoBehaviour:
   - 0
   - 0
   bulletSpeedIncreaseAmmount:
-  - 0.05
+  - -3
   - 3
   angleBetweenBullets:
   - 1

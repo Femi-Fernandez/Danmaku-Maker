@@ -160,7 +160,7 @@ public class UIManager : MonoBehaviour
     public int bulletType;
 
     public AnalyticsCommands AC;
-
+    public EdgeCollider2D edgeCol;
 
 
     float fadeOut;
@@ -551,6 +551,10 @@ public class UIManager : MonoBehaviour
         {
             tiles[i].GetComponent<bossGridCheck>().removeTile();
         }
+        List<Vector2> linePoints = new List<Vector2>();
+        linePoints.Add(new Vector2(0, 0));
+        linePoints.Add(new Vector2(0, 0));
+        edgeCol.points = linePoints.ToArray();
     }
 
     //checks for what turrets should be enabled, and enables their firing scripts. also deactivates the option panel. 

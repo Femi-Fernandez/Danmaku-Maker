@@ -96,6 +96,15 @@ public class SceneControl : MonoBehaviour
                     case "main menu":
                         loadMenuScene();
                         break;
+                    case "tut1":
+                        loadTut1Scene();
+                        break;
+                    case "tut2":
+                        loadTut2Scene();
+                        break;
+                    case "tut3":
+                        loadTut3Scene();
+                        break;
                     default:
                         break;
                 }
@@ -113,6 +122,19 @@ public class SceneControl : MonoBehaviour
     void loadMenuScene()
     {
         SceneManager.LoadScene("StartScene");
+    }
+
+    void loadTut1Scene()
+    {
+        SceneManager.LoadScene("Turret_panel_tutorial");
+    }
+    void loadTut2Scene()
+    {
+        SceneManager.LoadScene("bullet_panel_tutorial");
+    }
+    void loadTut3Scene()
+    {
+        SceneManager.LoadScene("Phase_panel_tutorial");
     }
 }
 
