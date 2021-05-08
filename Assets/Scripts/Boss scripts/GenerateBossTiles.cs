@@ -36,18 +36,10 @@ public class GenerateBossTiles : MonoBehaviour
             }
 
             linePoints.Add(new Vector2(0, 0));
-
             linePoints.Add(new Vector2(turretLocations[i].transform.position.x, turretLocations[i].transform.position.y - 2.5f));
-
-            //Debug.Log(turretLocations[i].transform.position.x + " " + turretLocations[i].transform.position.y);
-
-            //lineToCore[i] = new EdgeCollider2D();
-
             lineToCore.points = linePoints.ToArray();
 
             Vector3Int currentCells = bossTileMap.WorldToCell(turretLocations[i].transform.position);
-
-            //Debug.Log(currentCells);
             bossTileMap.SetTile(currentCells, smartTile);
         }
     }

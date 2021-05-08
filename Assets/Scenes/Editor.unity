@@ -31936,6 +31936,7 @@ MonoBehaviour:
   arraySlot: 0
   bulletType: 0
   AC: {fileID: 395859635}
+  edgeCol: {fileID: 1734187900}
 --- !u!114 &1684217903
 MonoBehaviour:
   m_ObjectHideFlags: 0
