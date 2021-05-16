@@ -592,10 +592,10 @@ public class UIManager : MonoBehaviour
             turretChildren[2] = mainTurret.transform.GetChild(2).gameObject;
             turretChildren[3] = mainTurret.transform.GetChild(3).gameObject;
 
-            for (int i = 0; i < 4; i++)
-            {
-                //turretChildren[i].GetComponent<Turret_Fire>().readyToFire = true;
-            }
+            //for (int i = 0; i < 4; i++)
+            //{
+            //    //turretChildren[i].GetComponent<Turret_Fire>().readyToFire = true;
+            //}
 
             turretName.text = "Selected turret \n" + currentSelectedTurret.name;
 
@@ -1445,13 +1445,14 @@ public class UIManager : MonoBehaviour
 
     void setSubwaveStorage()
     {
+        int slot = GetArraySlot();
         //Debug.Log("streamToEdit value: " + streamToEdit.value);
-        subwaveStorage.bulletFormation[GetArraySlot(), streamToEdit.value] = turret.bulletFormation;
-        subwaveStorage.streamEnabled[GetArraySlot(), streamToEdit.value] = turret.streamEnabled;
+        subwaveStorage.bulletFormation[slot, streamToEdit.value] = turret.bulletFormation;
+        subwaveStorage.streamEnabled[slot, streamToEdit.value] = turret.streamEnabled;
         subwaveStorage.turretLocation = turret.turretLocation;
 
-        subwaveStorage.targetingType[GetArraySlot(), streamToEdit.value] = turret.targetingType;
-        subwaveStorage.firerate[GetArraySlot(), streamToEdit.value] = turret.firerate;
+        subwaveStorage.targetingType[slot, streamToEdit.value] = turret.targetingType;
+        subwaveStorage.firerate[slot, streamToEdit.value] = turret.firerate;
         subwaveStorage.turretHealth[waveNum] = turret.turretHealth;
         //subwave count, numactivestreams
         //subwaveStorage.SubwaveCount[wavenum] = 
@@ -1464,45 +1465,45 @@ public class UIManager : MonoBehaviour
         //
 
         // subwaveStorage.streamEnabled[GetArraySlot(), streamToEdit.value] = turret.streamEnabled;
-        subwaveStorage.smoothTarget[GetArraySlot(), streamToEdit.value] = turret.smoothTarget;
-        subwaveStorage.smoothTargetSpeed[GetArraySlot(), streamToEdit.value] = turret.smoothTargetSpeed;
-        subwaveStorage.smoothTarget[GetArraySlot(), streamToEdit.value] = turret.smoothTarget;
-        subwaveStorage.targetPlayerOffsetAmmount[GetArraySlot(), streamToEdit.value] = turret.targetPlayerOffsetAmmount;
-        subwaveStorage.rotateAngleWidth[GetArraySlot(), streamToEdit.value] = turret.rotateAngleWidth;
-        subwaveStorage.rotateAngleDirection[GetArraySlot(), streamToEdit.value] = turret.rotateAngleDirection;
-        subwaveStorage.rotateSpeed[GetArraySlot(), streamToEdit.value] = turret.rotateSpeed;
+        subwaveStorage.smoothTarget[slot, streamToEdit.value] = turret.smoothTarget;
+        subwaveStorage.smoothTargetSpeed[slot, streamToEdit.value] = turret.smoothTargetSpeed;
+        subwaveStorage.smoothTarget[slot, streamToEdit.value] = turret.smoothTarget;
+        subwaveStorage.targetPlayerOffsetAmmount[slot, streamToEdit.value] = turret.targetPlayerOffsetAmmount;
+        subwaveStorage.rotateAngleWidth[slot, streamToEdit.value] = turret.rotateAngleWidth;
+        subwaveStorage.rotateAngleDirection[slot, streamToEdit.value] = turret.rotateAngleDirection;
+        subwaveStorage.rotateSpeed[slot, streamToEdit.value] = turret.rotateSpeed;
         //CHECK
-        subwaveStorage.spiralDirection[GetArraySlot(), streamToEdit.value] = turret.spiralDirection;
-        subwaveStorage.rotateSpeed[GetArraySlot(), streamToEdit.value] = turret.rotateSpeed;
-        subwaveStorage.singleDirDirection[GetArraySlot(), streamToEdit.value] = turret.singleDirDirection;
-        subwaveStorage.bulletBaseSpeed[GetArraySlot(), streamToEdit.value] = turret.bulletBaseSpeed;
-        subwaveStorage.bulletSpeedIncreaseCheck[GetArraySlot(), streamToEdit.value] = turret.bulletSpeedIncreaseCheck;
-        subwaveStorage.bulletSpeedIncreaseAmmount[GetArraySlot(), streamToEdit.value] = turret.bulletSpeedIncreaseAmmount;
-        subwaveStorage.bulletSpeedIncreaseCheck[GetArraySlot(), streamToEdit.value] = turret.bulletSpeedIncreaseCheck;
-        subwaveStorage.numOfBullets[GetArraySlot(), streamToEdit.value] = turret.numOfBullets;
-        subwaveStorage.shotgunStraight[GetArraySlot(), streamToEdit.value] = turret.shotgunStraight;
-        subwaveStorage.shotgunStraight[GetArraySlot(), streamToEdit.value] = turret.shotgunStraight;
-        subwaveStorage.numOfBullets[GetArraySlot(), streamToEdit.value] = turret.numOfBullets;
-        subwaveStorage.angleBetweenBullets[GetArraySlot(), streamToEdit.value] = turret.angleBetweenBullets;
-        subwaveStorage.numOfBullets[GetArraySlot(), streamToEdit.value] = turret.numOfBullets;
-        subwaveStorage.bulletRandomRange[GetArraySlot(), streamToEdit.value] = turret.bulletRandomRange;
+        subwaveStorage.spiralDirection[slot, streamToEdit.value] = turret.spiralDirection;
+        subwaveStorage.rotateSpeed[slot, streamToEdit.value] = turret.rotateSpeed;
+        subwaveStorage.singleDirDirection[slot, streamToEdit.value] = turret.singleDirDirection;
+        subwaveStorage.bulletBaseSpeed[slot, streamToEdit.value] = turret.bulletBaseSpeed;
+        subwaveStorage.bulletSpeedIncreaseCheck[slot, streamToEdit.value] = turret.bulletSpeedIncreaseCheck;
+        subwaveStorage.bulletSpeedIncreaseAmmount[slot, streamToEdit.value] = turret.bulletSpeedIncreaseAmmount;
+        subwaveStorage.bulletSpeedIncreaseCheck[slot, streamToEdit.value] = turret.bulletSpeedIncreaseCheck;
+        subwaveStorage.numOfBullets[slot, streamToEdit.value] = turret.numOfBullets;
+        subwaveStorage.shotgunStraight[slot, streamToEdit.value] = turret.shotgunStraight;
+        subwaveStorage.shotgunStraight[slot, streamToEdit.value] = turret.shotgunStraight;
+        subwaveStorage.numOfBullets[slot, streamToEdit.value] = turret.numOfBullets;
+        subwaveStorage.angleBetweenBullets[slot, streamToEdit.value] = turret.angleBetweenBullets;
+        subwaveStorage.numOfBullets[slot, streamToEdit.value] = turret.numOfBullets;
+        subwaveStorage.bulletRandomRange[slot, streamToEdit.value] = turret.bulletRandomRange;
 
 
-        subwaveStorage.bulletMovementType[GetArraySlot(), streamToEdit.value] = turret.bulletMovementType;
-        subwaveStorage.bulletAmplitude[GetArraySlot(), streamToEdit.value] = turret.bulletAmplitude;
-        subwaveStorage.bulletFrequency[GetArraySlot(), streamToEdit.value] = turret.bulletFrequency;
+        subwaveStorage.bulletMovementType[slot, streamToEdit.value] = turret.bulletMovementType;
+        subwaveStorage.bulletAmplitude[slot, streamToEdit.value] = turret.bulletAmplitude;
+        subwaveStorage.bulletFrequency[slot, streamToEdit.value] = turret.bulletFrequency;
 
-        subwaveStorage.bulletMaxSpeed[GetArraySlot(), streamToEdit.value] = turret.bulletMaxSpeed;
-        subwaveStorage.bulletMinSpeed[GetArraySlot(), streamToEdit.value] = turret.bulletMinSpeed;
-        subwaveStorage.bulletSpeedChangeFrequency[GetArraySlot(), streamToEdit.value] = turret.bulletSpeedChangeFrequency;
+        subwaveStorage.bulletMaxSpeed[slot, streamToEdit.value] = turret.bulletMaxSpeed;
+        subwaveStorage.bulletMinSpeed[slot, streamToEdit.value] = turret.bulletMinSpeed;
+        subwaveStorage.bulletSpeedChangeFrequency[slot, streamToEdit.value] = turret.bulletSpeedChangeFrequency;
 
-        subwaveStorage.timeUntilChange[GetArraySlot(), streamToEdit.value] = turret.bulletTimeUntilChange;
-        subwaveStorage.newTargetingType[GetArraySlot(), streamToEdit.value] = turret.bulletNewTargetingType;
-        subwaveStorage.speedAfterTarget[GetArraySlot(), streamToEdit.value] = turret.bulletSpeedAfterTarget;
+        subwaveStorage.timeUntilChange[slot, streamToEdit.value] = turret.bulletTimeUntilChange;
+        subwaveStorage.newTargetingType[slot, streamToEdit.value] = turret.bulletNewTargetingType;
+        subwaveStorage.speedAfterTarget[slot, streamToEdit.value] = turret.bulletSpeedAfterTarget;
 
-        subwaveStorage.bulletType[GetArraySlot(), streamToEdit.value] = turret.bulletType;
+        subwaveStorage.bulletType[slot, streamToEdit.value] = turret.bulletType;
 
-        subwaveStorage.turretSavedOnce[GetArraySlot(), streamToEdit.value] = true;
+        subwaveStorage.turretSavedOnce[slot, streamToEdit.value] = true;
     }
 
     public void clearInputFields()

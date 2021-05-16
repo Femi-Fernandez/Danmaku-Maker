@@ -55,18 +55,22 @@ public class OnGameStart : MonoBehaviour
         {
             for (int i = 0; i < turretMain.Length; i++)
             {
-                turretMain[i].SetActive(true);
-                if (turretMain[i].GetComponent<BoxCollider2D>())
+                if (turretMain[i] != null)
                 {
-                    turretMain[i].GetComponent<BoxCollider2D>().enabled = true;
-                }
+                    turretMain[i].SetActive(true);
+                    if (turretMain[i].GetComponent<BoxCollider2D>())
+                    {
+                        turretMain[i].GetComponent<BoxCollider2D>().enabled = true;
+                    }
 
 
-                for (int j = 0; j < 4; j++)
-                {
-                    turretMain[i].GetComponent<turretSubwaveStorage>().hasBeenDestroyed[j] = false;
-                    turretMain[i].transform.GetChild(j).GetComponent<Turret_Fire>().readyToFire = true;
+                    for (int j = 0; j < 4; j++)
+                    {
+                        turretMain[i].GetComponent<turretSubwaveStorage>().hasBeenDestroyed[j] = false;
+                        turretMain[i].transform.GetChild(j).GetComponent<Turret_Fire>().readyToFire = true;
+                    }
                 }
+                
             }
         }
     }

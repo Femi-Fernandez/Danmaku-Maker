@@ -18879,8 +18879,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 961384397
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7461332323694609221, guid: 02edf394dca52eb4d884b3402c1421db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -40455,8 +40455,8 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 3d04cd5601b690b4d99fcf9798e31dd2, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 93471b8486b7bac4c92d53bb7e58d108, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:

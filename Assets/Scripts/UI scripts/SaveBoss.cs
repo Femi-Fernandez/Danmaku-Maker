@@ -404,7 +404,8 @@ public class SaveBoss : MonoBehaviour
     {
         for (int i = 0; i < 2; i++)
         {
-            yield return null;
+            //yield return null;
+            yield return new WaitForEndOfFrame();
         }
         
         ongameStart.TestMode();
@@ -423,47 +424,45 @@ public class SaveBoss : MonoBehaviour
             turrets[i].GetComponentInParent<BoxCollider2D>().enabled = true;
             turrets[i].transform.rotation = Quaternion.Euler(0, 0, -90);
         }
+        yield return new WaitForEndOfFrame();
     }
 
     int NumOfTurretsLeft = 0;
     int NumOfTurrets = 1;
     public void LoadBoss(string[] filePath)
     {
-        lines = File.ReadAllLines(filePath[0]);
+         lines = File.ReadAllLines(filePath[0]);
+            NumOfTurrets = 1;
+
+            //Debug.Log(lines[0]);
+            //Debug.Log(lines[1]);
+            //Debug.Log(lines[2]);
 
 
-        for (int i = 1; i < boss.transform.childCount; i++)
-        {
-            Destroy(boss.transform.GetChild(i).gameObject);
-        }
+            for (int i = 1; i < boss.transform.childCount; i++)
+            {
+                Destroy(boss.transform.GetChild(i).gameObject);
+            }
 
-        Debug.Log("lines read");
+            NumOfTurretsLeft = 0;
+            StartCoroutine(loadBossTile());
 
-
-
-        NumOfTurrets = 1;
-        NumOfTurretsLeft = 0;
-
-        StartCoroutine(loadBossTile());
-
-        Debug.Log("boss loaded");
+            Debug.Log("boss loaded");
 
 
 
-        uIManager.turretSelected(spawnedTurret.transform.GetChild(0).gameObject);
-        uIManager.deselect();
+            uIManager.turretSelected(spawnedTurret.transform.GetChild(0).gameObject);
+            uIManager.TestBoss.interactable = true;
+            int wavenum = spawnedTurret.GetComponent<turretSubwaveStorage>().totalWaveCount;
+            int subwavenum = spawnedTurret.GetComponent<turretSubwaveStorage>().SubwaveCount[0];
+            uICustomisationManager.setWaveAndSubwaveValues(wavenum, subwavenum);
 
-        turrets = GameObject.FindGameObjectsWithTag("Turret");
+            //StartCoroutine(waitaFrame());
+            uIManager.deselect();
+            StartCoroutine(noFire());
 
-        //uIManager.SetAllValues();
-        uIManager.TestBoss.interactable = true;
-        int wavenum = spawnedTurret.GetComponent<turretSubwaveStorage>().totalWaveCount;
-        int subwavenum = spawnedTurret.GetComponent<turretSubwaveStorage>().SubwaveCount[0];
-        uICustomisationManager.setWaveAndSubwaveValues(wavenum, subwavenum);
-        uIManager.deselect();
-        ongameStart.TestMode();
-    }
-    IEnumerator loadBossTile()
+}
+IEnumerator loadBossTile()
     {
 
             spawnedTurret = Instantiate(turret, new Vector3(0, 0, 0), transform.rotation) as GameObject;
@@ -491,9 +490,11 @@ public class SaveBoss : MonoBehaviour
             if (NumOfTurretsLeft >= NumOfTurrets)
             {
                 yield return new WaitForEndOfFrame();
+                yield return new WaitForEndOfFrame();
             }
             else
             {
+                yield return new WaitForEndOfFrame();
                 yield return new WaitForEndOfFrame();
             StartCoroutine(loadBossTile());
             }

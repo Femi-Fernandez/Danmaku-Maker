@@ -92,6 +92,7 @@ public class Turret_BulletSetup : MonoBehaviour
             {
                 GameObject bullet = transform.GetComponentInParent<bullet_pool_manager>().GetBullet(turret.bulletType);
                 bullet.transform.position = transform.position;
+                bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
                 if (i % 2 == 0)
                 {
                     bullet.transform.rotation = transform.rotation * Quaternion.AngleAxis(-(anglemanip * turret.angleBetweenBullets), transform.forward);
@@ -122,6 +123,7 @@ public class Turret_BulletSetup : MonoBehaviour
             {
                 GameObject bullet = transform.GetComponentInParent<bullet_pool_manager>().GetBullet(turret.bulletType);
                 bullet.transform.position = transform.position;
+                bullet.GetComponent<Bullet>().speed = turret.bulletBaseSpeed;
                 if (i % 2 == 0)
                 {
                     bullet.transform.rotation = transform.rotation * Quaternion.AngleAxis(-((anglemanip * turret.angleBetweenBullets) + (turret.angleBetweenBullets / 2)), transform.forward);

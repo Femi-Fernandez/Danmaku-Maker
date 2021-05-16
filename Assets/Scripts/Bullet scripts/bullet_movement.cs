@@ -118,7 +118,7 @@ public class bullet_movement : MonoBehaviour
                 default:
                     break;
             }
-
+            bullet.speed = bullet.speedAfterTarget;
         }
 
         position += transform.right * bullet.speed * Time.deltaTime;
